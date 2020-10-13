@@ -60,3 +60,13 @@
 {
     margin: 0 0 11px;
 }
+
+.card-body {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.filters {
+    display: inline-flex;
+}
