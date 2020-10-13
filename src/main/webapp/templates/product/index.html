@@ -31,28 +31,50 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>TippMix Shop</h1>
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${country.name}">Category Title</strong>
+    <div class="filters">
+
+        <div class="sport-filter">
+            <label for="sport-select">Choose a sport:</label>
+
+            <select name="sport" id="sport-select">
+                <option value="">--Please choose an option--</option>
+                <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}" th:text="${sport.getName()}"></option>
+
+            </select>
+        </div>
+
+        <div class="country-filter">
+            <label for="country-select">Choose a country:</label>
+
+            <select name="country" id="country-select">
+
+                <option th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}" th:text="${country.getName()}"></option>
+
+            </select>
+        </div>
     </div>
 
-    <div id="matchDetails" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${matchDetails}">
+
+    <div id="matches" class="row">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="match,iterStat : ${matches}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${matchDetails.description}">Product name</h4>
-                    <p class="card-text" th:text="${matchDetails.description}">Product description... </p>
+                    <h4 class="card-title" th:text="${match.getHomeTeam()} + '-' + ${match.getAwayTeam()}">Product name</h4>
+                    <p class="card-text" th:text="${match.description}">Product description... </p>
                 </div>
                 <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${matchDetails.getCountry()}">100 USD</p>
+                    <div class="card-odds">
+                        <a class="btn btn-success" href="#">H <br> 1.8</a>
                     </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                    <div class="card-odds">
+                        <a class="btn btn-success" href="#">D <br> 1.8</a>
+                    </div>
+                    <div class="card-odds">
+                        <a class="btn btn-success" href="#">V <br> 1.8</a>
                     </div>
                 </div>
             </div>

@@ -60,3 +60,19 @@
 {
     margin: 0 0 11px;
 }
+
+.card-body {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.filters {
+    display: inline-flex;
+}
+
+.col.col-sm-12.col-md-6.col-lg-4 {
+    /*display: inline-flex;*/
+    max-width: 100% !important;
+    flex: 0 !important;
+}
