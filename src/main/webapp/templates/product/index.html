@@ -48,7 +48,6 @@
             <div class="sport-filter">
                 <label for="sport-select">Choose a sport:</label>
                 <select name="sport" id="sport-select">
-                    <option value="">--Please choose an option--</option>
                     <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}"
                             th:text="${sport.getName()}"></option>
                 </select>
