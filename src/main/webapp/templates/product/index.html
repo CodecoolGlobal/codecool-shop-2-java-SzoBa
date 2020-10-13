@@ -28,13 +28,20 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/icons.css"/>
+
     <script type="module" src="/static/js/main.js" defer></script>
+    <link rel="shortcut icon" href="/static/img/under4b.png" type="image/x-icon" />
 </head>
 
 <body>
 
 <div class="header">
-    <h1>Under Construction</h1>
+    <div id="header-with-logo">
+        <img id="header-logo" th:src="@{/static/img/under1b.png}" alt="team_logo">
+        <h1>Under Construction</h1>
+        <span class="ico-sport ico-sport-archery"><br/>TestIcon</span>
+    </div>
 
     <div class="cart-container">
         <div class="cart-title">Szelvény</div>

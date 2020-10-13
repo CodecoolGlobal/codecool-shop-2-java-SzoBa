@@ -7,12 +7,16 @@ export let dom = {
 
     addListeners: function () {
         document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
+        document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+        this.addListenerToOdds();
+    },
+
+    addListenerToOdds: function () {
         const odds = document.querySelectorAll('.card-odds')
         for (const odd of odds) {
             odd.addEventListener("click", event => this.modifyCartItems(event));
 
         }
-        document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
 
     },
 

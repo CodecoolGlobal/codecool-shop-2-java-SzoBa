@@ -1,0 +1,199 @@
+.ico-sport {
+    background-image: url("../img/sport-icons.png");
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.ico-sport.ico-sport-all {
+    background-position: 0px 0px;
+}
+.ico-sport.ico-sport-alpine-ski {
+    background-position: -40px -40px;
+}
+.ico-sport.ico-sport-american-football {
+    background-position: -80px -80px;
+}
+.ico-sport.ico-sport-archery {
+    background-position: -120px -120px;
+}
+.ico-sport.ico-sport-athletics {
+    background-position: -160px -160px;
+}
+.ico-sport.ico-sport-aussie-rules {
+    background-position: -200px -200px;
+}
+.ico-sport.ico-sport-badminton {
+    background-position: -240px -240px;
+}
+.ico-sport.ico-sport-bandy {
+    background-position: -280px -280px;
+}
+.ico-sport.ico-sport-baseball {
+    background-position: -320px -320px;
+}
+.ico-sport.ico-sport-basketball {
+    background-position: -360px -360px;
+}
+.ico-sport.ico-sport-beach-soccer {
+    background-position: -400px -400px;
+}
+.ico-sport.ico-sport-beach-volley {
+    background-position: -440px -440px;
+}
+.ico-sport.ico-sport-biathlon {
+    background-position: -480px -480px;
+}
+.ico-sport.ico-sport-bikes-moto-gp {
+    background-position: -520px -520px;
+}
+.ico-sport.ico-sport-bobsled {
+    background-position: -560px -560px;
+}
+.ico-sport.ico-sport-bowls {
+    background-position: -600px -600px;
+}
+.ico-sport.ico-sport-boxing {
+    background-position: -640px -640px;
+}
+.ico-sport.ico-sport-chess {
+    background-position: -680px -680px;
+}
+.ico-sport.ico-sport-cricket {
+    background-position: -720px -720px;
+}
+.ico-sport.ico-sport-curling {
+    background-position: -760px -760px;
+}
+.ico-sport.ico-sport-cycling {
+    background-position: -800px -800px;
+}
+.ico-sport.ico-sport-darts {
+    background-position: -840px -840px;
+}
+.ico-sport.ico-sport-e-sport {
+    background-position: -880px -880px;
+}
+.ico-sport.ico-sport-field-hockey {
+    background-position: -920px -920px;
+}
+.ico-sport.ico-sport-figure-skating {
+    background-position: -960px -960px;
+}
+.ico-sport.ico-sport-floorball {
+    background-position: -1000px -1000px;
+}
+.ico-sport.ico-sport-freestyle-ski {
+    background-position: -1040px -1040px;
+}
+.ico-sport.ico-sport-futsal {
+    background-position: -1080px -1080px;
+}
+.ico-sport.ico-sport-golf {
+    background-position: -1120px -1120px;
+}
+.ico-sport.ico-sport-gymnastics {
+    background-position: -1160px -1160px;
+}
+.ico-sport.ico-sport-handball {
+    background-position: -1200px -1200px;
+}
+.ico-sport.ico-sport-ice-hockey {
+    background-position: -1240px -1240px;
+}
+.ico-sport.ico-sport-judo {
+    background-position: -1280px -1280px;
+}
+.ico-sport.ico-sport-kayak {
+    background-position: -1320px -1320px;
+}
+.ico-sport.ico-sport-mma {
+    background-position: -1360px -1360px;
+}
+.ico-sport.ico-sport-north-composite {
+    background-position: -1400px -1400px;
+}
+.ico-sport.ico-sport-olympics {
+    background-position: -1440px -1440px;
+}
+.ico-sport.ico-sport-pentathlon {
+    background-position: -1480px -1480px;
+}
+.ico-sport.ico-sport-pesapallo {
+    background-position: -1520px -1520px;
+}
+.ico-sport.ico-sport-rowing {
+    background-position: -1560px -1560px;
+}
+.ico-sport.ico-sport-rugby {
+    background-position: -1600px -1600px;
+}
+.ico-sport.ico-sport-shooting {
+    background-position: -1640px -1640px;
+}
+.ico-sport.ico-sport-short-track-speed-skating {
+    background-position: -1680px -1680px;
+}
+.ico-sport.ico-sport-skeleton {
+    background-position: -1720px -1720px;
+}
+.ico-sport.ico-sport-ski-jumping {
+    background-position: -1760px -1760px;
+}
+.ico-sport.ico-sport-ski-running {
+    background-position: -1800px -1800px;
+}
+.ico-sport.ico-sport-sled {
+    background-position: -1840px -1840px;
+}
+.ico-sport.ico-sport-snooker {
+    background-position: -1880px -1880px;
+}
+.ico-sport.ico-sport-snowboard {
+    background-position: -1920px -1920px;
+}
+.ico-sport.ico-sport-soccer {
+    background-position: -1960px -1960px;
+}
+.ico-sport.ico-sport-speed-skating {
+    background-position: -2000px -2000px;
+}
+.ico-sport.ico-sport-squash {
+    background-position: -2040px -2040px;
+}
+.ico-sport.ico-sport-swimming {
+    background-position: -2080px -2080px;
+}
+.ico-sport.ico-sport-sword {
+    background-position: -2120px -2120px;
+}
+.ico-sport.ico-sport-table-tennis {
+    background-position: -2160px -2160px;
+}
+.ico-sport.ico-sport-tennis {
+    background-position: -2200px -2200px;
+}
+.ico-sport.ico-sport-triathlon {
+    background-position: -2240px -2240px;
+}
+.ico-sport.ico-sport-volleyball {
+    background-position: -2280px -2280px;
+}
+.ico-sport.ico-sport-waterpolo {
+    background-position: -2320px -2320px;
+}
+.ico-sport.ico-sport-weight-lifting {
+    background-position: -2360px -2360px;
+}
+.ico-sport.ico-sport-winter-olympics {
+    background-position: -2400px -2400px;
+}
+.ico-sport.ico-sport-winter-sports {
+    background-position: -2440px -2440px;
+}
+.ico-sport.ico-sport-wrestling {
+    background-position: -2480px -2480px;
+}
+.ico-sport.ico-sport-wtcc {
+    background-position: -2520px -2520px;
+}
