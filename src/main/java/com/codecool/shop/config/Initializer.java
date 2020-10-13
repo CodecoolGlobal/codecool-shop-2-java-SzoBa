@@ -23,7 +23,7 @@ public class Initializer implements ServletContextListener {
         CountryDao countryDataStore = CountryDaoMem.getInstance();
         SportTypeDao sportTypeDataStore = SportTypeDaoMem.getInstance();
 
-        //setting up a new supplier
+        //setting up a new sport
         SportType football = new SportType("Football", "Kick that ball, bro!");
         sportTypeDataStore.add(football);
         SportType iceHockey = new SportType("Hockey", "Ice, love it!");
@@ -31,8 +31,7 @@ public class Initializer implements ServletContextListener {
         SportType darts = new SportType("Darts", "Throw darts.");
         sportTypeDataStore.add(darts);
 
-
-        //setting up a new product category
+        //setting up a new country
         Country hungary = new Country("Hungary", "Best country - Hungary.");
         countryDataStore.add(hungary);
         Country england = new Country("England", "Tea for two.");
@@ -42,8 +41,7 @@ public class Initializer implements ServletContextListener {
         Country russia = new Country("Russia", "Voszem");
         countryDataStore.add(russia);
 
-
-        //setting up products and printing it
+        //setting up matches and printing them
         matchDetailsDataStore.add(new MatchDetails("First Match",
                 "Budafoki MTE", "Diósgyőri VTK", "NB I",
                 2.25f, 3.4f, 3.1f, hungary, football));
