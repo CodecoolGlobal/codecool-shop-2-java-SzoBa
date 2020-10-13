@@ -78,8 +78,17 @@ export let dom = {
 
     modifyCartItems(event) {
         let matchID = event.target.closest(".card").dataset.matchid;
-        let isAdded = event.target.classList.contains("active");
-        let outcome = event.target.dataset.outcome;
-        dataHandler.modifyCartItems(matchID, isAdded, outcome, data => console.log(data))
+        let isAdded = event.target.closest("a").classList.contains("active");
+        let outcome = event.target.closest(".card-odds").dataset.outcome;
+        dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
+            isAdded ? event.target.closest("a").classList.remove("active") :
+                        event.target.closest("a").classList.add("active");
+            let betCounter = document.querySelector(".cart-item-counter");
+            if (isAdded) {
+                betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
+            } else {
+                betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
+            }
+        })
     }
 }
