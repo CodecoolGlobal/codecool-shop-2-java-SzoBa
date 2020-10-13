@@ -1,13 +1,13 @@
 package com.codecool.shop.config;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.MatchDetails;
+import com.codecool.shop.dao.CountryDao;
+import com.codecool.shop.dao.MatchDetailsDao;
+import com.codecool.shop.dao.SportTypeDao;
+import com.codecool.shop.dao.implementation.CountryDaoMem;
+import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
+import com.codecool.shop.dao.implementation.SportTypeDaoMem;
 import com.codecool.shop.model.Country;
+import com.codecool.shop.model.MatchDetails;
 import com.codecool.shop.model.SportType;
 
 import javax.servlet.ServletContextEvent;
@@ -19,23 +19,42 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        MatchDetailsDao matchDetailsDataStore = MatchDetailsDaoMem.getInstance();
+        CountryDao countryDataStore = CountryDaoMem.getInstance();
+        SportTypeDao sportTypeDataStore = SportTypeDaoMem.getInstance();
 
         //setting up a new supplier
-//        SportType amazon = new SportType("Amazon", "Digital content and services");
-//        supplierDataStore.add(amazon);
-//        SportType lenovo = new SportType("Lenovo", "Computers");
-//        supplierDataStore.add(lenovo);
+        SportType football = new SportType("Football", "Kick that ball, bro!");
+        sportTypeDataStore.add(football);
+        SportType iceHockey = new SportType("Hockey", "Ice, love it!");
+        sportTypeDataStore.add(iceHockey);
+        SportType darts = new SportType("Darts", "Throw darts.");
+        sportTypeDataStore.add(darts);
+
 
         //setting up a new product category
-//        Country tablet = new Country("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-//        productCategoryDataStore.add(tablet);
+        Country hungary = new Country("Hungary", "Best country - Hungary.");
+        countryDataStore.add(hungary);
+        Country england = new Country("England", "Tea for two.");
+        countryDataStore.add(england);
+
 
         //setting up products and printing it
-//        productDataStore.add(new MatchDetails("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-//        productDataStore.add(new MatchDetails("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-//        productDataStore.add(new MatchDetails("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        matchDetailsDataStore.add(new MatchDetails("First Match",
+                "Budafoki MTE", "Diósgyőri VTK", "NB I",
+                2.25f, 3.4f, 3.1f, hungary, football));
+
+        matchDetailsDataStore.add(new MatchDetails("Second Match",
+                "Budapest Honvéd", "MOL Fehérvár FC", "NB I",
+                4f, 3.7f, 1.83f, hungary, football));
+
+        matchDetailsDataStore.add(new MatchDetails("Third Match",
+                "Everton", "Liverpool", "Premier League",
+                3.75f, 4.2f, 1.8f, england, football));
+
+        matchDetailsDataStore.add(new MatchDetails("Fourth Match",
+                "Wright P", "Aspinall N", "Premier League",
+                1.65f, 1.0f, 2.45f, england, darts));
     }
+
 }

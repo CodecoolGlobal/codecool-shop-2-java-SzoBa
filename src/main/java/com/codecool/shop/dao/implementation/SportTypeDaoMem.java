@@ -1,24 +1,24 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.SportTypeDao;
 import com.codecool.shop.model.SportType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDaoMem implements SupplierDao {
+public class SportTypeDaoMem implements SportTypeDao {
 
     private List<SportType> data = new ArrayList<>();
-    private static SupplierDaoMem instance = null;
+    private static SportTypeDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private SupplierDaoMem() {
+    private SportTypeDaoMem() {
     }
 
-    public static SupplierDaoMem getInstance() {
+    public static SportTypeDaoMem getInstance() {
         if (instance == null) {
-            instance = new SupplierDaoMem();
+            instance = new SportTypeDaoMem();
         }
         return instance;
     }

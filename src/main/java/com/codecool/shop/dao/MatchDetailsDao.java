@@ -6,7 +6,7 @@ import com.codecool.shop.model.Country;
 
 import java.util.List;
 
-public interface ProductDao {
+public interface MatchDetailsDao {
 
     void add(MatchDetails matchDetails);
     MatchDetails find(int id);

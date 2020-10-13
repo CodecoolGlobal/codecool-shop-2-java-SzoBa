@@ -1,7 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 
-import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.MatchDetailsDao;
 import com.codecool.shop.model.MatchDetails;
 import com.codecool.shop.model.Country;
 import com.codecool.shop.model.SportType;
@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductDaoMem implements ProductDao {
+public class MatchDetailsDaoMem implements MatchDetailsDao {
 
     private List<MatchDetails> data = new ArrayList<>();
-    private static ProductDaoMem instance = null;
+    private static MatchDetailsDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoMem() {
+    private MatchDetailsDaoMem() {
     }
 
-    public static ProductDaoMem getInstance() {
+    public static MatchDetailsDaoMem getInstance() {
         if (instance == null) {
-            instance = new ProductDaoMem();
+            instance = new MatchDetailsDaoMem();
         }
         return instance;
     }

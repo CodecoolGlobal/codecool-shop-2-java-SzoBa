@@ -4,7 +4,7 @@ import com.codecool.shop.model.SportType;
 
 import java.util.List;
 
-public interface SupplierDao {
+public interface SportTypeDao {
 
     void add(SportType sportType);
     SportType find(int id);
