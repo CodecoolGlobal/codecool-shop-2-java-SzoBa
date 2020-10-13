@@ -37,6 +37,10 @@ public class Initializer implements ServletContextListener {
         countryDataStore.add(hungary);
         Country england = new Country("England", "Tea for two.");
         countryDataStore.add(england);
+        Country spain = new Country("Spain", "Arriva Dercsi:)");
+        countryDataStore.add(spain);
+        Country russia = new Country("Russia", "Voszem");
+        countryDataStore.add(russia);
 
 
         //setting up products and printing it
@@ -55,6 +59,12 @@ public class Initializer implements ServletContextListener {
         matchDetailsDataStore.add(new MatchDetails("Fourth Match",
                 "Wright P", "Aspinall N", "Premier League",
                 1.65f, 1.0f, 2.45f, england, darts));
+        matchDetailsDataStore.add(new MatchDetails("Fifth Match",
+                "Granada", "Sevilla", "LaLiga",
+                4.0f, 3.5f, 1.9f, spain, football));
+        matchDetailsDataStore.add(new MatchDetails("Sixth Match",
+                "Dinamo Riga", "Locomotiv Yaroslavl", "KHL",
+                3.25f, 1.0f, 1.35f, russia, iceHockey));
     }
 
 }
