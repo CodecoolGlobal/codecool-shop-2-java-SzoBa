@@ -49,7 +49,7 @@ export let dom = {
                                     <span>${match.homeOdds}</span>
                             </a>
                         </div>
-                        <div class="card-odds">
+                        <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}">
                             <a class="btn btn-success" href="#">
                                 <span>H</span>
                                 <br>
