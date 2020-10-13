@@ -2,9 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.MatchDetails;
+import com.codecool.shop.model.Country;
+import com.codecool.shop.model.SportType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
 
-    private List<Product> data = new ArrayList<>();
+    private List<MatchDetails> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -28,13 +28,13 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public void add(Product product) {
-        product.setId(data.size() + 1);
-        data.add(product);
+    public void add(MatchDetails matchDetails) {
+        matchDetails.setId(data.size() + 1);
+        data.add(matchDetails);
     }
 
     @Override
-    public Product find(int id) {
+    public MatchDetails find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -44,17 +44,17 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<MatchDetails> getAll() {
         return data;
     }
 
     @Override
-    public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+    public List<MatchDetails> getBy(SportType sportType) {
+        return data.stream().filter(t -> t.getSportType().equals(sportType)).collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    public List<MatchDetails> getBy(Country country) {
+        return data.stream().filter(t -> t.getCountry().equals(country)).collect(Collectors.toList());
     }
 }

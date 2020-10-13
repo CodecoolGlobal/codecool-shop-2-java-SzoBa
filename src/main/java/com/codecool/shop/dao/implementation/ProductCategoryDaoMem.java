@@ -2,14 +2,14 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Country;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
 
-    private List<ProductCategory> data = new ArrayList<>();
+    private List<Country> data = new ArrayList<>();
     private static ProductCategoryDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -25,13 +25,13 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     }
 
     @Override
-    public void add(ProductCategory category) {
+    public void add(Country category) {
         category.setId(data.size() + 1);
         data.add(category);
     }
 
     @Override
-    public ProductCategory find(int id) {
+    public Country find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -41,7 +41,7 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     }
 
     @Override
-    public List<ProductCategory> getAll() {
+    public List<Country> getAll() {
         return data;
     }
 }
