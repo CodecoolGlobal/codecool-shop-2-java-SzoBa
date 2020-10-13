@@ -62,12 +62,20 @@
 }
 
 .menu-items {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
 .filters {
+    width: 60%;
     display: inline-flex;
+    justify-content: space-between;
+}
+
+.sport-filter,
+.country-filter {
+    margin: 20px;
 }
 
 .col.col-sm-12.col-md-6.col-lg-4 {
@@ -92,15 +100,21 @@
     display: inline-flex;
     justify-content: space-evenly;
     width: 100%;
+    padding: 1rem;
 }
 
-.card-odds {
+/*.card-odds {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*}*/
+
+.btn {
     width: 60px;
+    height: 60px;
 }
 
 .cart-container {
-    width: 100%;
-    text-align: right;
+
 }
 
 .cart-text {
