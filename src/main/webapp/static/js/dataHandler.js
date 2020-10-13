@@ -12,5 +12,11 @@ export let dataHandler = {
         });
     },
 
+    modifyCartItems: function (matchID, isAdded, outcome, callback) {
+        this._get(`/modifyCart?matchID=${matchID}&isAdded=${isAdded}&outcome=${outcome}`, (response) => {
+            callback(response);
+        });
+    }
+
 
 }

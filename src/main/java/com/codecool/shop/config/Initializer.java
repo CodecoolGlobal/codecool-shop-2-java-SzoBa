@@ -25,17 +25,22 @@ public class Initializer implements ServletContextListener {
 
         //setting up a new supplier
         SportType football = new SportType("Football", "Kick that ball, bro!");
+        football.setId(1);
         sportTypeDataStore.add(football);
         SportType iceHockey = new SportType("Hockey", "Ice, love it!");
+        iceHockey.setId(2);
         sportTypeDataStore.add(iceHockey);
         SportType darts = new SportType("Darts", "Throw darts.");
+        darts.setId(3);
         sportTypeDataStore.add(darts);
 
 
         //setting up a new product category
         Country hungary = new Country("Hungary", "Best country - Hungary.");
+        hungary.setId(1);
         countryDataStore.add(hungary);
         Country england = new Country("England", "Tea for two.");
+        england.setId(2);
         countryDataStore.add(england);
 
 
@@ -55,6 +60,10 @@ public class Initializer implements ServletContextListener {
         matchDetailsDataStore.add(new MatchDetails("Fourth Match",
                 "Wright P", "Aspinall N", "Premier League",
                 1.65f, 1.0f, 2.45f, england, darts));
+
+        for (int i = 0; i < matchDetailsDataStore.getAll().size(); i++) {
+            matchDetailsDataStore.getAll().get(i).setId(i+1);
+        }
     }
 
 }
