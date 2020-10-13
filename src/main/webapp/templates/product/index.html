@@ -31,12 +31,31 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>TippMix Shop</h1>
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="filters">
+
+        <div class="sport-filter">
+            <label for="sport-select">Choose a sport:</label>
+
+            <select name="sport" id="sport-select">
+                <option value="">--Please choose an option--</option>
+                <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}" th:text="${sport.getName()}"></option>
+
+            </select>
+        </div>
+
+        <div class="country-filter">
+            <label for="country-select">Choose a country:</label>
+
+            <select name="country" id="country-select">
+
+                <option th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}" th:text="${country.getName()}"></option>
+
+            </select>
+        </div>
     </div>
 
     <div id="products" class="row">
