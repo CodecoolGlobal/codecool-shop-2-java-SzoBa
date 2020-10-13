@@ -16,8 +16,7 @@ export let dataHandler = {
         this._get(`/modifyCart?matchID=${matchID}&isAdded=${isAdded}&outcome=${outcome}`, (response) => {
             callback(response);
         });
-    }
-
+    },
 
     getSportType: function (typeId, callback) {
         this._get(`/sport-type?typeId=${typeId}`, (response) => {

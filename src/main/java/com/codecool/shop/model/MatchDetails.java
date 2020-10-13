@@ -2,8 +2,6 @@ package com.codecool.shop.model;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.Currency;
-
 public class MatchDetails extends BaseModel {
 
     @Expose
