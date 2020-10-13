@@ -26,6 +26,10 @@ public class SportType extends BaseModel {
         this.matchDetails.add(matchDetails);
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +

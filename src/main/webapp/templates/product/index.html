@@ -63,7 +63,7 @@
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="match,iterStat : ${matches}">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${match.name}">Product name</h4>
+                    <h4 class="card-title" th:text="${match.getHomeTeam()} + '-' + ${match.getAwayTeam()}">Product name</h4>
                     <p class="card-text" th:text="${match.description}">Product description... </p>
                 </div>
                 <div class="card-body">
