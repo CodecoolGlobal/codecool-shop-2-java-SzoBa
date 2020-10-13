@@ -7,6 +7,8 @@ export let dom = {
 
     addListeners: function () {
         document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
+        document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+
     },
 
     addListenerToCountrySelect: function () {
@@ -17,11 +19,18 @@ export let dom = {
         })
     },
 
+    addListenerToSportSelect() {
+        let item = document.getElementById("sport-select");
+        dataHandler.getSportType(item.options[item.selectedIndex].value, (data) => {
+            dom.clearMatches();
+            dom.createMatches(data);
+        })
+    },
+
     clearMatches: function () {
         document.getElementById("matches").innerHTML = "";
 
     },
-
     createMatches: function (matches) {
         let mainContent = "";
         for (let match of matches) {

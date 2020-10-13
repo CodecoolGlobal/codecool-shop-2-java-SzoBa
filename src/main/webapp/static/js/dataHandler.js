@@ -13,4 +13,9 @@ export let dataHandler = {
     },
 
 
+    getSportType: function (typeId, callback) {
+        this._get(`/sport-type?typeId=${typeId}`, (response) => {
+            callback(response);
+        });
+    }
 }
