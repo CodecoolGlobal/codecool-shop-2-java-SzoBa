@@ -61,9 +61,8 @@
     margin: 0 0 11px;
 }
 
-.card-body {
+.menu-items {
     display: inline-flex;
-    justify-content: space-evenly;
     width: 100%;
 }
 
@@ -72,7 +71,39 @@
 }
 
 .col.col-sm-12.col-md-6.col-lg-4 {
-    /*display: inline-flex;*/
     max-width: 100% !important;
     flex: 0 !important;
+    margin: 24px 0;
 }
+
+#matches {
+    display: block;
+}
+
+.card {
+    flex-direction: unset !important;
+}
+
+.card-header {
+    width: 200%;
+}
+
+.card-body {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.card-odds {
+    width: 60px;
+}
+
+.cart-container {
+    width: 100%;
+    text-align: right;
+}
+
+.cart-text {
+    text-align: center;
+}
+
