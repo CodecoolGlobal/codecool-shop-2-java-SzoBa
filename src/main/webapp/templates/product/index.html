@@ -27,31 +27,32 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
     <script type="module" src="/static/js/main.js" defer></script>
 </head>
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>TippMix Shop</h1>
+<div class="header">
+    <h1>Under Construction</h1>
+
+    <div class="cart-container">
+        <div class="cart-title">Szelvény</div>
+        <div class="cart-item-counter">0</div>
+    </div>
 </div>
 
 <div class="container">
     <div class="menu-items">
         <div class="filters">
-
             <div class="sport-filter">
                 <label for="sport-select">Choose a sport:</label>
-
                 <select name="sport" id="sport-select">
                     <option value="">--Please choose an option--</option>
                     <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}"
                             th:text="${sport.getName()}"></option>
-
                 </select>
             </div>
-
             <div class="country-filter">
                 <label for="country-select">Choose a country:</label>
 
@@ -61,12 +62,6 @@
                             th:text="${country.getName()}"></option>
 
                 </select>
-            </div>
-        </div>
-        <div class="cart-container">
-            <div class="cart-text">
-                <p>Szelvény</p>
-                <p class="bet-counter">0</p>
             </div>
         </div>
     </div>
