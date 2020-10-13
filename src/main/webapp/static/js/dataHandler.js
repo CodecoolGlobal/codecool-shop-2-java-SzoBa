@@ -6,9 +6,8 @@ export let dataHandler = {
             .then((response) => callback(response))
     },
 
-    getNews: function (page, callback) {
-        page = parseInt(page) < 1 ? null : page;
-        this._get(`/api/top?page=${page}`, (response) => {
+    getCountry: function (countryId, callback) {
+        this._get(`/country?countryId=${countryId}`, (response) => {
             callback(response);
         });
     },
