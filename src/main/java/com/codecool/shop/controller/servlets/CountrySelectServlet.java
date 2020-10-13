@@ -6,11 +6,15 @@ import com.codecool.shop.dao.implementation.CountryDaoMem;
 import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
 import com.codecool.shop.model.Country;
 import com.codecool.shop.model.MatchDetails;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name="countrySelectServlet", urlPatterns = {"/country"}, loadOnStartup = 2)
@@ -25,9 +29,14 @@ public class CountrySelectServlet extends javax.servlet.http.HttpServlet {
         MatchDetailsDao matchDetailsDataStore = MatchDetailsDaoMem.getInstance();
         List<MatchDetails> matchesBySelectedCountry = matchDetailsDataStore.getBy(selectedCountry);
 
-        matchesBySelectedCountry.forEach(System.out::println);
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
 
-
-
+        String matches = gson.toJson(matchesBySelectedCountry);
+//        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter out = resp.getWriter();
+        out.println(matches);
     }
 }

@@ -1,14 +1,22 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Currency;
 
 public class MatchDetails extends BaseModel {
 
+    @Expose
     private String homeTeam;
+    @Expose
     private String awayTeam;
+    @Expose
     private String leagueName;
+    @Expose
     private float homeOdds;
+    @Expose
     private float drawOdds;
+    @Expose
     private float awayOdds;
 
     private Country country;
