@@ -1,16 +1,14 @@
 package com.codecool.shop.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Cart extends BaseModel{
 
-    protected String homeTeam;
-    protected String awayTeam;
-    protected String chosenTeam;
-    protected String leagueName;
-    protected float odds;
+    protected List<CartItem> items = new ArrayList<>();
     protected float bet;
-    protected Date ActualTime;
+    protected Date date;
 
 
 
@@ -18,45 +16,7 @@ public class Cart extends BaseModel{
         super(description);
     }
 
-    public String getHomeTeam() {
-        return homeTeam;
-    }
 
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public String getAwayTeam() {
-        return awayTeam;
-    }
-
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public String getChosenTeam() {
-        return chosenTeam;
-    }
-
-    public void setChosenTeam(String chosenTeam) {
-        this.chosenTeam = chosenTeam;
-    }
-
-    public String getLeagueName() {
-        return leagueName;
-    }
-
-    public void setLeagueName(String leagueName) {
-        this.leagueName = leagueName;
-    }
-
-    public float getOdds() {
-        return odds;
-    }
-
-    public void setOdds(float odds) {
-        this.odds = odds;
-    }
 
     public float getBet() {
         return bet;
@@ -67,10 +27,23 @@ public class Cart extends BaseModel{
     }
 
     public Date getActualTime() {
-        return ActualTime;
+        return date;
     }
 
     public void setActualTime(Date actualTime) {
-        ActualTime = actualTime;
+        date = actualTime;
+    }
+
+    public void addItemToCart(CartItem cartItem) {
+        items.add(cartItem);
+    }
+
+    public void removeItemFromCart(int matchId) {
+        for (CartItem cartItem : items) {
+            if (cartItem.getMatchId() == matchId) {
+                items.remove(cartItem);
+                break;
+            }
+        }
     }
 }

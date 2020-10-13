@@ -68,30 +68,30 @@
 
     <div id="matches" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="match,iterStat : ${matches}">
-            <div class="card">
+            <div class="card" th:attr="data-matchId=${match.getId()}">
                 <div class="card-header">
                     <h4 class="card-title" th:text="${match.getHomeTeam()} + ' - ' + ${match.getAwayTeam()}">Product
                         name</h4>
                     <p class="card-text" th:text="${match.description}">Product description... </p>
                 </div>
                 <div class="card-body">
-                    <div class="card-odds">
+                    <div class="card-odds" data-outcome="home">
                         <a class="btn btn-success" href="#">
                             <span>H</span>
                             <br>
                             <span th:text="${match.getHomeOdds()}"></span>
                         </a>
                     </div>
-                    <div class="card-odds">
+                    <div class="card-odds" data-outcome="draw">
                         <a class="btn btn-success" href="#">
-                            <span>H</span>
+                            <span>D</span>
                             <br>
                             <span th:text="${match.getDrawOdds()}"></span>
                         </a>
                     </div>
-                    <div class="card-odds">
+                    <div class="card-odds" data-outcome="away">
                         <a class="btn btn-success" href="#">
-                            <span>H</span>
+                            <span>V</span>
                             <br>
                             <span th:text="${match.getAwayOdds()}"></span>
                         </a>
