@@ -2,18 +2,29 @@ body {
     background: #4c97ca;
 }
 
+/*Header Content*/
 .header {
     width: 100%;
     padding: 10px 10% 20px 10%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+#header-with-logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+#header-logo {
+    width: 80px;
+    padding: 10px;
+    background: #4c97ca;
 }
 
 .header h1 {
     color: #fff;
     text-shadow: 0 0 4px rgba(255, 255, 255, .3), 0 0 6px rgba(255, 255, 255, .2);
+    margin: 0;
 }
 
 .cart-container {
@@ -34,6 +45,10 @@ body {
     text-shadow: 0 0 4px rgba(0, 0, 0, .1), 0 0 6px rgba(0, 0, 0, .2);
 }
 
+.cart-text {
+    text-align: center;
+}
+
 .cart-item-counter {
     display: flex;
     justify-content: center;
@@ -45,7 +60,9 @@ body {
     color: #fff;
     text-shadow: 0 0 4px rgba(0, 0, 0, .1), 0 0 6px rgba(0, 0, 0, .2);
 }
+/*Header Content*/
 
+/*Main Content*/
 .container {
     width: 100%;
     padding: 10px 5% 0 5%;
@@ -56,13 +73,76 @@ body {
 .menu-items {
     background: #C5D3F5;
     border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
+.card {
+    flex-direction: unset !important;
+}
+
+.card-header {
+    width: 200%;
+}
+
+.card-body {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 1rem;
+}
+
+#matches {
+    display: block;
+}
+
+/*.card-odds {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*}*/
+
+.btn {
+    width: 60px;
+    height: 60px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.filters {
+    width: 60%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.sport-filter,
+.country-filter {
+    margin: 20px;
+}
+
+.col.col-sm-12.col-md-6.col-lg-4 {
+    max-width: 100% !important;
+    flex: 0 !important;
+    margin: 24px 0;
+}
+
+/*Main Content*/
 
 
+
+
+
+
+
+
+
+/*Original CSS from skeleton - Currently UNUSED*/
 .glyphicon {
     margin-right:5px;
 }
+
 .thumbnail
 {
     margin-bottom: 20px;
@@ -123,66 +203,8 @@ body {
     margin: 0 0 11px;
 }
 
-.menu-items {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
+/*Original CSS from skeleton - Currently UNUSED*/
 
-.filters {
-    width: 60%;
-    display: inline-flex;
-    justify-content: space-between;
-}
 
-.sport-filter,
-.country-filter {
-    margin: 20px;
-}
 
-.col.col-sm-12.col-md-6.col-lg-4 {
-    max-width: 100% !important;
-    flex: 0 !important;
-    margin: 24px 0;
-}
 
-#matches {
-    display: block;
-}
-
-.card {
-    flex-direction: unset !important;
-}
-
-.card-header {
-    width: 200%;
-}
-
-.card-body {
-    display: inline-flex;
-    justify-content: space-evenly;
-    width: 100%;
-    padding: 1rem;
-}
-
-/*.card-odds {*/
-/*    width: 60px;*/
-/*    height: 60px;*/
-/*}*/
-
-.btn {
-    width: 60px;
-    height: 60px;
-}
-
-.cart-container {
-
-}
-
-.cart-text {
-    text-align: center;
-}
-
-.hidden {
-    visibility: hidden;
-}
