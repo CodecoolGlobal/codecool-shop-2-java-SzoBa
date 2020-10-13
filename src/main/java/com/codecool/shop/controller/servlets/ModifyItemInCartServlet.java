@@ -22,7 +22,13 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
         int matchId = Integer.parseInt(req.getParameter("matchID"));
         Boolean isAdded = req.getParameter("isAdded").equals("true");
         String outcome = req.getParameter("outcome");
-        System.out.println();
+        MatchDetailsDao matchDetailsDao = MatchDetailsDaoMem.getInstance();
+        MatchDetails matchDetails = matchDetailsDao.find(matchId);
+        if (isAdded) {
+
+        } else {
+
+        }
 
     }
 }
