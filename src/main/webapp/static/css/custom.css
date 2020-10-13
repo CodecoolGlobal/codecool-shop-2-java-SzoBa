@@ -61,18 +61,63 @@
     margin: 0 0 11px;
 }
 
-.card-body {
-    display: inline-flex;
-    justify-content: space-evenly;
+.menu-items {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
 .filters {
+    width: 60%;
     display: inline-flex;
+    justify-content: space-between;
+}
+
+.sport-filter,
+.country-filter {
+    margin: 20px;
 }
 
 .col.col-sm-12.col-md-6.col-lg-4 {
-    /*display: inline-flex;*/
     max-width: 100% !important;
     flex: 0 !important;
+    margin: 24px 0;
 }
+
+#matches {
+    display: block;
+}
+
+.card {
+    flex-direction: unset !important;
+}
+
+.card-header {
+    width: 200%;
+}
+
+.card-body {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 1rem;
+}
+
+/*.card-odds {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*}*/
+
+.btn {
+    width: 60px;
+    height: 60px;
+}
+
+.cart-container {
+
+}
+
+.cart-text {
+    text-align: center;
+}
+

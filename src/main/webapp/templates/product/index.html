@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>Codecool Shop</title>
 
@@ -14,11 +14,13 @@
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -36,46 +38,68 @@
 </div>
 
 <div class="container">
-    <div class="filters">
+    <div class="menu-items">
+        <div class="filters">
 
-        <div class="sport-filter">
-            <label for="sport-select">Choose a sport:</label>
+            <div class="sport-filter">
+                <label for="sport-select">Choose a sport:</label>
 
-            <select name="sport" id="sport-select">
-                <option value="">--Please choose an option--</option>
-                <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}" th:text="${sport.getName()}"></option>
+                <select name="sport" id="sport-select">
+                    <option value="">--Please choose an option--</option>
+                    <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}"
+                            th:text="${sport.getName()}"></option>
 
-            </select>
+                </select>
+            </div>
+
+            <div class="country-filter">
+                <label for="country-select">Choose a country:</label>
+
+                <select name="country" id="country-select">
+
+                    <option th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}"
+                            th:text="${country.getName()}"></option>
+
+                </select>
+            </div>
         </div>
-
-        <div class="country-filter">
-            <label for="country-select">Choose a country:</label>
-
-            <select name="country" id="country-select">
-
-                <option th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}" th:text="${country.getName()}"></option>
-
-            </select>
+        <div class="cart-container">
+            <div class="cart-text">
+                <p>Szelvény</p>
+                <p class="bet-counter">0</p>
+            </div>
         </div>
     </div>
-
 
     <div id="matches" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="match,iterStat : ${matches}">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${match.getHomeTeam()} + '-' + ${match.getAwayTeam()}">Product name</h4>
+                    <h4 class="card-title" th:text="${match.getHomeTeam()} + ' - ' + ${match.getAwayTeam()}">Product
+                        name</h4>
                     <p class="card-text" th:text="${match.description}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-odds">
-                        <a class="btn btn-success" href="#">H <br> 1.8</a>
+                        <a class="btn btn-success" href="#">
+                            <span>H</span>
+                            <br>
+                            <span th:text="${match.getHomeOdds()}"></span>
+                        </a>
                     </div>
                     <div class="card-odds">
-                        <a class="btn btn-success" href="#">D <br> 1.8</a>
+                        <a class="btn btn-success" href="#">
+                            <span>H</span>
+                            <br>
+                            <span th:text="${match.getDrawOdds()}"></span>
+                        </a>
                     </div>
                     <div class="card-odds">
-                        <a class="btn btn-success" href="#">V <br> 1.8</a>
+                        <a class="btn btn-success" href="#">
+                            <span>H</span>
+                            <br>
+                            <span th:text="${match.getAwayOdds()}"></span>
+                        </a>
                     </div>
                 </div>
             </div>
