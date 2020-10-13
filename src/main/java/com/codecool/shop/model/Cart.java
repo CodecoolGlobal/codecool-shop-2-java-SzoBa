@@ -17,6 +17,9 @@ public class Cart extends BaseModel{
     }
 
 
+    public List<CartItem> getItems() {
+        return items;
+    }
 
     public float getBet() {
         return bet;
