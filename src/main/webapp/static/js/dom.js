@@ -2,22 +2,25 @@ import {dataHandler} from "./dataHandler.js";
 
 export let dom = {
     init: function () {
-        this.addListeners();
+        this.addConstantListeners();
+        this.addTemporaryListeners();
     },
 
-    addListeners: function () {
+    addConstantListeners: function () {
         document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
         document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+    },
+
+    addTemporaryListeners: function () {
         this.addListenerToOdds();
+
     },
 
     addListenerToOdds: function () {
         const odds = document.querySelectorAll('.card-odds')
         for (const odd of odds) {
-            odd.addEventListener("click", event => this.modifyCartItems(event));
-
+            odd.addEventListener("click", this.modifyCartItems);
         }
-
     },
 
     addListenerToCountrySelect: function () {
@@ -41,31 +44,32 @@ export let dom = {
 
     },
     createMatches: function (matches) {
+        console.log(matches)
         let mainContent = "";
         for (let match of matches) {
             let matchContent = `
             <div class="col col-sm-12 col-md-6 col-lg-4">
-                <div class="card">
+                <div class="card" data-matchId="${match.id}">
                     <div class="card-header">
                         <h4 class="card-title">${match.homeTeam} - ${match.awayTeam}</h4>
                         <p class="card-text">${match.description}</p>
                     </div>
                     <div class="card-body">
-                        <div class="card-odds">
+                        <div class="card-odds" data-outcome="home">
                             <a class="btn btn-success" href="#">
                                 <span>H</span>
                                 <br>
                                     <span>${match.homeOdds}</span>
                             </a>
                         </div>
-                        <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}">
+                        <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}" data-outcome="draw">
                             <a class="btn btn-success" href="#">
                                 <span>H</span>
                                 <br>
                                     <span>${match.drawOdds}</span>
                             </a>
                         </div>
-                        <div class="card-odds">
+                        <div class="card-odds" data-outcome="away">
                             <a class="btn btn-success" href="#">
                                 <span>H</span>
                                 <br>
@@ -78,6 +82,7 @@ export let dom = {
             mainContent += matchContent;
         }
         document.getElementById("matches").insertAdjacentHTML("beforeend", mainContent);
+        this.addTemporaryListeners();
     },
 
     modifyCartItems(event) {
