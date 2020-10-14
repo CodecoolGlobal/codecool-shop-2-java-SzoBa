@@ -7,8 +7,10 @@ export let dom = {
     },
 
     addConstantListeners: function () {
-        document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
-        document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+        // document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
+        // document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+        document.getElementById("type-selection").addEventListener("click", this.showTypeDropdownMenu);
+        document.getElementById("country-selection").addEventListener("click", this.showCountryDropdownMenu);
     },
 
     addTemporaryListeners: function () {
@@ -99,5 +101,29 @@ export let dom = {
                 betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
             }
         })
+    },
+
+    showTypeDropdownMenu() {
+        let typeDropdown = document.querySelector(".type-dropdown");
+        switch (typeDropdown.classList.contains("hidden")) {
+            case true:
+                typeDropdown.classList.remove("hidden");
+                break;
+            case false:
+                typeDropdown.classList.add("hidden");
+                break;
+        }
+    },
+
+    showCountryDropdownMenu() {
+        let countryDropdown = document.querySelector(".country-dropdown");
+        switch (countryDropdown.classList.contains("hidden")) {
+            case true:
+                countryDropdown.classList.remove("hidden");
+                break;
+            case false:
+                countryDropdown.classList.add("hidden");
+                break;
+        }
     }
 }
