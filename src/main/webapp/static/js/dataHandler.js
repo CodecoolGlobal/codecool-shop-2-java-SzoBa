@@ -18,6 +18,12 @@ export let dataHandler = {
         });
     },
 
+    getCartItems: function (callback) {
+        this._get(`/getCartItems`, (response) => {
+            callback(response);
+        });
+    },
+
     getSportType: function (typeId, callback) {
         this._get(`/sport-type?typeId=${typeId}`, (response) => {
             callback(response);
