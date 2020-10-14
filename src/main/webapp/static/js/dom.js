@@ -45,13 +45,14 @@ export let dom = {
         let content = document.querySelector(".cart-content");
         if (event.target.classList.contains("cart-container") || event.target.classList.contains("cart-item-counter")
             || event.target.classList.contains("cart-title")) {
+
             content.classList.toggle("hidden");
-        }
-        if (!content.classList.contains("hidden")) {
-            dataHandler.getCartContent((data) => {
-                dom.clearTicketContentBody();
-                dom.createTicketData(data);
-            })
+            if (!content.classList.contains("hidden")) {
+                dataHandler.getCartContent((data) => {
+                    dom.clearTicketContentBody();
+                    dom.createTicketData(data);
+                })
+            }
         }
     },
 
@@ -127,11 +128,11 @@ export let dom = {
     },
 
     createTicketData: function (data) {
-        this.createCartMatches(data.items);
+        this.createCartMatchesList(data.items);
         this.addCartConstantItems(data);
     },
 
-    createCartMatches: function (matches) {
+    createCartMatchesList: function (matches) {
         let matchList = document.querySelector(".cart-content-matches ul");
         let content = "";
         for (let match of matches) {
@@ -144,11 +145,22 @@ export let dom = {
 
     addCartConstantItems: function (data) {
         let content = document.querySelector(".cart-content-body");
-        console.log(data);
         let items =
             `<label for="betValue">Current bet:  </label>
-             <input id="betValue" name="betValue" type="number" value="${data.bet}">`
+             <input id="betValue" name="betValue" type="text" placeholder="${data.bet}">
+             <a href="/"><button>Confirm Order</button></a>`
         content.insertAdjacentHTML("beforeend", items);
+        this.addListenersToBetInput();
+    },
+
+    addListenersToBetInput: function () {
+        let input = document.querySelector("#betValue");
+        input.addEventListener("keydown", (event) => {
+            if (event.keyCode === 13 && /^\d+$/.test(input.value)) {
+                //TODO save bet to database
+            }
+        })
+
     }
 }
 
