@@ -170,6 +170,15 @@ export let dom = {
             this.addCartConstantItems(data);
             this.addListenersToTrashBins();
             this.calculatedOddsInCartRefresh();
+        } else {
+            let matchList = document.querySelector(".cart-content-matches ul");
+            let matchContent = document.querySelector(".cart-content-matches");
+            let addNoMatches = `<div class="no-matches">
+                No matches added to cart yet. </br>
+                Please choose to continue!
+            </div>`
+            matchList.insertAdjacentHTML("beforeend", addNoMatches);
+            matchContent.classList.add("align-no-matches")
         }
     },
 
@@ -188,6 +197,7 @@ export let dom = {
             </li>`
             content += addMatch;
         }
+
         matchList.insertAdjacentHTML("beforeend", content);
     },
 
