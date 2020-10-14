@@ -225,7 +225,7 @@ export let dom = {
         let cards = document.querySelectorAll(".card");
         cards.forEach(card => {
             if (card.dataset.matchid === matchId) {
-                card.querySelector(".active").classList.remove("active");
+                card.querySelectorAll(".btn").forEach(btn => btn.classList.remove("inactive", "active"));
             }
         })
         dataHandler.modifyCartItems(matchId, isAdded, outcome, () => {
@@ -257,7 +257,8 @@ export let dom = {
     },
 
     updatePossibleWinNumber: function (bet){
-        let possibleWinAmount = document.querySelector("#possible-win-value")
+        let possibleWinAmount = document.querySelector("#possible-win-value");
+
         //TODO update fields
     }
 }
