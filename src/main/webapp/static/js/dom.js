@@ -184,7 +184,7 @@ export let dom = {
                     Chosen: ${match.chosenOutcome}
                     <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a>
                 </div>
-                <span class="odds">Odds: ${match.odds}</span>
+                <span class="odds">Odds: <span>${match.odds}</span></span>
             </li>`
             content += addMatch;
         }
@@ -197,7 +197,7 @@ export let dom = {
             `<div class="cart-inputs">
                  <div>
                      <label class="bet-value-label" for="betValue">Current bet: </label>
-                     <input class="bet-value-input" id="betValue" name="betValue" type="text" placeholder="${data.bet}">
+                     <input class="bet-value-input" id="betValue" name="betValue" type="text" placeholder="Min 100">
                  </div>
                  <table class="cart-input-table">
                      <tr>
@@ -206,7 +206,7 @@ export let dom = {
                      </tr>
                      <tr>
                          <td>Possible win: </td>
-                         <td id="possible-win-value">34214</td>
+                         <td id="possible-win-value">0</td>
                      </tr>
                  </table>
              </div>
@@ -269,7 +269,7 @@ export let dom = {
 
     calculatedOddsInCartRefresh: function () {
         let calculatedOdds = document.querySelector("#total-odds-value");
-        let allOdds = document.querySelectorAll(".cart-content-matches ul li span");
+        let allOdds = document.querySelectorAll(".cart-content-matches ul li span span");
         let valueOfCalculatedOdds = 1;
         allOdds.forEach(odd => {valueOfCalculatedOdds = valueOfCalculatedOdds * parseFloat(odd.innerHTML)});
         calculatedOdds.innerHTML = valueOfCalculatedOdds.toFixed(2);
