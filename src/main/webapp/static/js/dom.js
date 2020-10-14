@@ -9,6 +9,7 @@ export let dom = {
     addConstantListeners: function () {
         document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
         document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+        document.querySelector(".cart-container").addEventListener("click", this.addListenerToCart);
     },
 
     addTemporaryListeners: function () {
@@ -39,10 +40,19 @@ export let dom = {
         })
     },
 
+    addListenerToCart: function (event) {
+        if (event.target.classList.contains("cart-container") || event.target.classList.contains("cart-item-counter")
+            || event.target.classList.contains("cart-title")) {
+            document.querySelector(".cart-content").classList.toggle("hidden");
+        }
+        // document.querySelector(".cart-container").removeEventListener("click", dom.addListenerToCart);
+    },
+
     clearMatches: function () {
         document.getElementById("matches").innerHTML = "";
 
     },
+
     createMatches: function (matches) {
         console.log(matches)
         let mainContent = "";
@@ -84,7 +94,6 @@ export let dom = {
         document.getElementById("matches").insertAdjacentHTML("beforeend", mainContent);
         this.addTemporaryListeners();
     },
-
     modifyCartItems(event) {
         let matchID = event.target.closest(".card").dataset.matchid;
         let isAdded = event.target.closest("a").classList.contains("active");
