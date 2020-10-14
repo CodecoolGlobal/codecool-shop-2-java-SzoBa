@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/icons.css"/>
 
     <script type="module" src="/static/js/main.js" defer></script>
-    <link rel="shortcut icon" href="/static/img/under4b.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="/static/img/under4b.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -52,23 +52,29 @@
 <div class="container">
     <div class="menu-items">
         <div class="filters">
-            <div class="sport-filter">
-                <label for="sport-select">Choose a sport:</label>
-                <select name="sport" id="sport-select">
-                    <option th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}"
-                            th:text="${sport.getName()}"></option>
-                </select>
+            <div class="sport-filter" id="sport-filter">
+                <div id="type-selection">Choose from sports</div>
+                <div class="type-dropdown hidden">
+                    <ul>
+                        <li class="sport-type" th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}">
+                            <span th:class="${sport.description}"></span>
+                            <span th:text="${sport.getName()}"></span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="country-filter">
-                <label for="country-select">Choose a country:</label>
-
-                <select name="country" id="country-select">
-
-                    <option th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}"
-                            th:text="${country.getName()}"></option>
-
-                </select>
+            <div class="country-filter" id="country-filter">
+                <div id="country-selection">Choose from countries</div>
+                <div class="country-dropdown hidden">
+                    <ul>
+                        <li class="country-type" th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}"
+                            th:text="${country.getName()}"></li>
+                    </ul>
+                </div>
             </div>
+        </div>
+        <div>
+            Search
         </div>
     </div>
 
