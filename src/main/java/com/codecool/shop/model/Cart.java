@@ -1,13 +1,17 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Cart extends BaseModel{
-
+    @Expose
     protected List<CartItem> items = new ArrayList<>();
+    @Expose
     protected float bet;
+    @Expose
     protected Date date;
 
 
