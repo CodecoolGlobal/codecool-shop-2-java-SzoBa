@@ -30,8 +30,8 @@ export let dataHandler = {
         });
     },
 
-    getCartContent: function (cartId, callback) {
-        this._get(`/cart-content?cartId=${cartId}`, (response) => {
+    getCartContent: function (callback) {
+        this._get(`/getCartItems`, (response) => {
             callback(response);
         })
     }

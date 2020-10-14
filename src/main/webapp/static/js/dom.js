@@ -29,7 +29,7 @@ export let dom = {
         dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
             dom.clearMatches();
             dom.createMatches(data);
-            refreshSelected
+            //refreshSelected
         })
     },
 
@@ -48,8 +48,7 @@ export let dom = {
             content.classList.toggle("hidden");
         }
         if (!content.classList.contains("hidden")) {
-            //Currently just one player, no need for option, only when login implemented
-            dataHandler.getCartContent(id, (data) => {
+            dataHandler.getCartContent((data) => {
                 dom.clearTicketContentBody();
                 dom.createTicketData(data);
             })
@@ -62,7 +61,7 @@ export let dom = {
     },
 
     clearTicketContentBody: function () {
-        let content = document.querySelector(".cart-content");
+        let content = document.querySelector(".cart-content-body");
         content.innerHTML = "";
     },
 
@@ -125,8 +124,10 @@ export let dom = {
         }
     },
 
-    createTicketData: function () {
+    createTicketData: function (data) {
         let content = document.querySelector(".cart-content");
+        console.log(data)
+
     }
 }
 
