@@ -62,6 +62,9 @@
                 <div id="type-selection">All sports</div>
                 <div class="type-dropdown hidden">
                     <ul>
+                        <li class="sport-type" value="0">
+                        <span class="ico-sport ico-sport-all"></span>
+                        <span>All sports</span></li>
                         <li class="sport-type" th:each="sport,iterStat : ${sports}" th:attr="value=${sport.getId()}">
                             <span th:class="${sport.description}"></span>
                             <span th:text="${sport.getName()}"></span>

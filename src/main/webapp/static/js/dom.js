@@ -10,11 +10,14 @@ export let dom = {
     addConstantListeners: function () {
         document.getElementById("type-selection").addEventListener("click", () => {
             this.showDropdownMenu(".type-dropdown");
+            this.addListenerToSportSelect();
         });
         document.getElementById("country-selection").addEventListener("click", () => {
             this.showDropdownMenu(".country-dropdown");
+            this.addListenerToCountrySelect();
         });
         document.querySelector(".cart-container").addEventListener("click", this.addListenerToCart);
+        document.querySelector(".search").addEventListener("click", this.filterByCondition);
     },
 
     addTemporaryListeners: function () {
@@ -30,21 +33,40 @@ export let dom = {
     },
 
     addListenerToCountrySelect: function () {
-        let item = document.getElementById("country-select");
-        dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
-            dom.clearMatches();
-            dom.createMatches(data);
-            checkIfOddsAlreadySelected();
-        })
+        let items = document.querySelectorAll(".country-type");
+        items.forEach(item => item.addEventListener("click", this.addSelectedCountryListener))
     },
 
     addListenerToSportSelect() {
-        let item = document.getElementById("sport-select");
-        dataHandler.getSportType(item.options[item.selectedIndex].value, (data) => {
-            dom.clearMatches();
-            dom.createMatches(data);
-            checkIfOddsAlreadySelected();
-        })
+        let items = document.querySelectorAll(".sport-type");
+        items.forEach(item => item.addEventListener("click", this.addSelectedTypeListener));
+    },
+
+    addSelectedTypeListener: function (event) {
+        let mainItem = document.querySelector("#type-selection")
+        mainItem.innerHTML = event.target.innerText;
+        console.log(event.target);
+        mainItem.dataset.value = event.target.value;
+    },
+
+    addSelectedCountryListener: function (event) {
+        let mainItem = document.querySelector("#country-selection")
+        mainItem.innerHTML = event.target.innerText;
+        mainItem.dataset.value = event.target.value;
+    },
+
+    filterByCondition: function (event) {
+        let typeId = document.querySelector("#type-selection").dataset.value > 0 ?
+            document.querySelector("#type-selection").dataset.value : 0;
+        let countryId = document.querySelector("#country-selection").dataset.value > 0 ?
+            document.querySelector("#country-selection").dataset.value : 0;
+        console.log(typeId + " " + countryId);
+        // dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
+        //     dom.clearMatches();
+        //     dom.createMatches(data);
+        //     checkIfOddsAlreadySelected();
+        // })
+
     },
 
     addListenerToCart: function (event) {
