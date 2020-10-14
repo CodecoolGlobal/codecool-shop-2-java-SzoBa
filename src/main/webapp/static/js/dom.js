@@ -47,7 +47,6 @@ export let dom = {
     addSelectedTypeListener: function (event) {
         let mainItem = document.querySelector("#type-selection")
         mainItem.innerHTML = event.target.innerText;
-
         mainItem.dataset.value = event.target.value > -1 ? event.target.value : event.target.parentElement.value;
     },
 
@@ -168,6 +167,7 @@ export let dom = {
     createTicketData: function (data) {
         this.createCartMatchesList(data.items);
         this.addCartConstantItems(data);
+        this.addListenersToTrashBins();
     },
 
     createCartMatchesList: function (matches) {
@@ -175,8 +175,9 @@ export let dom = {
         let content = "";
         for (let match of matches) {
             let addMatch = `
-            <li>${match.home} - ${match.away} Chosen: ${match.chosenOutcome}, Odds ${match.odds}
-            <a><img src="/static/img/trashbin3.png"" width="15" height="15" alt="delete-match"></a></li>`
+            <li>${match.home} - ${match.away} Odds ${match.odds}
+            <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a><br>Chosen: ${match.chosenOutcome}
+            </li>`
             content += addMatch;
         }
         matchList.insertAdjacentHTML("beforeend", content);
@@ -201,6 +202,18 @@ export let dom = {
         })
 
     },
+
+    addListenersToTrashBins: function () {
+        let trashBinContainers = document.querySelectorAll(".cart-content-matches ul li a");
+        trashBinContainers.forEach(bin => bin.addEventListener("click", this.removeMatchItemFromCart))
+    },
+
+    removeMatchItemFromCart: function (event) {
+        console.log(event.target.closest("li"));
+
+
+    },
+
     showDropdownMenu(Type) {
         let dropdown = document.querySelector(Type);
         switch (dropdown.classList.contains("hidden")) {
