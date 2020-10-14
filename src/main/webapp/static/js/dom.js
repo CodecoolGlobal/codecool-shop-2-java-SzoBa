@@ -56,11 +56,7 @@ export let dom = {
     },
 
     filterByCondition: function () {
-        // Close the dropdowns before get search results
-        let typeDropdown = document.querySelector(".type-dropdown");
-        let countryDropdown = document.querySelector(".country-dropdown");
-        typeDropdown.classList.add("hidden");
-        countryDropdown.classList.add("hidden");
+        dom.closeDropdowns();
 
         let typeId = document.querySelector("#type-selection").dataset.value > 0 ?
             document.querySelector("#type-selection").dataset.value : 0;
@@ -72,7 +68,13 @@ export let dom = {
             dom.createMatches(data);
             checkIfOddsAlreadySelected();
         })
+    },
 
+    closeDropdowns: function () {
+        let typeDropdown = document.querySelector(".type-dropdown");
+        let countryDropdown = document.querySelector(".country-dropdown");
+        typeDropdown.classList.add("hidden");
+        countryDropdown.classList.add("hidden");
     },
 
     addListenerToCart: function (event) {
