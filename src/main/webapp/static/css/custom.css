@@ -1,5 +1,8 @@
 body {
     background: #4c97ca;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ and Edge */
+    user-select: none; /* Standard syntax */
 }
 
 body::-webkit-scrollbar {
@@ -73,6 +76,7 @@ body::-webkit-scrollbar {
 .cart-content {
     position: absolute;
     width: 400px;
+    min-height: 100px;
     height: auto;
     top: 101px;
     right: 149px;
@@ -102,6 +106,25 @@ body::-webkit-scrollbar {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.align-no-matches {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+.no-matches {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #C5D3F5;
+    border-radius: 15px;
+    font-size: 20px;
+    margin: 15px 25px;
+    padding: 7px 17px;
+    width: 350px;
 }
 
 .cart-item {
