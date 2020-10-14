@@ -18,7 +18,7 @@ export let dom = {
             this.showDropdownMenu(".country-dropdown");
             this.addListenerToCountrySelect();
         });
-        document.querySelector(".cart-container").addEventListener("click", this.addListenerToCart);
+        document.querySelector(".cart-container").addEventListener("click", this.loadCartContentOnOpen);
         document.querySelector(".search").addEventListener("click", this.filterByCondition);
     },
 
@@ -78,7 +78,7 @@ export let dom = {
         countryDropdown.classList.add("hidden");
     },
 
-    addListenerToCart: function (event) {
+    loadCartContentOnOpen: function (event) {
         let content = document.querySelector(".cart-content");
         if (event.target.classList.contains("cart-container") || event.target.classList.contains("cart-item-counter")
             || event.target.classList.contains("cart-title")) {
@@ -219,8 +219,8 @@ export let dom = {
 
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
-        input.addEventListener("keydown", (event) => {
-            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 10) {
+        input.addEventListener("keyup", (event) => {
+            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
                 this.updatePossibleWinNumber(input.value);
 
                 //TODO save bet to database no?
@@ -250,7 +250,6 @@ export let dom = {
             listItem.remove();
             dom.calculatedOddsInCartRefresh();
             let counter = document.querySelector(".cart-item-counter");
-            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
             counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
         })
     },
