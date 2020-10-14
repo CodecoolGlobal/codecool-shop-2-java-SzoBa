@@ -77,7 +77,7 @@
                 <div id="country-selection">All countries</div>
                 <div class="country-dropdown hidden">
                     <ul>
-                        <li class="country-type" value="0">All country</li>
+                        <li class="country-type" value="0">All countries</li>
                         <li class="country-type" th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}"
                             th:text="${country.getName()}"></li>
                     </ul>
