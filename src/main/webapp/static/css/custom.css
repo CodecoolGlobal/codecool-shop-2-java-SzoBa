@@ -1,6 +1,9 @@
 body {
     background: #4c97ca;
-    overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 /*Header Content*/
