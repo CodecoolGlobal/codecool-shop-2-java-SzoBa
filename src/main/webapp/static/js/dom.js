@@ -11,12 +11,12 @@ export let dom = {
         document.getElementById("type-selection").addEventListener("click", () => {
             document.querySelector(".country-dropdown").classList.add("hidden");
             this.showDropdownMenu(".type-dropdown");
-            this.addListenerToSportSelect();
+            this.addListenersToSportSelectItems();
         });
         document.getElementById("country-selection").addEventListener("click", () => {
             document.querySelector(".type-dropdown").classList.add("hidden");
             this.showDropdownMenu(".country-dropdown");
-            this.addListenerToCountrySelect();
+            this.addListenersToCountrySelectItems();
         });
         document.querySelector(".cart-container").addEventListener("click", this.loadCartContentOnOpen);
         document.querySelector(".search").addEventListener("click", this.filterByCondition);
@@ -34,12 +34,12 @@ export let dom = {
         }
     },
 
-    addListenerToCountrySelect: function () {
+    addListenersToCountrySelectItems: function () {
         let items = document.querySelectorAll(".country-type");
         items.forEach(item => item.addEventListener("click", this.addSelectedCountryListener))
     },
 
-    addListenerToSportSelect() {
+    addListenersToSportSelectItems() {
         let items = document.querySelectorAll(".sport-type");
         items.forEach(item => item.addEventListener("click", this.addSelectedTypeListener));
     },
@@ -58,15 +58,17 @@ export let dom = {
 
     filterByCondition: function () {
         dom.closeDropdowns();
-
         let typeId = document.querySelector("#type-selection").dataset.value > 0 ?
             document.querySelector("#type-selection").dataset.value : 0;
         let countryId = document.querySelector("#country-selection").dataset.value > 0 ?
             document.querySelector("#country-selection").dataset.value : 0;
+
         console.log(typeId + " " + countryId);
+        //TODO make filter universal - need to filter 2 types of data (front-back job?)
+
         dataHandler.getCountry(countryId, (data) => {
-            dom.clearMatches();
-            dom.createMatches(data);
+            dom.clearMatchesFromMainTable();
+            dom.createMatchesOnMainTable(data);
             checkIfOddsAlreadySelected();
         })
     },
@@ -82,23 +84,22 @@ export let dom = {
         let content = document.querySelector(".cart-content");
         if (event.target.classList.contains("cart-container") || event.target.classList.contains("cart-item-counter")
             || event.target.classList.contains("cart-title")) {
-
             content.classList.toggle("hidden");
             if (!content.classList.contains("hidden")) {
                 dataHandler.getCartContent((data) => {
-                    dom.clearTicketContentBody();
-                    dom.createTicketData(data);
+                    dom.clearCartContentBody();
+                    dom.createCartContent(data);
                 })
             }
         }
     },
 
-    clearMatches: function () {
+    clearMatchesFromMainTable: function () {
         document.getElementById("matches").innerHTML = "";
 
     },
 
-    clearTicketContentBody: function () {
+    clearCartContentBody: function () {
         let content = document.querySelector(".cart-content-body");
         content.innerHTML =
             `<div class="cart-content-matches">
@@ -106,7 +107,7 @@ export let dom = {
             </div>`;
     },
 
-    createMatches: function (matches) {
+    createMatchesOnMainTable: function (matches) {
         let mainContent = "";
         for (let match of matches) {
             let matchContent = `
@@ -158,13 +159,13 @@ export let dom = {
                     event.target.closest("div").classList.add("active");
 
                 addOrRemoveInactiveFromOdds(event, isAdded);
-                let betCounter = document.querySelector(".cart-item-counter");
-                changeBetCounter(isAdded, betCounter);
+
+                changeBetCounter(isAdded);
             })
         }
     },
 
-    createTicketData: function (data) {
+    createCartContent: function (data) {
         if (data != null) {
             this.createCartMatchesList(data.items);
             this.addCartConstantItems(data);
@@ -264,9 +265,9 @@ export let dom = {
             listItem.remove();
             dom.calculatedOddsInCartRefresh();
             let counter = document.querySelector(".cart-item-counter");
-            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
+            changeBetCounter(true);
             if (parseInt(counter.innerHTML) < 1) {
-                dom.clearTicketContentBody();
+                dom.clearCartContentBody();
                 dom.addFancyTextToEmptyCart();
             }
         })
@@ -357,7 +358,8 @@ function addOrRemoveInactiveFromOdds(event, isAdded) {
     }
 }
 
-function changeBetCounter(isAdded, betCounter) {
+function changeBetCounter(isAdded) {
+    let betCounter = document.querySelector(".cart-item-counter");
     if (isAdded) {
         betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
     } else {
