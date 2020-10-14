@@ -89,15 +89,38 @@ export let dom = {
         let matchID = event.target.closest(".card").dataset.matchid;
         let isAdded = event.target.closest("a").classList.contains("active");
         let outcome = event.target.closest(".card-odds").dataset.outcome;
-        dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
-            isAdded ? event.target.closest("a").classList.remove("active") :
-                        event.target.closest("a").classList.add("active");
-            let betCounter = document.querySelector(".cart-item-counter");
-            if (isAdded) {
-                betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
-            } else {
-                betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
+
+        if (!event.target.closest("a").classList.contains("inactive")) {
+            dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
+                isAdded ? event.target.closest("a").classList.remove("active") :
+                    event.target.closest("a").classList.add("active");
+
+                addOrRemoveInactiveFromOdds(event, isAdded);
+                let betCounter = document.querySelector(".cart-item-counter");
+                if (isAdded) {
+                    betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
+                } else {
+                    betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
+                }
+            })
+        }
+    }
+}
+
+function addOrRemoveInactiveFromOdds(event, isAdded) {
+    if (isAdded) {
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        for (let odd of matchOdds) {
+            if (odd.classList.contains("inactive")) {
+                odd.classList.remove("inactive");
             }
-        })
+        }
+    } else {
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        for (let odd of matchOdds) {
+            if (!odd.classList.contains("active")) {
+                odd.classList.add("inactive");
+            }
+        }
     }
 }
