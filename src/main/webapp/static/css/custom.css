@@ -298,6 +298,8 @@ ul {
 
 .card {
     flex-direction: unset !important;
+    background: #c3e7b6;
+    border-radius: 5px;
 }
 
 .card-header {
