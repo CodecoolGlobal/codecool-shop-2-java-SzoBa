@@ -103,6 +103,7 @@
                             <span>H</span>
                             <br>
                             <span th:text="${match.getHomeOdds()}"></span>
+<!--                            <span th:text="${#numbers.formatDecimal(match.getHomeOdds(), 1, 1)}"></span>-->
                         </a>
                     </div>
                     <div th:class="'card-odds ' + ${match.drawOdds == 1 ? 'hidden' : ''}" data-outcome="draw">
