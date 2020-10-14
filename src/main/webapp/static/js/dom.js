@@ -4,6 +4,7 @@ export let dom = {
     init: function () {
         this.addConstantListeners();
         this.addTemporaryListeners();
+        checkIfOddsAlreadySelected();
     },
 
     addConstantListeners: function () {
@@ -29,7 +30,7 @@ export let dom = {
         dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
             dom.clearMatches();
             dom.createMatches(data);
-            //refreshSelected
+            checkIfOddsAlreadySelected();
         })
     },
 
@@ -38,6 +39,7 @@ export let dom = {
         dataHandler.getSportType(item.options[item.selectedIndex].value, (data) => {
             dom.clearMatches();
             dom.createMatches(data);
+            checkIfOddsAlreadySelected();
         })
     },
 
@@ -163,6 +165,44 @@ export let dom = {
         })
 
     }
+}
+
+function checkIfOddsAlreadySelected() {
+    dataHandler.getCartItems((data) => {
+        if (data !== null) {
+            document.querySelector(".cart-item-counter").innerHTML = (data["items"].length).toString();
+            let matches = document.querySelectorAll(".card");
+            for (let match of matches) {
+                for (let cartItem of data["items"]) {
+                    if (cartItem["matchId"] === parseInt(match.dataset.matchid)) {
+                        let outcome;
+                        switch (cartItem["chosenOutcome"]) {
+                            case ("Hazai"):
+                                outcome = "home";
+                                break;
+                            case ("Döntetlen"):
+                                outcome = "draw";
+                                break;
+                            case ("Vendég"):
+                                outcome = "away";
+                                break;
+                        }
+                        let cardOdds = match.querySelectorAll(".card-odds");
+                        for (let cardOdd of cardOdds) {
+                            if (cardOdd.dataset.outcome === outcome) {
+                                cardOdd.querySelector("a").classList.add("active");
+                            } else {
+                                cardOdd.querySelector("a").classList.add("inactive");
+                            }
+                        }
+                    }
+                }
+            }
+
+        } else {
+            document.querySelector(".cart-item-counter").innerHTML = "0";
+        }
+    })
 }
 
 function addOrRemoveInactiveFromOdds(event, isAdded) {
