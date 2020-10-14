@@ -9,10 +9,12 @@ export let dom = {
 
     addConstantListeners: function () {
         document.getElementById("type-selection").addEventListener("click", () => {
+            document.querySelector(".country-dropdown").classList.add("hidden");
             this.showDropdownMenu(".type-dropdown");
             this.addListenerToSportSelect();
         });
         document.getElementById("country-selection").addEventListener("click", () => {
+            document.querySelector(".type-dropdown").classList.add("hidden");
             this.showDropdownMenu(".country-dropdown");
             this.addListenerToCountrySelect();
         });

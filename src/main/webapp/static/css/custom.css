@@ -196,7 +196,9 @@ ul {
     justify-content: center;
 }
 
-
+.type-icon {
+    pointer-events: none
+}
 
 .card {
     flex-direction: unset !important;
