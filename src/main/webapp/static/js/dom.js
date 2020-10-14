@@ -62,11 +62,13 @@ export let dom = {
 
     clearTicketContentBody: function () {
         let content = document.querySelector(".cart-content-body");
-        content.innerHTML = "";
+        content.innerHTML =
+            `<div class="cart-content-matches">
+            <ul></ul>
+            </div>`;
     },
 
     createMatches: function (matches) {
-        console.log(matches)
         let mainContent = "";
         for (let match of matches) {
             let matchContent = `
@@ -125,9 +127,28 @@ export let dom = {
     },
 
     createTicketData: function (data) {
-        let content = document.querySelector(".cart-content");
-        console.log(data)
+        this.createCartMatches(data.items);
+        this.addCartConstantItems(data);
+    },
 
+    createCartMatches: function (matches) {
+        let matchList = document.querySelector(".cart-content-matches ul");
+        let content = "";
+        for (let match of matches) {
+            let addMatch = `
+            <li>${match.home} - ${match.away} Chosen: ${match.chosenOutcome}, Odds ${match.odds}</li>`
+            content += addMatch;
+        }
+        matchList.insertAdjacentHTML("beforeend", content);
+    },
+
+    addCartConstantItems: function (data) {
+        let content = document.querySelector(".cart-content-body");
+        console.log(data);
+        let items =
+            `<label for="betValue">Current bet:  </label>
+             <input id="betValue" name="betValue" type="number" value="${data.bet}">`
+        content.insertAdjacentHTML("beforeend", items);
     }
 }
 
