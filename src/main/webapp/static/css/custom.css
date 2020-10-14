@@ -104,9 +104,10 @@ body {
 /*Main Content*/
 .container {
     width: 100%;
-    padding: 10px 5% 0 5%;
+    padding: 10px 5% 10px 5%;
     background: #fff;
     border-radius: 25px;
+    margin-bottom: 100px;
 }
 
 .filters {
@@ -277,7 +278,47 @@ ul {
 /*Main Content*/
 
 
+.footer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background: #eeeeee;
+}
 
+.infos,
+.eightteen {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-text {
+    color: #28a745;
+    font-size: 15px;
+}
+
+.eightteen-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border: 5px solid red;
+    border-radius: 50%;
+    color: #28a745;
+    width: 60px;
+    height: 60px;
+}
+
+.footer-body {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
