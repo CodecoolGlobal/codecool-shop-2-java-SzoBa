@@ -8,8 +8,12 @@ export let dom = {
     },
 
     addConstantListeners: function () {
-        document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
-        document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
+        document.getElementById("type-selection").addEventListener("click", () => {
+            this.showDropdownMenu(".type-dropdown");
+        });
+        document.getElementById("country-selection").addEventListener("click", () => {
+            this.showDropdownMenu(".country-dropdown");
+        });
         document.querySelector(".cart-container").addEventListener("click", this.addListenerToCart);
     },
 
@@ -228,5 +232,16 @@ function changeBetCounter(isAdded, betCounter) {
         betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
     } else {
         betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
+    }
+}
+showDropdownMenu(Type) {
+    let dropdown = document.querySelector(Type);
+    switch (dropdown.classList.contains("hidden")) {
+        case true:
+            dropdown.classList.remove("hidden");
+            break;
+        case false:
+            dropdown.classList.add("hidden");
+            break;
     }
 }

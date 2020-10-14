@@ -24,12 +24,16 @@ public class Initializer implements ServletContextListener {
         SportTypeDao sportTypeDataStore = SportTypeDaoMem.getInstance();
 
         //setting up a new sport
-        SportType football = new SportType("Football", "Kick that ball, bro!");
+        SportType football = new SportType("Football", "ico-sport ico-sport-soccer");
         sportTypeDataStore.add(football);
-        SportType iceHockey = new SportType("Hockey", "Ice, love it!");
+        SportType iceHockey = new SportType("Hockey", "ico-sport ico-sport-ice-hockey");
         sportTypeDataStore.add(iceHockey);
-        SportType darts = new SportType("Darts", "Throw darts.");
+        SportType darts = new SportType("Darts", "ico-sport ico-sport-darts");
         sportTypeDataStore.add(darts);
+        SportType anything = new SportType("Tennis", "ico-sport ico-sport-tennis");
+        sportTypeDataStore.add(anything);
+        SportType another = new SportType("Handball", "ico-sport ico-sport-handball");
+        sportTypeDataStore.add(another);
 
         //setting up a new country
         Country hungary = new Country("Hungary", "Best country - Hungary.");
