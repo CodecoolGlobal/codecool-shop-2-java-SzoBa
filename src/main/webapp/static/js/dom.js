@@ -114,7 +114,7 @@ export let dom = {
                 <div class="card" data-matchId="${match.id}">
                     <div class="card-header">
                         <h4 class="card-title">${match.homeTeam} - ${match.awayTeam}</h4>
-                        <p class="card-text">${match.description}</p>
+                        <p class="card-text">${match.leagueName}</p>
                     </div>
                     <div class="card-body">
                         <div class="card-odds" data-outcome="home">
@@ -168,6 +168,7 @@ export let dom = {
         this.createCartMatchesList(data.items);
         this.addCartConstantItems(data);
         this.addListenersToTrashBins();
+        this.calculatedOddsInCartRefresh();
     },
 
     createCartMatchesList: function (matches) {
@@ -175,7 +176,7 @@ export let dom = {
         let content = "";
         for (let match of matches) {
             let addMatch = `
-            <li>${match.home} - ${match.away} Odds ${match.odds}
+            <li>${match.home} - ${match.away} Odds <span>${match.odds}</span>
             <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a><br>Chosen: ${match.chosenOutcome}
             </li>`
             content += addMatch;
@@ -202,7 +203,7 @@ export let dom = {
         let input = document.querySelector("#betValue");
         input.addEventListener("keydown", (event) => {
             if (/^\d+$/.test(input.value)) {
-                this.updateFieldNumbers(input.value);
+                this.updatePossibleWinNumber(input.value);
                 //TODO save bet to database
 
             }
@@ -217,7 +218,7 @@ export let dom = {
 
     removeMatchItemFromCart: function (event) {
         event.target.closest("li").remove();
-
+        dom.calculatedOddsInCartRefresh();
         //TODO remove from database
 
     },
@@ -234,9 +235,20 @@ export let dom = {
         }
     },
 
-    updateFieldNumbers: function (bet){
+    calculatedOddsInCartRefresh: function () {
         let calculatedOdds = document.querySelector("#total-odds-value");
+        let allOdds = document.querySelectorAll(".cart-content-matches ul li span");
+        let valueOfCalculatedOdds = 1;
+        allOdds.forEach(odd => {valueOfCalculatedOdds = valueOfCalculatedOdds * parseFloat(odd.innerHTML)});
+        calculatedOdds.innerHTML = valueOfCalculatedOdds.toFixed(2);
+
+    },
+
+    updatePossibleWinNumber: function (bet){
         let possibleWinAmount = document.querySelector("#possible-win-value")
+
+
+
         //TODO update fields
     }
 }
