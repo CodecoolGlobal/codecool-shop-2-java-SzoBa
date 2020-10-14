@@ -41,4 +41,24 @@ public class CartItem extends BaseModel {
     public int getMatchId() {
         return matchId;
     }
+
+    public String getHome() {
+        return home;
+    }
+
+    public String getAway() {
+        return away;
+    }
+
+    public String getChosenOutcome() {
+        return chosenOutcome;
+    }
+
+    public String getLeagueName() {
+        return leagueName;
+    }
+
+    public float getOdds() {
+        return odds;
+    }
 }
