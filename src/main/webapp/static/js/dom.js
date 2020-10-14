@@ -121,21 +121,21 @@ export let dom = {
                             <a class="btn btn-success" href="#">
                                 <span>H</span>
                                 <br>
-                                    <span>${match.homeOdds}</span>
+                                    <span>${match.homeOdds % 1 === 0 ? match.homeOdds + '.0' : match.homeOdds}</span>
                             </a>
                         </div>
                         <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}" data-outcome="draw">
                             <a class="btn btn-success" href="#">
                                 <span>D</span>
                                 <br>
-                                    <span>${match.drawOdds}</span>
+                                    <span>${match.drawOdds % 1 === 0 ? match.drawOdds + '.0' : match.drawOdds}</span>
                             </a>
                         </div>
                         <div class="card-odds" data-outcome="away">
                             <a class="btn btn-success" href="#">
                                 <span>V</span>
                                 <br>
-                                    <span>${match.awayOdds}</span>
+                                    <span>${match.awayOdds % 1 === 0 ? match.awayOdds + '.0' : match.awayOdds}</span>
                             </a>
                         </div>
                     </div>
