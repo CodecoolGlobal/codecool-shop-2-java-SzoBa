@@ -56,16 +56,22 @@ export let dom = {
     },
 
     filterByCondition: function () {
+        // Close the dropdowns before get search results
+        let typeDropdown = document.querySelector(".type-dropdown");
+        let countryDropdown = document.querySelector(".country-dropdown");
+        typeDropdown.classList.add("hidden");
+        countryDropdown.classList.add("hidden");
+
         let typeId = document.querySelector("#type-selection").dataset.value > 0 ?
             document.querySelector("#type-selection").dataset.value : 0;
         let countryId = document.querySelector("#country-selection").dataset.value > 0 ?
             document.querySelector("#country-selection").dataset.value : 0;
         console.log(typeId + " " + countryId);
-        // dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
-        //     dom.clearMatches();
-        //     dom.createMatches(data);
-        //     checkIfOddsAlreadySelected();
-        // })
+        dataHandler.getCountry(countryId, (data) => {
+            dom.clearMatches();
+            dom.createMatches(data);
+            checkIfOddsAlreadySelected();
+        })
 
     },
 
