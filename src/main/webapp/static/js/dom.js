@@ -28,6 +28,7 @@ export let dom = {
         dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
             dom.clearMatches();
             dom.createMatches(data);
+            refreshSelected
         })
     },
 
@@ -64,14 +65,14 @@ export let dom = {
                         </div>
                         <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}" data-outcome="draw">
                             <a class="btn btn-success" href="#">
-                                <span>H</span>
+                                <span>D</span>
                                 <br>
                                     <span>${match.drawOdds}</span>
                             </a>
                         </div>
                         <div class="card-odds" data-outcome="away">
                             <a class="btn btn-success" href="#">
-                                <span>H</span>
+                                <span>V</span>
                                 <br>
                                     <span>${match.awayOdds}</span>
                             </a>
@@ -97,11 +98,7 @@ export let dom = {
 
                 addOrRemoveInactiveFromOdds(event, isAdded);
                 let betCounter = document.querySelector(".cart-item-counter");
-                if (isAdded) {
-                    betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
-                } else {
-                    betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
-                }
+                changeBetCounter(isAdded, betCounter);
             })
         }
     }
@@ -122,5 +119,13 @@ function addOrRemoveInactiveFromOdds(event, isAdded) {
                 odd.classList.add("inactive");
             }
         }
+    }
+}
+
+function changeBetCounter(isAdded, betCounter) {
+    if (isAdded) {
+        betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
+    } else {
+        betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
     }
 }
