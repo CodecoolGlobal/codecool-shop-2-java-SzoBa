@@ -45,8 +45,8 @@ export let dom = {
     addSelectedTypeListener: function (event) {
         let mainItem = document.querySelector("#type-selection")
         mainItem.innerHTML = event.target.innerText;
-        console.log(event.target);
-        mainItem.dataset.value = event.target.value;
+
+        mainItem.dataset.value = event.target.value > -1 ? event.target.value : event.target.parentElement.value;
     },
 
     addSelectedCountryListener: function (event) {
@@ -55,7 +55,7 @@ export let dom = {
         mainItem.dataset.value = event.target.value;
     },
 
-    filterByCondition: function (event) {
+    filterByCondition: function () {
         let typeId = document.querySelector("#type-selection").dataset.value > 0 ?
             document.querySelector("#type-selection").dataset.value : 0;
         let countryId = document.querySelector("#country-selection").dataset.value > 0 ?
