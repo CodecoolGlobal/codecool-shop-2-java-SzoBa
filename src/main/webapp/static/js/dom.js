@@ -114,7 +114,7 @@ export let dom = {
                 <div class="card" data-matchId="${match.id}">
                     <div class="card-header">
                         <h4 class="card-title">${match.homeTeam} - ${match.awayTeam}</h4>
-                        <p class="card-text">${match.description}</p>
+                        <p class="card-text">${match.leagueName}</p>
                     </div>
                     <div class="card-body">
                         <div class="card-odds" data-outcome="home">
