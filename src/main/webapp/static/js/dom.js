@@ -118,25 +118,25 @@ export let dom = {
                     </div>
                     <div class="card-body">
                         <div class="card-odds" data-outcome="home">
-                            <a class="btn btn-success" href="#">
+                            <div class="btn btn-success">
                                 <span>H</span>
                                 <br>
                                     <span>${match.homeOdds % 1 === 0 ? match.homeOdds + '.0' : match.homeOdds}</span>
-                            </a>
+                            </div>
                         </div>
                         <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}" data-outcome="draw">
-                            <a class="btn btn-success" href="#">
+                            <div class="btn btn-success">
                                 <span>D</span>
                                 <br>
                                     <span>${match.drawOdds % 1 === 0 ? match.drawOdds + '.0' : match.drawOdds}</span>
-                            </a>
+                            </div>
                         </div>
                         <div class="card-odds" data-outcome="away">
-                            <a class="btn btn-success" href="#">
+                            <div class="btn btn-success">
                                 <span>V</span>
                                 <br>
                                     <span>${match.awayOdds % 1 === 0 ? match.awayOdds + '.0' : match.awayOdds}</span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,13 +149,13 @@ export let dom = {
 
     modifyCartItems(event) {
         let matchID = event.target.closest(".card").dataset.matchid;
-        let isAdded = event.target.closest("a").classList.contains("active");
+        let isAdded = event.target.closest("div").classList.contains("active");
         let outcome = event.target.closest(".card-odds").dataset.outcome;
 
-        if (!event.target.closest("a").classList.contains("inactive")) {
+        if (!event.target.closest("div").classList.contains("inactive")) {
             dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
-                isAdded ? event.target.closest("a").classList.remove("active") :
-                    event.target.closest("a").classList.add("active");
+                isAdded ? event.target.closest("div").classList.remove("active") :
+                    event.target.closest("div").classList.add("active");
 
                 addOrRemoveInactiveFromOdds(event, isAdded);
                 let betCounter = document.querySelector(".cart-item-counter");
@@ -281,9 +281,9 @@ function checkIfOddsAlreadySelected() {
                         let cardOdds = match.querySelectorAll(".card-odds");
                         for (let cardOdd of cardOdds) {
                             if (cardOdd.dataset.outcome === outcome) {
-                                cardOdd.querySelector("a").classList.add("active");
+                                cardOdd.querySelector("div").classList.add("active");
                             } else {
-                                cardOdd.querySelector("a").classList.add("inactive");
+                                cardOdd.querySelector("div").classList.add("inactive");
                             }
                         }
                     }
@@ -298,14 +298,14 @@ function checkIfOddsAlreadySelected() {
 
 function addOrRemoveInactiveFromOdds(event, isAdded) {
     if (isAdded) {
-        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("div");
         for (let odd of matchOdds) {
             if (odd.classList.contains("inactive")) {
                 odd.classList.remove("inactive");
             }
         }
     } else {
-        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("div");
         for (let odd of matchOdds) {
             if (!odd.classList.contains("active")) {
                 odd.classList.add("inactive");

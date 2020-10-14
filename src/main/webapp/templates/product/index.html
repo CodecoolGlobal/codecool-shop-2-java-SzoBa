@@ -77,7 +77,7 @@
                 <div id="country-selection">All countries</div>
                 <div class="country-dropdown hidden">
                     <ul>
-                        <li class="country-type" value="0">All country</li>
+                        <li class="country-type" value="0">All countries</li>
                         <li class="country-type" th:each="country,iterStat : ${countries}" th:attr="value=${country.getId()}"
                             th:text="${country.getName()}"></li>
                     </ul>
@@ -98,26 +98,26 @@
                 </div>
                 <div class="card-body">
                     <div class="card-odds" data-outcome="home">
-                        <a class="btn btn-success" href="#">
+                        <div class="btn btn-success">
                             <span>H</span>
                             <br>
                             <span th:text="${match.getHomeOdds()}"></span>
 <!--                            <span th:text="${#numbers.formatDecimal(match.getHomeOdds(), 1, 1)}"></span>-->
-                        </a>
+                        </div>
                     </div>
                     <div th:class="'card-odds ' + ${match.drawOdds == 1 ? 'hidden' : ''}" data-outcome="draw">
-                        <a class="btn btn-success" href="#">
+                        <div class="btn btn-success">
                             <span>D</span>
                             <br>
                             <span th:text="${match.getDrawOdds()}"></span>
-                        </a>
+                        </div>
                     </div>
                     <div class="card-odds" data-outcome="away">
-                        <a class="btn btn-success" href="#">
+                        <div class="btn btn-success">
                             <span>V</span>
                             <br>
                             <span th:text="${match.getAwayOdds()}"></span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

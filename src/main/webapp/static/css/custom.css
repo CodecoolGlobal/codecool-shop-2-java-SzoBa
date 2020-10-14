@@ -2,6 +2,10 @@ body {
     background: #4c97ca;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 /*Header Content*/
 .header {
     width: 100%;
