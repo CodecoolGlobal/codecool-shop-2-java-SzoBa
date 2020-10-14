@@ -171,14 +171,7 @@ export let dom = {
             this.addListenersToTrashBins();
             this.calculatedOddsInCartRefresh();
         } else {
-            let matchList = document.querySelector(".cart-content-matches ul");
-            let matchContent = document.querySelector(".cart-content-matches");
-            let addNoMatches = `<div class="no-matches">
-                No matches added to cart yet. </br>
-                Please choose to continue!
-            </div>`
-            matchList.insertAdjacentHTML("beforeend", addNoMatches);
-            matchContent.classList.add("align-no-matches")
+            this.addFancyTextToEmptyCart();
         }
     },
 
@@ -199,6 +192,17 @@ export let dom = {
         }
 
         matchList.insertAdjacentHTML("beforeend", content);
+    },
+
+    addFancyTextToEmptyCart: function () {
+        let matchList = document.querySelector(".cart-content-matches ul");
+        let matchContent = document.querySelector(".cart-content-matches");
+        let addNoMatches = `<div class="no-matches">
+                No matches added to cart yet. </br>
+                Please choose to continue!
+            </div>`
+        matchList.insertAdjacentHTML("beforeend", addNoMatches);
+        matchContent.classList.add("align-no-matches")
     },
 
     addCartConstantItems: function (data) {
@@ -261,6 +265,10 @@ export let dom = {
             dom.calculatedOddsInCartRefresh();
             let counter = document.querySelector(".cart-item-counter");
             counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
+            if (parseInt(counter.innerHTML) < 1) {
+                dom.clearTicketContentBody();
+                dom.addFancyTextToEmptyCart();
+            }
         })
     },
 
