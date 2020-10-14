@@ -165,6 +165,7 @@ export let dom = {
     },
 
     createTicketData: function (data) {
+        console.log(data)
         this.createCartMatchesList(data.items);
         this.addCartConstantItems(data);
         this.addListenersToTrashBins();
@@ -176,7 +177,7 @@ export let dom = {
         let content = "";
         for (let match of matches) {
             let addMatch = `
-            <li>${match.home} - ${match.away} Odds <span>${match.odds}</span>
+            <li data-matchid="${match.id}">${match.home} - ${match.away} Odds <span>${match.odds}</span>
             <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a><br>Chosen: ${match.chosenOutcome}
             </li>`
             content += addMatch;
@@ -204,7 +205,8 @@ export let dom = {
         input.addEventListener("keydown", (event) => {
             if (/^\d+$/.test(input.value)) {
                 this.updatePossibleWinNumber(input.value);
-                //TODO save bet to database
+
+                //TODO save bet to database no?
 
             }
         })
@@ -217,10 +219,15 @@ export let dom = {
     },
 
     removeMatchItemFromCart: function (event) {
-        event.target.closest("li").remove();
-        dom.calculatedOddsInCartRefresh();
+        let listItem = event.target.closest("li");
         //TODO remove from database
-
+        let matchID = listItem.dataset.matchid;
+        let isAdded = true;
+        let outcome = "deletable";
+        dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
+            listItem.remove();
+            dom.calculatedOddsInCartRefresh();
+        })
     },
 
     showDropdownMenu(Type) {
@@ -246,9 +253,6 @@ export let dom = {
 
     updatePossibleWinNumber: function (bet){
         let possibleWinAmount = document.querySelector("#possible-win-value")
-
-
-
         //TODO update fields
     }
 }

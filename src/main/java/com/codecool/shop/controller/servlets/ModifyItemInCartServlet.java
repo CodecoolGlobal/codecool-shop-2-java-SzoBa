@@ -33,6 +33,9 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
 
         if (isAdded) {
             Cart cart = cartDao.find(clientSessionIdHashCode);
+
+            System.out.println(cart.toString());
+
             cart.removeItemFromCart(matchId);
             if (cart.getItems().size() == 0) {
                 cartDao.remove(clientSessionIdHashCode);
