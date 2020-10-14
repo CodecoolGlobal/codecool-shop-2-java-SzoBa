@@ -29,6 +29,7 @@ export let dom = {
         dataHandler.getCountry(item.options[item.selectedIndex].value, (data) => {
             dom.clearMatches();
             dom.createMatches(data);
+            refreshSelected
         })
     },
 
@@ -86,14 +87,14 @@ export let dom = {
                         </div>
                         <div class="card-odds ${match.drawOdds === 1 ? "hidden" : ""}" data-outcome="draw">
                             <a class="btn btn-success" href="#">
-                                <span>H</span>
+                                <span>D</span>
                                 <br>
                                     <span>${match.drawOdds}</span>
                             </a>
                         </div>
                         <div class="card-odds" data-outcome="away">
                             <a class="btn btn-success" href="#">
-                                <span>H</span>
+                                <span>V</span>
                                 <br>
                                     <span>${match.awayOdds}</span>
                             </a>
@@ -106,23 +107,51 @@ export let dom = {
         document.getElementById("matches").insertAdjacentHTML("beforeend", mainContent);
         this.addTemporaryListeners();
     },
+
     modifyCartItems(event) {
         let matchID = event.target.closest(".card").dataset.matchid;
         let isAdded = event.target.closest("a").classList.contains("active");
         let outcome = event.target.closest(".card-odds").dataset.outcome;
-        dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
-            isAdded ? event.target.closest("a").classList.remove("active") :
-                        event.target.closest("a").classList.add("active");
-            let betCounter = document.querySelector(".cart-item-counter");
-            if (isAdded) {
-                betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
-            } else {
-                betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
-            }
-        })
+
+        if (!event.target.closest("a").classList.contains("inactive")) {
+            dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
+                isAdded ? event.target.closest("a").classList.remove("active") :
+                    event.target.closest("a").classList.add("active");
+
+                addOrRemoveInactiveFromOdds(event, isAdded);
+                let betCounter = document.querySelector(".cart-item-counter");
+                changeBetCounter(isAdded, betCounter);
+            })
+        }
     },
 
     createTicketData: function () {
         let content = document.querySelector(".cart-content");
+    }
+}
+
+function addOrRemoveInactiveFromOdds(event, isAdded) {
+    if (isAdded) {
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        for (let odd of matchOdds) {
+            if (odd.classList.contains("inactive")) {
+                odd.classList.remove("inactive");
+            }
+        }
+    } else {
+        let matchOdds = event.target.closest(".card-body").querySelectorAll("a");
+        for (let odd of matchOdds) {
+            if (!odd.classList.contains("active")) {
+                odd.classList.add("inactive");
+            }
+        }
+    }
+}
+
+function changeBetCounter(isAdded, betCounter) {
+    if (isAdded) {
+        betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
+    } else {
+        betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
     }
 }

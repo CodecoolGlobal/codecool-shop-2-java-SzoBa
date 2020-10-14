@@ -1,11 +1,19 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 public class CartItem extends BaseModel {
+    @Expose
     protected String home;
+    @Expose
     protected String away;
+    @Expose
     protected String chosenOutcome;
+    @Expose
     protected String leagueName;
+    @Expose
     protected float odds;
+    @Expose
     protected int matchId;
 
     public CartItem(String description, MatchDetails matchDetails, String outcome) {

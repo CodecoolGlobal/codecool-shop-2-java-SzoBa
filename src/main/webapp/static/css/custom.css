@@ -161,6 +161,11 @@ body {
     border-color: red !important;
 }
 
+.inactive {
+    background-color: gray !important;
+    border-color: gray !important;
+}
+
 /*Main Content*/
 
 
