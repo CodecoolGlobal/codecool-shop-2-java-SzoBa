@@ -41,16 +41,28 @@ export let dom = {
     },
 
     addListenerToCart: function (event) {
+        let content = document.querySelector(".cart-content");
         if (event.target.classList.contains("cart-container") || event.target.classList.contains("cart-item-counter")
             || event.target.classList.contains("cart-title")) {
-            document.querySelector(".cart-content").classList.toggle("hidden");
+            content.classList.toggle("hidden");
         }
-        // document.querySelector(".cart-container").removeEventListener("click", dom.addListenerToCart);
+        if (!content.classList.contains("hidden")) {
+            //Currently just one player, no need for option, only when login implemented
+            dataHandler.getCartContent(id, (data) => {
+                dom.clearTicketContentBody();
+                dom.createTicketData(data);
+            })
+        }
     },
 
     clearMatches: function () {
         document.getElementById("matches").innerHTML = "";
 
+    },
+
+    clearTicketContentBody: function () {
+        let content = document.querySelector(".cart-content");
+        content.innerHTML = "";
     },
 
     createMatches: function (matches) {
@@ -108,5 +120,9 @@ export let dom = {
                 betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
             }
         })
+    },
+
+    createTicketData: function () {
+        let content = document.querySelector(".cart-content");
     }
 }
