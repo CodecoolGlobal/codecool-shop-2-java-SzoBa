@@ -22,5 +22,11 @@ export let dataHandler = {
         this._get(`/sport-type?typeId=${typeId}`, (response) => {
             callback(response);
         });
+    },
+
+    getCartContent: function (cartId, callback) {
+        this._get(`/cart-content?cartId=${cartId}`, (response) => {
+            callback(response);
+        })
     }
 }
