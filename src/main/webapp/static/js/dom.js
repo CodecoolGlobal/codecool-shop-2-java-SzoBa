@@ -165,10 +165,12 @@ export let dom = {
     },
 
     createTicketData: function (data) {
-        this.createCartMatchesList(data.items);
-        this.addCartConstantItems(data);
-        this.addListenersToTrashBins();
-        this.calculatedOddsInCartRefresh();
+        if (data != null) {
+            this.createCartMatchesList(data.items);
+            this.addCartConstantItems(data);
+            this.addListenersToTrashBins();
+            this.calculatedOddsInCartRefresh();
+        }
     },
 
     createCartMatchesList: function (matches) {
@@ -192,7 +194,7 @@ export let dom = {
              <br>
              <table>
              <tr><td>Total odds: </td><td id="total-odds-value">${data.odds}</td></tr>
-             <tr><td>Possible win: </td><td id="possible-win-value">Kiszámolni</td></tr>
+             <tr><td>Possible win: </td><td id="possible-win-value">0</td></tr>
              </table>
              <a href="/"><button>Confirm Order</button></a>`
         content.insertAdjacentHTML("beforeend", items);
@@ -202,7 +204,7 @@ export let dom = {
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
         input.addEventListener("keydown", (event) => {
-            if (/^\d+$/.test(input.value)) {
+            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 10) {
                 this.updatePossibleWinNumber(input.value);
 
                 //TODO save bet to database no?
@@ -231,7 +233,9 @@ export let dom = {
         dataHandler.modifyCartItems(matchId, isAdded, outcome, () => {
             listItem.remove();
             dom.calculatedOddsInCartRefresh();
-
+            let counter = document.querySelector(".cart-item-counter");
+            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
+            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
         })
     },
 
@@ -258,8 +262,8 @@ export let dom = {
 
     updatePossibleWinNumber: function (bet){
         let possibleWinAmount = document.querySelector("#possible-win-value");
-
-        //TODO update fields
+        let currentOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML);
+        possibleWinAmount.innerHTML = bet === 0 ? "0" : (currentOdds * bet).toFixed(0);
     }
 }
 
