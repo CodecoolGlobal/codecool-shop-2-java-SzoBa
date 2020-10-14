@@ -27,7 +27,13 @@ public class CountrySelectServlet extends javax.servlet.http.HttpServlet {
         Country selectedCountry = countryDataStore.find(countryId);
 
         MatchDetailsDao matchDetailsDataStore = MatchDetailsDaoMem.getInstance();
-        List<MatchDetails> matchesBySelectedCountry = matchDetailsDataStore.getBy(selectedCountry);
+        List<MatchDetails> matchesBySelectedCountry;
+
+        if (countryId == 0) {
+            matchesBySelectedCountry = matchDetailsDataStore.getAll();
+        } else {
+            matchesBySelectedCountry = matchDetailsDataStore.getBy(selectedCountry);
+        }
 
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
