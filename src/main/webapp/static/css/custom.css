@@ -87,8 +87,8 @@ body {
     border-top-right-radius: 20px;
 }
 
-.cart-content-body {
-
+.cart-content-body ul{
+    list-style-type: none;
 }
 
 .unselectable {

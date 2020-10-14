@@ -188,6 +188,11 @@ export let dom = {
         let items =
             `<label for="betValue">Current bet:  </label>
              <input id="betValue" name="betValue" type="text" placeholder="${data.bet}">
+             <br>
+             <table>
+             <tr><td>Total odds: </td><td id="total-odds-value">${data.odds}</td></tr>
+             <tr><td>Possible win: </td><td id="possible-win-value">Kiszámolni</td></tr>
+             </table>
              <a href="/"><button>Confirm Order</button></a>`
         content.insertAdjacentHTML("beforeend", items);
         this.addListenersToBetInput();
@@ -196,8 +201,10 @@ export let dom = {
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
         input.addEventListener("keydown", (event) => {
-            if (event.keyCode === 13 && /^\d+$/.test(input.value)) {
+            if (/^\d+$/.test(input.value)) {
+                this.updateFieldNumbers(input.value);
                 //TODO save bet to database
+
             }
         })
 
@@ -209,8 +216,9 @@ export let dom = {
     },
 
     removeMatchItemFromCart: function (event) {
-        console.log(event.target.closest("li"));
+        event.target.closest("li").remove();
 
+        //TODO remove from database
 
     },
 
@@ -224,8 +232,15 @@ export let dom = {
                 dropdown.classList.add("hidden");
                 break;
         }
+    },
+
+    updateFieldNumbers: function (bet){
+        let calculatedOdds = document.querySelector("#total-odds-value");
+        let possibleWinAmount = document.querySelector("#possible-win-value")
+        //TODO update fields
     }
 }
+
 
 function checkIfOddsAlreadySelected() {
     dataHandler.getCartItems((data) => {
