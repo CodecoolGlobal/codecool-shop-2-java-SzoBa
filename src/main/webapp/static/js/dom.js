@@ -7,10 +7,12 @@ export let dom = {
     },
 
     addConstantListeners: function () {
-        // document.getElementById("country-select").addEventListener("click", this.addListenerToCountrySelect);
-        // document.getElementById("sport-select").addEventListener("click", this.addListenerToSportSelect);
-        document.getElementById("type-selection").addEventListener("click", this.showTypeDropdownMenu);
-        document.getElementById("country-selection").addEventListener("click", this.showCountryDropdownMenu);
+        document.getElementById("type-selection").addEventListener("click", () => {
+            this.showDropdownMenu(".type-dropdown");
+        });
+        document.getElementById("country-selection").addEventListener("click", () => {
+            this.showDropdownMenu(".country-dropdown");
+        });
     },
 
     addTemporaryListeners: function () {
@@ -93,7 +95,7 @@ export let dom = {
         let outcome = event.target.closest(".card-odds").dataset.outcome;
         dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
             isAdded ? event.target.closest("a").classList.remove("active") :
-                        event.target.closest("a").classList.add("active");
+                event.target.closest("a").classList.add("active");
             let betCounter = document.querySelector(".cart-item-counter");
             if (isAdded) {
                 betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
@@ -103,27 +105,15 @@ export let dom = {
         })
     },
 
-    showTypeDropdownMenu() {
-        let typeDropdown = document.querySelector(".type-dropdown");
-        switch (typeDropdown.classList.contains("hidden")) {
+    showDropdownMenu(Type) {
+        let dropdown = document.querySelector(Type);
+        switch (dropdown.classList.contains("hidden")) {
             case true:
-                typeDropdown.classList.remove("hidden");
+                dropdown.classList.remove("hidden");
                 break;
             case false:
-                typeDropdown.classList.add("hidden");
+                dropdown.classList.add("hidden");
                 break;
         }
     },
-
-    showCountryDropdownMenu() {
-        let countryDropdown = document.querySelector(".country-dropdown");
-        switch (countryDropdown.classList.contains("hidden")) {
-            case true:
-                countryDropdown.classList.remove("hidden");
-                break;
-            case false:
-                countryDropdown.classList.add("hidden");
-                break;
-        }
-    }
 }
