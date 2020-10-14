@@ -168,6 +168,17 @@ export let dom = {
             }
         })
 
+    },
+    showDropdownMenu(Type) {
+        let dropdown = document.querySelector(Type);
+        switch (dropdown.classList.contains("hidden")) {
+            case true:
+                dropdown.classList.remove("hidden");
+                break;
+            case false:
+                dropdown.classList.add("hidden");
+                break;
+        }
     }
 }
 
@@ -232,16 +243,5 @@ function changeBetCounter(isAdded, betCounter) {
         betCounter.innerHTML = (parseInt(betCounter.innerHTML) - 1).toString();
     } else {
         betCounter.innerHTML = (parseInt(betCounter.innerHTML) + 1).toString();
-    }
-}
-showDropdownMenu(Type) {
-    let dropdown = document.querySelector(Type);
-    switch (dropdown.classList.contains("hidden")) {
-        case true:
-            dropdown.classList.remove("hidden");
-            break;
-        case false:
-            dropdown.classList.add("hidden");
-            break;
     }
 }
