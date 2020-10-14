@@ -138,8 +138,7 @@ export let dom = {
         for (let match of matches) {
             let addMatch = `
             <li>${match.home} - ${match.away} Chosen: ${match.chosenOutcome}, Odds ${match.odds}
-            <a><img src="/static/img/trashbin3.png"" width="20" height="20"
-    alt="delete-tag"></a></li>`
+            <a><img src="/static/img/trashbin3.png"" width="15" height="15" alt="delete-match"></a></li>`
             content += addMatch;
         }
         matchList.insertAdjacentHTML("beforeend", content);
