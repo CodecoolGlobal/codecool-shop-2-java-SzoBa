@@ -165,11 +165,12 @@ export let dom = {
     },
 
     createTicketData: function (data) {
-        console.log(data)
-        this.createCartMatchesList(data.items);
-        this.addCartConstantItems(data);
-        this.addListenersToTrashBins();
-        this.calculatedOddsInCartRefresh();
+        if (data != null) {
+            this.createCartMatchesList(data.items);
+            this.addCartConstantItems(data);
+            this.addListenersToTrashBins();
+            this.calculatedOddsInCartRefresh();
+        }
     },
 
     createCartMatchesList: function (matches) {
@@ -177,7 +178,7 @@ export let dom = {
         let content = "";
         for (let match of matches) {
             let addMatch = `
-            <li class ="cart-item" data-matchid="${match.id}">
+            <li class ="cart-item" data-matchid="${match.matchId}">
                 <div>${match.home} - ${match.away}</div>
                 <div>
                     Chosen: ${match.chosenOutcome}
@@ -219,7 +220,7 @@ export let dom = {
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
         input.addEventListener("keydown", (event) => {
-            if (/^\d+$/.test(input.value)) {
+            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 10) {
                 this.updatePossibleWinNumber(input.value);
 
                 //TODO save bet to database no?
@@ -236,13 +237,21 @@ export let dom = {
 
     removeMatchItemFromCart: function (event) {
         let listItem = event.target.closest("li");
-        //TODO remove from database
-        let matchID = listItem.dataset.matchid;
+        let matchId = listItem.dataset.matchid;
         let isAdded = true;
         let outcome = "deletable";
-        dataHandler.modifyCartItems(matchID, isAdded, outcome, () => {
+        let cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            if (card.dataset.matchid === matchId) {
+                card.querySelectorAll(".btn").forEach(btn => btn.classList.remove("inactive", "active"));
+            }
+        })
+        dataHandler.modifyCartItems(matchId, isAdded, outcome, () => {
             listItem.remove();
             dom.calculatedOddsInCartRefresh();
+            let counter = document.querySelector(".cart-item-counter");
+            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
+            counter.innerHTML = (parseInt(counter.innerHTML) - 1).toString();
         })
     },
 
@@ -268,8 +277,9 @@ export let dom = {
     },
 
     updatePossibleWinNumber: function (bet){
-        let possibleWinAmount = document.querySelector("#possible-win-value")
-        //TODO update fields
+        let possibleWinAmount = document.querySelector("#possible-win-value");
+        let currentOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML);
+        possibleWinAmount.innerHTML = bet === 0 ? "0" : (currentOdds * bet).toFixed(0);
     }
 }
 
