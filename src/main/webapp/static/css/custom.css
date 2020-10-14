@@ -72,10 +72,10 @@ body::-webkit-scrollbar {
 /*Cart content*/
 .cart-content {
     position: absolute;
-    width: 700px;
-    height: 500px;
-    top: 100px;
-    right: 160px;
+    width: 400px;
+    height: auto;
+    top: 101px;
+    right: 149px;
     border: 1px solid #4c97ca;
     box-shadow: 0 3px 1px -2px rgba(255, 255, 255, .2), 0 2px 2px 0 rgba(255, 255, 255, .14), 0 1px 5px 0 rgba(255, 255, 255, .12);
     border-radius: 25px;
@@ -103,6 +103,79 @@ body::-webkit-scrollbar {
     -ms-user-select: none;
     user-select: none;
 }
+
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 15px 25px;
+    font-size: 20px;
+    background: #C5D3F5;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+.cart-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    left: 70px;
+}
+
+label {
+    margin-bottom: 0;
+}
+
+.bet-value-label {
+    font-size: 20px;
+}
+
+.bet-value-input {
+    background: #C5D3F5;
+    border-radius: 10px;
+    border: 2px solid #8faef3;
+    width: 100px;
+    padding: 0 5px;
+}
+
+.bet-value-input:focus {
+    outline: none;
+    border: 2px solid #d78b00;
+}
+
+.cart-input-table {
+    font-size: 20px;
+}
+
+.confirmation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 5px;
+}
+
+.confirmation a {
+    text-decoration: none;
+}
+
+.go-to-checkout {
+    display: flex;
+    justify-content: center;
+    background: #C5D3F5;
+    border-radius: 10px;
+    border: 2px solid #8faef3;
+}
+
+.go-to-checkout:hover {
+    background: #8faef3;
+    border-radius: 10px;
+    border: 2px solid #d78b00;
+}
+
 /*Header Content*/
 
 /*Main Content*/

@@ -177,8 +177,13 @@ export let dom = {
         let content = "";
         for (let match of matches) {
             let addMatch = `
-            <li data-matchid="${match.id}">${match.home} - ${match.away} Odds <span>${match.odds}</span>
-            <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a><br>Chosen: ${match.chosenOutcome}
+            <li class ="cart-item" data-matchid="${match.id}">
+                <div>${match.home} - ${match.away}</div>
+                <div>
+                    Chosen: ${match.chosenOutcome}
+                    <a><img src="/static/img/trashbin3.png" width="15" height="15" alt="delete-match"></a>
+                </div>
+                <span class="odds">Odds: ${match.odds}</span>
             </li>`
             content += addMatch;
         }
@@ -188,14 +193,25 @@ export let dom = {
     addCartConstantItems: function (data) {
         let content = document.querySelector(".cart-content-body");
         let items =
-            `<label for="betValue">Current bet:  </label>
-             <input id="betValue" name="betValue" type="text" placeholder="${data.bet}">
-             <br>
-             <table>
-             <tr><td>Total odds: </td><td id="total-odds-value">${data.odds}</td></tr>
-             <tr><td>Possible win: </td><td id="possible-win-value">Kiszámolni</td></tr>
-             </table>
-             <a href="/"><button>Confirm Order</button></a>`
+            `<div class="cart-inputs">
+                 <div>
+                     <label class="bet-value-label" for="betValue">Current bet: </label>
+                     <input class="bet-value-input" id="betValue" name="betValue" type="text" placeholder="${data.bet}">
+                 </div>
+                 <table class="cart-input-table">
+                     <tr>
+                         <td>Total odds: </td>
+                         <td id="total-odds-value">${data.odds}</td>
+                     </tr>
+                     <tr>
+                         <td>Possible win: </td>
+                         <td id="possible-win-value">34214</td>
+                     </tr>
+                 </table>
+             </div>
+             <div class="confirmation">
+                <a href="/"><button class="go-to-checkout">Confirm Order</button></a>
+             </div>`
         content.insertAdjacentHTML("beforeend", items);
         this.addListenersToBetInput();
     },
