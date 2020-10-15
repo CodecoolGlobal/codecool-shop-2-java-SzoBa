@@ -34,5 +34,10 @@ export let dataHandler = {
         this._get(`/getCartItems`, (response) => {
             callback(response);
         })
+    },
+    saveBet(betValue, possibleWin, today, callback) {
+        this._get(`/save_bet?bet=${betValue}&possible_win=${possibleWin}&${today}`, (response) => {
+            callback(response);
+        })
     }
 }

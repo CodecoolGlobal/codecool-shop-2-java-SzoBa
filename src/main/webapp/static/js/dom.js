@@ -168,6 +168,7 @@ export let dom = {
         let items = contentItems.cartConstantItems(data);
         content.insertAdjacentHTML("beforeend", items);
         this.addListenersToBetInput();
+        this.addListenerToConfirmButton();
     },
 
     addListenersToBetInput: function () {
@@ -176,16 +177,33 @@ export let dom = {
             if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
                 this.updatePossibleWinNumber(input.value);
 
-                //TODO save bet to database no?
 
             }
         })
 
     },
 
+    addListenerToConfirmButton: function () {
+        let button = document.querySelector(".go-to-checkout");
+        button.addEventListener("click", this.confirmCart);
+    },
+
     addListenersToTrashBins: function () {
         let trashBinContainers = document.querySelectorAll(".cart-content-matches ul li a");
         trashBinContainers.forEach(bin => bin.addEventListener("click", this.removeMatchItemFromCart))
+    },
+
+    confirmCart: function () {
+        let betValue = document.querySelector("#betValue").value;
+        let possibleWinAmount = parseInt(document.querySelector("#possible-win-value").innerHTML);
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + "-" + mm + "-" + dd;
+        dataHandler.saveBet(betValue, possibleWinAmount, today, (data) => {
+            window.location.href("/checkout");
+        })
     },
 
     removeMatchItemFromCart: function (event) {

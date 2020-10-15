@@ -13,7 +13,8 @@ public class Cart extends BaseModel{
     protected float bet;
     @Expose
     protected Date date;
-
+    @Expose
+    protected int possibleWin;
 
 
     public Cart(String description) {
@@ -39,6 +40,14 @@ public class Cart extends BaseModel{
 
     public void setActualTime(Date actualTime) {
         date = actualTime;
+    }
+
+    public int getPossibleWin() {
+        return possibleWin;
+    }
+
+    public void setPossibleWin(int possibleWin) {
+        this.possibleWin = possibleWin;
     }
 
     public void addItemToCart(CartItem cartItem) {

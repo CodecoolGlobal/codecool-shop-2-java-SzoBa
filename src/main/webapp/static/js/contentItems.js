@@ -64,7 +64,7 @@ export let contentItems = {
                  </table>
              </div>
              <div class="confirmation">
-                <a href="/"><button class="go-to-checkout">Confirm Order</button></a>
+                <a><button class="go-to-checkout">Confirm Order</button></a>
              </div>`
     },
 
