@@ -17,8 +17,11 @@ public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int clientSessionIdHashCode = req.getSession().getId().hashCode();
+
         OrderDao orderDao = OrderDaoMem.getInstance();
         Order order = new Order();
+        order.setId(clientSessionIdHashCode);
         order.setFirstName(req.getParameter("firstName"));
         order.setLastName(req.getParameter("lastName"));
         order.setPhoneNumber(req.getParameter("telephone"));
@@ -28,10 +31,6 @@ public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
         order.setZip(Integer.parseInt(req.getParameter("zip")));
         order.setAddress(req.getParameter("address"));
         orderDao.add(order);
-
-        int clientSessionIdHashCode = req.getSession().getId().hashCode();
-        CartDao cartDao = CartDaoMem.getInstance();
-        cartDao.remove(clientSessionIdHashCode);
 
         resp.sendRedirect(req.getContextPath() + "/success");
     }
