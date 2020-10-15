@@ -35,8 +35,8 @@ export let dataHandler = {
             callback(response);
         })
     },
-    saveBet(betValue, possibleWin, today, callback) {
-        this._get(`/save_bet?bet=${betValue}&possible_win=${possibleWin}&${today}`, (response) => {
+    saveBet(betValue, possibleWinAmount, today, totalOdds, callback) {
+        this._get(`/save_bet?bet=${betValue}&possible_win=${possibleWinAmount}&date=${today}&total_odds=${totalOdds}`, (response) => {
             callback(response);
         })
     }

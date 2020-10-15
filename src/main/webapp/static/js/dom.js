@@ -198,11 +198,14 @@ export let dom = {
         let possibleWinAmount = parseInt(document.querySelector("#possible-win-value").innerHTML);
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear();
-        today = yyyy + "-" + mm + "-" + dd;
-        dataHandler.saveBet(betValue, possibleWinAmount, today, (data) => {
-            window.location.href("/checkout");
+        today = dd + "-" + mm + "-" + yyyy;
+        let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
+        // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
+        dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, (data) => {
+            console.log(data);
+            window.location.href = "/checkout";
         })
     },
 

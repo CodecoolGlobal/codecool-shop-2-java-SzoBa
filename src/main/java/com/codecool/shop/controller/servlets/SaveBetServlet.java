@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name="saveBetServlet", urlPatterns = {"/save_bet"}, loadOnStartup = 2)
@@ -30,14 +34,19 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
         CartDao cartDao = CartDaoMem.getInstance();
         Cart cart = cartDao.find(clientSessionIdHashCode);
-
         try {
             int bet = Integer.parseInt(req.getParameter("bet"));
             int possibleWin = Integer.parseInt(req.getParameter("possible_win"));
+            float totalOdds = Float.parseFloat(req.getParameter("total_odds"));
+            String dateString = req.getParameter("date");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = formatter.parse(dateString);
             message = "Successful";
             cart.setBet(bet);
             cart.setPossibleWin(possibleWin);
-        } catch (IllegalArgumentException e) {
+            cart.setActualTime(date);
+            cart.setTotalOdds(totalOdds);
+        } catch (IllegalArgumentException | ParseException e) {
             message = "An error occurred!";
         }
 
