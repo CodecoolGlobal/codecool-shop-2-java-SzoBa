@@ -35,6 +35,13 @@ export let dom = {
         }
     },
 
+    removeListenerToOdds: function () {
+        const odds = document.querySelectorAll('.card-odds')
+        for (const odd of odds) {
+            odd.removeEventListener("click", this.modifyCartItems);
+        }
+    },
+
     addListenersToCountrySelectItems: function () {
         let items = document.querySelectorAll(".country-type");
         items.forEach(item => item.addEventListener("click", this.addSelectedCountryListener))
@@ -64,9 +71,6 @@ export let dom = {
         let countryId = document.querySelector("#country-selection").dataset.value > 0 ?
             document.querySelector("#country-selection").dataset.value : 0;
 
-        console.log(typeId + " " + countryId);
-        //TODO make filter universal - need to filter 2 types of data (front-back job?)
-
         dataHandler.getCountry(typeId, countryId, (data) => {
             dom.clearMatchesFromMainTable();
             dom.createMatchesOnMainTable(data);
@@ -91,6 +95,9 @@ export let dom = {
                     dom.clearCartContentBody();
                     dom.createCartContent(data);
                 })
+                dom.removeListenerToOdds();
+            } else {
+                dom.addListenerToOdds();
             }
         }
     },
@@ -174,7 +181,7 @@ export let dom = {
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
         input.addEventListener("keyup", (event) => {
-            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
+            if (/^\d+$/.test(input.value)) {
                 this.updatePossibleWinNumber(input.value);
             }
         })
@@ -258,8 +265,9 @@ export let dom = {
 
     updatePossibleWinNumber: function (bet){
         let possibleWinAmount = document.querySelector("#possible-win-value");
+
         let currentOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML);
-        possibleWinAmount.innerHTML = bet === 0 ? "0" : (currentOdds * bet).toFixed(0);
+        possibleWinAmount.innerHTML = bet < 100 ? "0" : (currentOdds * bet).toFixed(0);
     }
 }
 
