@@ -30,7 +30,6 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String message = "";
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
         CartDao cartDao = CartDaoMem.getInstance();
         Cart cart = cartDao.find(clientSessionIdHashCode);
@@ -41,13 +40,12 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
             String dateString = req.getParameter("date");
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date date = formatter.parse(dateString);
-            message = "Successful";
             cart.setBet(bet);
             cart.setPossibleWin(possibleWin);
             cart.setActualTime(date);
             cart.setTotalOdds(totalOdds);
         } catch (IllegalArgumentException | ParseException e) {
-            message = "An error occurred!";
+            System.out.println("An error occurred at the checkout!");
         }
 
         PrintWriter out = resp.getWriter();
