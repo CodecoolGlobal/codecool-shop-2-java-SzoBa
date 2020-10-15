@@ -102,8 +102,6 @@ public class OrderConfirmedController extends HttpServlet {
                 mex.printStackTrace();
             }
 
-            // TODO
-            // save order to json/txt
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String dateString = formatter.format(date);
