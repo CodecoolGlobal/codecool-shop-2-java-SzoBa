@@ -82,7 +82,7 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
-            <form class="needs-validation" novalidate="">
+            <form class="needs-validation" novalidate="" method="post" action="/confirmation">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
@@ -225,13 +225,13 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block submitButton" type="submit">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block submit-button" type="submit">Continue to checkout</button>
             </form>
         </div>
     </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
-<script src="/static/js/email_validation.js"></script>
+<script type="module" src="/static/js/email_validation.js"></script>
 </body>
 </html>

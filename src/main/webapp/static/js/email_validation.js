@@ -1,4 +1,11 @@
-(function () {
+import {dataHandler} from "./dataHandler.js";
+
+function init() {
+    sendDataIfAllValidated();
+
+}
+
+function validateDataAndSendData () {
     'use strict'
 
     window.addEventListener('load', function () {
@@ -17,7 +24,37 @@
             }, false)
         })
     }, false)
-})()
+}
+
+function sendDataIfAllValidated () {
+    let submitButton = document.querySelector('.submit-button');
+    submitButton.addEventListener("click", (event) => {
+        let forms = document.getElementsByClassName('needs-validation');
+        let counter = 0;
+        for (const form of forms) {
+            if (form.checkValidity() === false) {
+                event.preventDefault()
+                event.stopPropagation()
+            } else {
+                counter++;
+            }
+            form.classList.add('was-validated')
+        }
+        if (counter === forms.length) {
+            console.log("heeeeeeeeeeeeeeeeeeeeeeeeey") ;
+        }
+    })
+}
+
+function sendData() {
+    let forms = document.getElementsByClassName('needs-validation');
+    let counter = 0;
+    for (const form of forms) {
+    }
+}
+
+
+init();
 
 
 // function ValidateEmail(inputText) {
