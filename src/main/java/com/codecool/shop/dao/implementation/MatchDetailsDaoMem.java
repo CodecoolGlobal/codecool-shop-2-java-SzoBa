@@ -57,4 +57,12 @@ public class MatchDetailsDaoMem implements MatchDetailsDao {
     public List<MatchDetails> getBy(Country country) {
         return data.stream().filter(t -> t.getCountry().equals(country)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<MatchDetails> getBy(SportType sportType, Country country) {
+        return data.stream()
+                .filter(t -> t.getSportType().equals(sportType))
+                .filter(t -> t.getCountry().equals(country))
+                .collect(Collectors.toList());
+    }
 }
