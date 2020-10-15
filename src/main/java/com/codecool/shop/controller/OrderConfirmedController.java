@@ -1,6 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.CartItem;
+import com.codecool.shop.model.Order;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -20,75 +27,105 @@ public class OrderConfirmedController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int clientSessionIdHashCode = req.getSession().getId().hashCode();
+        OrderDao orderDao = OrderDaoMem.getInstance();
+        Order order = orderDao.find(clientSessionIdHashCode);
+        if (order == null) {
+            resp.sendRedirect(req.getContextPath() + "/");
+        } else {
+            CartDao cartDao = CartDaoMem.getInstance();
+            Cart cart = cartDao.find(clientSessionIdHashCode);
 
-        // Recipient's email ID needs to be mentioned.
-        String to = "bszolcsan@gmail.com";
 
-        // Sender's email ID needs to be mentioned
-        String from = "convector97@gmail.com";
+            // Recipient's email ID needs to be mentioned.
+            String to = order.getEmailAddress();
 
-        // Assuming you are sending email from through gmails smtp
-        String host = "smtp.gmail.com";
+            // Sender's email ID needs to be mentioned
+            String from = System.getenv("email");
+            String password = System.getenv("password");
+            String messageFromOrder = createMessage(cart, clientSessionIdHashCode);
 
-        // Get system properties
-        Properties properties = System.getProperties();
 
-        // Setup mail server
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
+            // Assuming you are sending email from through gmails smtp
+            String host = "smtp.gmail.com";
 
-        // Get the Session object.// and pass username and password
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            // Get system properties
+            Properties properties = System.getProperties();
 
-            protected PasswordAuthentication getPasswordAuthentication() {
+            // Setup mail server
+            properties.put("mail.smtp.host", host);
+            properties.put("mail.smtp.port", "465");
+            properties.put("mail.smtp.ssl.enable", "true");
+            properties.put("mail.smtp.auth", "true");
 
-                return new PasswordAuthentication("convector97@gmail.com", "Convectorok");
+            // Get the Session object.// and pass username and password
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
+                protected PasswordAuthentication getPasswordAuthentication() {
+
+                    return new PasswordAuthentication(from, password);
+
+                }
+
+            });
+
+            // Used to debug SMTP issues
+            session.setDebug(true);
+
+            try {
+                // Create a default MimeMessage object.
+                MimeMessage message = new MimeMessage(session);
+
+                // Set From: header field of the header.
+                message.setFrom(new InternetAddress(from));
+
+                // Set To: header field of the header.
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+                // Set Subject: header field
+                message.setSubject("Order was successful!");
+
+                // Now set the actual message
+                message.setContent(messageFromOrder,"text/html");
+
+                System.out.println("sending...");
+                // Send message
+                Transport.send(message);
+                System.out.println("Sent message successfully....");
+            } catch (MessagingException mex) {
+                mex.printStackTrace();
             }
 
-        });
+            // TODO
+            // save order to json/txt
 
-        // Used to debug SMTP issues
-        session.setDebug(true);
 
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
+            orderDao.remove(clientSessionIdHashCode);
+            cartDao.remove(clientSessionIdHashCode);
 
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+            // TODO
+            // order was successful message?
 
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+//            WebContext context = new WebContext(req, resp, req.getServletContext());
+//
+//
+//            resp.setContentType("text/html; charset=UTF-8");
+//            engine.process("product/index.html", context, resp.getWriter());
 
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
 
-            // Now set the actual message
-            message.setText("This is actual message");
+            resp.sendRedirect(req.getContextPath() + "/");
+        }
+    }
 
-            System.out.println("sending...");
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
+    private String createMessage(Cart cart, int id) {
+        StringBuilder message = new StringBuilder();
+        for (CartItem cartItem: cart.getItems()) {
+            message.append("<p>" + cartItem.getHome() + " - " + cartItem.getAway() +"</p>");
+            message.append("<p>" + cartItem.getHome() + " - " + cartItem.getAway() +"</p>");
         }
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-
-
-
-        resp.setContentType("text/html; charset=UTF-8");
-        engine.process("product/index.html", context, resp.getWriter());
-
-
-
-        resp.sendRedirect(req.getContextPath() + "/");
-
+        return message.toString();
     }
 
 }
