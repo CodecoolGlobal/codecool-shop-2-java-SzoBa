@@ -25,7 +25,7 @@ public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
         order.setZip(Integer.parseInt(req.getParameter("zip")));
         order.setAddress(req.getParameter("address"));
         orderDao.add(order);
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/success");
     }
 
 }
