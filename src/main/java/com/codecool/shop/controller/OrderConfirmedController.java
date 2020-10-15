@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 @WebServlet(urlPatterns = {"/success"})
@@ -42,7 +42,6 @@ public class OrderConfirmedController extends HttpServlet {
             CartDao cartDao = CartDaoMem.getInstance();
             Cart cart = cartDao.find(clientSessionIdHashCode);
 
-
             // Recipient's email ID needs to be mentioned.
             String to = order.getEmailAddress();
 
@@ -50,7 +49,6 @@ public class OrderConfirmedController extends HttpServlet {
             String from = System.getenv("email");
             String password = System.getenv("password");
             String messageFromOrder = createMessage(cart);
-
 
             // Assuming you are sending email from through gmails smtp
             String host = "smtp.gmail.com";
@@ -66,13 +64,9 @@ public class OrderConfirmedController extends HttpServlet {
 
             // Get the Session object.// and pass username and password
             Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
                 protected PasswordAuthentication getPasswordAuthentication() {
-
                     return new PasswordAuthentication(from, password);
-
                 }
-
             });
 
             // Used to debug SMTP issues
@@ -102,9 +96,9 @@ public class OrderConfirmedController extends HttpServlet {
                 mex.printStackTrace();
             }
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String dateString = formatter.format(date);
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateString = date.format(formatter);
         String fileName = order.getId() + "_" + dateString;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -132,7 +126,6 @@ public class OrderConfirmedController extends HttpServlet {
 //
 //            resp.setContentType("text/html; charset=UTF-8");
 //            engine.process("product/index.html", context, resp.getWriter());
-
 
             resp.sendRedirect(req.getContextPath() + "/");
         }
