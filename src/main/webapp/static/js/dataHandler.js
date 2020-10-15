@@ -7,7 +7,7 @@ export let dataHandler = {
     },
 
     getCountry: function (typeId, countryId, callback) {
-        this._get(`/country?typeId=${typeId}&countryId=${countryId}`, (response) => {
+        this._get(`/search?typeId=${typeId}&countryId=${countryId}`, (response) => {
             callback(response);
         });
     },

@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name="countrySelectServlet", urlPatterns = {"/country"}, loadOnStartup = 2)
-public class CountrySelectServlet extends javax.servlet.http.HttpServlet {
+@WebServlet(name="searchSelectServlet", urlPatterns = {"/search"}, loadOnStartup = 2)
+public class searchSelectServlet extends javax.servlet.http.HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
