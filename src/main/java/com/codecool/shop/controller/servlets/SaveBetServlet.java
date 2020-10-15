@@ -33,6 +33,7 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
         CartDao cartDao = CartDaoMem.getInstance();
         Cart cart = cartDao.find(clientSessionIdHashCode);
+        String message = "";
         try {
             int bet = Integer.parseInt(req.getParameter("bet"));
             int possibleWin = Integer.parseInt(req.getParameter("possible_win"));
@@ -44,11 +45,13 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
             cart.setPossibleWin(possibleWin);
             cart.setActualTime(date);
             cart.setTotalOdds(totalOdds);
+            message = "Cart saved successfully";
         } catch (IllegalArgumentException | ParseException e) {
-            System.out.println("An error occurred at the checkout!");
+            message = "An error occurred at the checkout!";
         }
-
+        Gson gson = new GsonBuilder().create();
+        String answer = gson.toJson(message);
         PrintWriter out = resp.getWriter();
-        out.println("[]");
+        out.println(answer);
     }
 }
