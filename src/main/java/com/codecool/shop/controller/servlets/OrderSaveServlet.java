@@ -17,7 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name="orderSaveServlet", urlPatterns = {"/save_order"}, loadOnStartup = 2)
+@WebServlet(name="orderSaveServlet", urlPatterns = {"/confirmation"}, loadOnStartup = 2)
 public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
 
     @Override
