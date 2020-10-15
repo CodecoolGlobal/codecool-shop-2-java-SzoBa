@@ -200,16 +200,16 @@ export let dom = {
 
     confirmCart: function () {
         let betValue = document.querySelector("#betValue").value;
-        let possibleWinAmount = parseInt(document.querySelector("#possible-win-value").innerHTML);
+        let possibleWinAmount = document.querySelector("#possible-win-value").innerHTML;
         if (betValue > 0 && possibleWinAmount > 0) {
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
             let mm = String(today.getMonth() + 1).padStart(2, '0');
             let yyyy = today.getFullYear();
             today = dd + "-" + mm + "-" + yyyy;
-            let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
-            // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
-            dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, (data) => {
+            let totalOdds = document.querySelector("#total-odds-value").innerHTML;
+            let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "date": today, "totalOdds": totalOdds};
+            dataHandler.saveBet(orderInfos, (data) => {
                 if (data === "Cart saved successfully") {
                     window.location.href = "/checkout";
                 } else {
