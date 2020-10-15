@@ -67,7 +67,7 @@ export let dom = {
         console.log(typeId + " " + countryId);
         //TODO make filter universal - need to filter 2 types of data (front-back job?)
 
-        dataHandler.getCountry(countryId, (data) => {
+        dataHandler.getCountry(typeId, countryId, (data) => {
             dom.clearMatchesFromMainTable();
             dom.createMatchesOnMainTable(data);
             checkIfOddsAlreadySelected();

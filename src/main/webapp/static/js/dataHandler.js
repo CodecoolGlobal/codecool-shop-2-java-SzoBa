@@ -6,8 +6,8 @@ export let dataHandler = {
             .then((response) => callback(response))
     },
 
-    getCountry: function (countryId, callback) {
-        this._get(`/country?countryId=${countryId}`, (response) => {
+    getCountry: function (typeId, countryId, callback) {
+        this._get(`/search?typeId=${typeId}&countryId=${countryId}`, (response) => {
             callback(response);
         });
     },
@@ -20,12 +20,6 @@ export let dataHandler = {
 
     getCartItems: function (callback) {
         this._get(`/getCartItems`, (response) => {
-            callback(response);
-        });
-    },
-
-    getSportType: function (typeId, callback) {
-        this._get(`/sport-type?typeId=${typeId}`, (response) => {
             callback(response);
         });
     },

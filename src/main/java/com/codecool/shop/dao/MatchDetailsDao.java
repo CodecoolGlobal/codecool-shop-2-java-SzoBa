@@ -15,5 +15,6 @@ public interface MatchDetailsDao {
     List<MatchDetails> getAll();
     List<MatchDetails> getBy(SportType sportType);
     List<MatchDetails> getBy(Country country);
+    List<MatchDetails> getBy(SportType sportType, Country country);
 
 }

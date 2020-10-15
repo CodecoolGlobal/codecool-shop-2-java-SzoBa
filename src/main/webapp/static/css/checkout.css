@@ -5,3 +5,15 @@ h6.my-0 {
 input.bet-value {
     width: 100px;
 }
+
+.submitButton {
+    margin-bottom: 20px !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 80px;
+}
+
+.container {
+    margin-bottom: 110px;
+}
