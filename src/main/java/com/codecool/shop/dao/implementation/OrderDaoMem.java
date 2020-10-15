@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.model.Order;
 
 public class OrderDaoMem implements OrderDao {
 
