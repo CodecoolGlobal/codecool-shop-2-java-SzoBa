@@ -23,6 +23,11 @@ public class Order extends BaseModel {
         Address = address;
     }
 
+    public Order() {
+        super("This is the description");
+
+    }
+
     public Order(String description) {
         super(description);
     }
