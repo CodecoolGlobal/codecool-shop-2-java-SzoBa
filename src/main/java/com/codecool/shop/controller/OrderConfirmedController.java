@@ -43,7 +43,7 @@ public class OrderConfirmedController extends HttpServlet {
             // Sender's email ID needs to be mentioned
             String from = System.getenv("email");
             String password = System.getenv("password");
-            String messageFromOrder = createMessage(cart, clientSessionIdHashCode);
+            String messageFromOrder = createMessage(cart);
 
 
             // Assuming you are sending email from through gmails smtp
@@ -118,12 +118,18 @@ public class OrderConfirmedController extends HttpServlet {
         }
     }
 
-    private String createMessage(Cart cart, int id) {
+    private String createMessage(Cart cart) {
         StringBuilder message = new StringBuilder();
         for (CartItem cartItem: cart.getItems()) {
-            message.append("<p>" + cartItem.getHome() + " - " + cartItem.getAway() +"</p>");
-            message.append("<p>" + cartItem.getHome() + " - " + cartItem.getAway() +"</p>");
+            message.append("<p>" + cartItem.getHome() + " - " + cartItem.getAway() + "   " + cartItem.getOdds() + "</p>");
+            message.append("<p>" + cartItem.getChosenOutcome() +"</p>");
+            message.append("<p>" + cartItem.getLeagueName() +"</p>");
+            message.append("<br>");
         }
+        message.append("<p>Total odds: " + cart.getTotalOdds() +"</p>");
+        message.append("<p>Bet: " + cart.getBet() +"</p>");
+        message.append("<p>Possible win: " + cart.getPossibleWin() +"</p>");
+        message.append("<p>Date: " + cart.getActualTime() +"</p>");
 
         return message.toString();
     }
