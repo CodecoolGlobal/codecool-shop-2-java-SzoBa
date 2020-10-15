@@ -8,5 +8,7 @@ import java.util.List;
 public interface OrderDao {
 
     void add(Order order);
+    void remove(int id);
+
     Order find(int id);
 }
