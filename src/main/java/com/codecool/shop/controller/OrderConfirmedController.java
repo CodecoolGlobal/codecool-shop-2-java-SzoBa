@@ -105,7 +105,7 @@ public class OrderConfirmedController extends HttpServlet {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String dateString = formatter.format(date);
-        String fileName = order.getId() + dateString;
+        String fileName = order.getId() + "_" + dateString;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String orderString = gson.toJson(order);
