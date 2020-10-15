@@ -5,11 +5,12 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoMem implements OrderDao {
 
-    private List<Order> listOfOrders;
+    private List<Order> listOfOrders = new ArrayList<>();
     private static OrderDaoMem instance = null;
 
     private OrderDaoMem() {
@@ -24,8 +25,14 @@ public class OrderDaoMem implements OrderDao {
 
     @Override
     public void add(Order order) {
-
+        listOfOrders.add(order);
     }
+
+    @Override
+    public void remove(int id) {
+        listOfOrders.remove(find(id));
+    }
+
 
     @Override
     public Order find(int id) {
