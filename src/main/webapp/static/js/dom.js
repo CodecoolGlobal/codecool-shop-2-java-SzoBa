@@ -174,7 +174,7 @@ export let dom = {
     addListenersToBetInput: function () {
         let input = document.querySelector("#betValue");
         input.addEventListener("keyup", (event) => {
-            if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
+            if (/^\d+$/.test(input.value)) {
                 this.updatePossibleWinNumber(input.value);
             }
         })
@@ -258,8 +258,9 @@ export let dom = {
 
     updatePossibleWinNumber: function (bet){
         let possibleWinAmount = document.querySelector("#possible-win-value");
+
         let currentOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML);
-        possibleWinAmount.innerHTML = bet === 0 ? "0" : (currentOdds * bet).toFixed(0);
+        possibleWinAmount.innerHTML = bet < 100 ? "0" : (currentOdds * bet).toFixed(0);
     }
 }
 
