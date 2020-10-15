@@ -38,8 +38,7 @@ public class Initializer implements ServletContextListener {
         sportTypeDataStore.add(darts);
         SportType badminton = new SportType("Badminton", "ico-sport ico-sport-badminton");
         sportTypeDataStore.add(badminton);
-        SportType another = new SportType("Handball", "ico-sport ico-sport-handball");
-        sportTypeDataStore.add(another);
+
 
         //setting up a new country
         Country international = new Country("International", "Best country - Hungary.");
@@ -126,14 +125,73 @@ public class Initializer implements ServletContextListener {
 
 
 
+        //Tennis games
+            //international tennis
+        matchDetailsDataStore.add(new MatchDetails("16. Match",
+                "Zverev A.", "Verdasco F.", "ATP",
+                1.2f, 1.0f, 4.33f, international, tennis));
 
-        matchDetailsDataStore.add(new MatchDetails("Fourth Match",
-                "Wright P", "Aspinall N", "Premier League",
-                1.65f, 1.0f, 2.45f, england, darts));
+        matchDetailsDataStore.add(new MatchDetails("17. Match",
+                "Simon G.", "Bautista Agut R.", "ATP",
+                3.0f, 1.0f, 1.36f, international, tennis));
 
-        matchDetailsDataStore.add(new MatchDetails("Sixth Match",
+
+        // basketball
+            //international basketball
+        matchDetailsDataStore.add(new MatchDetails("18. Match",
+                "Barca Basket", "Panathinaikos BC", "Euroleague",
+                1.18f, 1.0f, 5.25f, international, basketball));
+
+            //spain basket
+        matchDetailsDataStore.add(new MatchDetails("19. Match",
+                "Movistar E.", "Gran Canaria", "Liga ACB",
+                1.66f, 1.0f, 2.3f, spain, basketball));
+
+        // hockey
+            //russia
+        matchDetailsDataStore.add(new MatchDetails("20. Match",
                 "Dinamo Riga", "Locomotiv Yaroslavl", "KHL",
                 3.25f, 1.0f, 1.35f, russia, iceHockey));
+
+        matchDetailsDataStore.add(new MatchDetails("21. Match",
+                "Kunlun Red Star", "Salavat Yulaev Ufa", "KHL",
+                3.8f, 1.0f, 1.28f, russia, iceHockey));
+
+        // handball
+            //international handball
+        matchDetailsDataStore.add(new MatchDetails("22. Match",
+                "FC Porto Sofarma", "MOL Pick Szeged", "Champions League, Group A",
+                1.18f, 13.0f, 8.0f, international, handball));
+
+            //france handball
+        matchDetailsDataStore.add(new MatchDetails("23. Match",
+                "Cesson Rennes MHB", "Limoges Handball 87", "LNH Starligue",
+                1.8f, 7.5f, 2.7f, france, handball));
+
+        // darts
+            //england darts
+        matchDetailsDataStore.add(new MatchDetails("24. Match",
+                "Wright P.", "Aspinall N.", "Premier League, Playoffs",
+                1.65f, 1.0f, 2.45f, england, darts));
+
+        matchDetailsDataStore.add(new MatchDetails("25. Match",
+                "Durrant G.", "Anderson G.", "Premier League, Playoffs",
+                1.85f, 1.0f, 2.3f, england, darts));
+
+        // badminton
+            //international
+        matchDetailsDataStore.add(new MatchDetails("26. Match",
+                "Ho-Shue J.", "Srikanth K.", "Denmark Open 2020, MS",
+                2.7f, 1.0f, 1.4f, international, badminton));
+
+        matchDetailsDataStore.add(new MatchDetails("27. Match",
+                "Popov T.", "Jorgensen J.", "Denmark Open 2020, MS",
+                1.65f, 1.0f, 2.45f, international, badminton));
+
+        matchDetailsDataStore.add(new MatchDetails("28. Match",
+                "Yang B.", "Weisskirchen M.", "Denmark Open 2020, MS",
+                1.95f, 1.0f, 2.25f, international, badminton));
+
     }
 
 }
