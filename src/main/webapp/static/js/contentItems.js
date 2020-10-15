@@ -25,7 +25,7 @@ export let contentItems = {
                         </div>
                         <div class="card-odds" data-outcome="away">
                             <div class="btn btn-success">
-                                <span>V</span>
+                                <span>A</span>
                                 <br>
                                     <span>${match.awayOdds % 1 === 0 ? match.awayOdds + '.0' : match.awayOdds}</span>
                             </div>

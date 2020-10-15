@@ -282,13 +282,13 @@ function checkIfOddsAlreadySelected() {
                     if (cartItem["matchId"] === parseInt(match.dataset.matchid)) {
                         let outcome;
                         switch (cartItem["chosenOutcome"]) {
-                            case ("Hazai"):
+                            case ("Home"):
                                 outcome = "home";
                                 break;
-                            case ("Döntetlen"):
+                            case ("Draw"):
                                 outcome = "draw";
                                 break;
-                            case ("Vendég"):
+                            case ("Away"):
                                 outcome = "away";
                                 break;
                         }

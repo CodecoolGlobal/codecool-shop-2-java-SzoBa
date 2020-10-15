@@ -23,15 +23,15 @@ public class CartItem extends BaseModel {
         this.leagueName = matchDetails.getLeagueName();
         switch (outcome) {
             case ("home"):
-                this.chosenOutcome = "Hazai";
+                this.chosenOutcome = "Home";
                 this.odds = matchDetails.getHomeOdds();
                 break;
             case ("draw"):
-                this.chosenOutcome = "Döntetlen";
+                this.chosenOutcome = "Draw";
                 this.odds = matchDetails.getDrawOdds();
                 break;
             case ("away"):
-                this.chosenOutcome = "Vendég";
+                this.chosenOutcome = "Away";
                 this.odds = matchDetails.getAwayOdds();
                 break;
         }

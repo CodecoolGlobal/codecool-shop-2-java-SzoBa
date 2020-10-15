@@ -109,6 +109,7 @@ public class OrderConfirmedController extends HttpServlet {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String orderString = gson.toJson(order);
+        orderString += gson.toJson(cart);
 
         try {
             File myFile = new File(fileName + ".txt");
