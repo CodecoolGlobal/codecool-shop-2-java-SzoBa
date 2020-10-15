@@ -6,8 +6,8 @@ export let dataHandler = {
             .then((response) => callback(response))
     },
 
-    getCountry: function (countryId, callback) {
-        this._get(`/country?countryId=${countryId}`, (response) => {
+    getCountry: function (typeId, countryId, callback) {
+        this._get(`/country?typeId=${typeId}&countryId=${countryId}`, (response) => {
             callback(response);
         });
     },
