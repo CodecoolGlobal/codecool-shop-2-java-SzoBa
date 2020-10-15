@@ -168,6 +168,7 @@ export let dom = {
         let items = contentItems.cartConstantItems(data);
         content.insertAdjacentHTML("beforeend", items);
         this.addListenersToBetInput();
+        this.addListenerToConfirmButton();
     },
 
     addListenersToBetInput: function () {
@@ -176,16 +177,38 @@ export let dom = {
             if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
                 this.updatePossibleWinNumber(input.value);
 
-                //TODO save bet to database no?
 
             }
         })
 
     },
 
+    addListenerToConfirmButton: function () {
+        let button = document.querySelector(".go-to-checkout");
+        button.addEventListener("click", this.confirmCart);
+    },
+
     addListenersToTrashBins: function () {
         let trashBinContainers = document.querySelectorAll(".cart-content-matches ul li a");
         trashBinContainers.forEach(bin => bin.addEventListener("click", this.removeMatchItemFromCart))
+    },
+
+    confirmCart: function () {
+        let betValue = document.querySelector("#betValue").value;
+        let possibleWinAmount = parseInt(document.querySelector("#possible-win-value").innerHTML);
+        if (betValue > 0 && possibleWinAmount > 0) {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            today = dd + "-" + mm + "-" + yyyy;
+            let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
+            // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
+            dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, () => {
+                window.location.href = "/checkout";
+            })
+        }
+
     },
 
     removeMatchItemFromCart: function (event) {
