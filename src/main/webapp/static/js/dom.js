@@ -176,8 +176,6 @@ export let dom = {
         input.addEventListener("keyup", (event) => {
             if (/^\d+$/.test(input.value) && parseInt(input.value) >= 100) {
                 this.updatePossibleWinNumber(input.value);
-
-
             }
         })
 
@@ -204,11 +202,14 @@ export let dom = {
             today = dd + "-" + mm + "-" + yyyy;
             let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
             // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
-            dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, () => {
-                window.location.href = "/checkout";
+            dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, (data) => {
+                if (data === "Cart saved successfully") {
+                    window.location.href = "/checkout";
+                } else {
+                    console.log(data);
+                }
             })
         }
-
     },
 
     removeMatchItemFromCart: function (event) {
