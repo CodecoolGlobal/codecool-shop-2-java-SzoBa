@@ -196,17 +196,19 @@ export let dom = {
     confirmCart: function () {
         let betValue = document.querySelector("#betValue").value;
         let possibleWinAmount = parseInt(document.querySelector("#possible-win-value").innerHTML);
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-        today = dd + "-" + mm + "-" + yyyy;
-        let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
-        // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
-        dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, (data) => {
-            console.log(data);
-            window.location.href = "/checkout";
-        })
+        if (betValue > 0 && possibleWinAmount > 0) {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            today = dd + "-" + mm + "-" + yyyy;
+            let totalOdds = parseFloat(document.querySelector("#total-odds-value").innerHTML).toFixed(2);
+            // let orderInfos = {"betValue" : betValue, "possibleWinAmount": possibleWinAmount, "today": today, "totalOdds": totalOdds}
+            dataHandler.saveBet(betValue, possibleWinAmount, today, totalOdds, () => {
+                window.location.href = "/checkout";
+            })
+        }
+
     },
 
     removeMatchItemFromCart: function (event) {
