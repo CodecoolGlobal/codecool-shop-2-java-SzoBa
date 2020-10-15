@@ -1,7 +1,10 @@
 package com.codecool.shop.controller.servlets;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +28,11 @@ public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
         order.setZip(Integer.parseInt(req.getParameter("zip")));
         order.setAddress(req.getParameter("address"));
         orderDao.add(order);
+
+        int clientSessionIdHashCode = req.getSession().getId().hashCode();
+        CartDao cartDao = CartDaoMem.getInstance();
+        cartDao.remove(clientSessionIdHashCode);
+
         resp.sendRedirect(req.getContextPath() + "/success");
     }
 
