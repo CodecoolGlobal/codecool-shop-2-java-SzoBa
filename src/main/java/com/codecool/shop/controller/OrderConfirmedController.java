@@ -10,6 +10,7 @@ import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Order;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -26,6 +27,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 @WebServlet(urlPatterns = {"/success"})
@@ -102,12 +105,13 @@ public class OrderConfirmedController extends HttpServlet {
         String fileName = order.getId() + "_" + dateString;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String orderString = gson.toJson(order);
-        orderString += gson.toJson(cart);
+        List<Object> objectsToJsonify = new LinkedList<>();
+        objectsToJsonify.add(order);
+        objectsToJsonify.add(cart);
+        String orderString = gson.toJson(objectsToJsonify);
 
         try {
-            File myFile = new File(fileName + ".txt");
-            FileWriter myFileWriter = new FileWriter(fileName + ".txt");
+            FileWriter myFileWriter = new FileWriter(fileName + ".json");
             myFileWriter.write(orderString);
             myFileWriter.close();
         } catch (IOException e) {
@@ -122,7 +126,6 @@ public class OrderConfirmedController extends HttpServlet {
 
 //            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 //            WebContext context = new WebContext(req, resp, req.getServletContext());
-//
 //
 //            resp.setContentType("text/html; charset=UTF-8");
 //            engine.process("product/index.html", context, resp.getWriter());
