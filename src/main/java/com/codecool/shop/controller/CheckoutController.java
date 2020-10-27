@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.CountryDaoMem;
 import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
 import com.codecool.shop.dao.implementation.SportTypeDaoMem;
+import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -26,7 +27,9 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CartDao cartDao = CartDaoMem.getInstance();
+        GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
+
+        CartDao cartDao = gameDatabaseManager.getCartDao();
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
         Cart cart = cartDao.find(clientSessionIdHashCode);
 

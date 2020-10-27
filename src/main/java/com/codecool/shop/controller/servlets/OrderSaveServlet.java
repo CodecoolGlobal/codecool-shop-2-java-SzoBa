@@ -1,9 +1,9 @@
 package com.codecool.shop.controller.servlets;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import javax.servlet.ServletException;
@@ -17,9 +17,10 @@ public class OrderSaveServlet extends javax.servlet.http.HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
 
-        OrderDao orderDao = OrderDaoMem.getInstance();
+        OrderDao orderDao = gameDatabaseManager.getOrderDao();
         Order order = new Order();
         order.setId(clientSessionIdHashCode);
         order.setFirstName(req.getParameter("firstName"));

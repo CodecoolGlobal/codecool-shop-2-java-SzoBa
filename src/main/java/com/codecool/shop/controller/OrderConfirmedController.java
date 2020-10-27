@@ -1,10 +1,10 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.CartItem;
 import com.codecool.shop.model.Order;
@@ -36,13 +36,15 @@ public class OrderConfirmedController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
+
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
-        OrderDao orderDao = OrderDaoMem.getInstance();
+        OrderDao orderDao = gameDatabaseManager.getOrderDao();
         Order order = orderDao.find(clientSessionIdHashCode);
         if (order == null) {
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
-            CartDao cartDao = CartDaoMem.getInstance();
+            CartDao cartDao = gameDatabaseManager.getCartDao();
             Cart cart = cartDao.find(clientSessionIdHashCode);
 
             // Recipient's email ID needs to be mentioned.
