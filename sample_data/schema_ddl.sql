@@ -7,7 +7,8 @@ ALTER TABLE IF EXISTS ONLY public.cart_item DROP CONSTRAINT IF EXISTS fk_cart_id
 DROP TABLE IF EXISTS public.country;
 CREATE TABLE public.country (
     id serial NOT NULL PRIMARY KEY,
-    name text NOT NULL
+    name text NOT NULL,
+    description text NOT NULL
 );
 
 DROP TABLE IF EXISTS public.sport_type;
