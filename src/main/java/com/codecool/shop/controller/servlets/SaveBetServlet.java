@@ -45,6 +45,7 @@ public class SaveBetServlet extends javax.servlet.http.HttpServlet {
             cart.setPossibleWin(possibleWin);
             cart.setActualTime(date);
             cart.setTotalOdds(totalOdds);
+            cartDao.update(cart);
             message = "Cart saved successfully";
         } catch (IllegalArgumentException | ParseException e) {
             message = "An error occurred at the checkout!";
