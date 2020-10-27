@@ -26,7 +26,8 @@ CREATE TABLE public.match_details (
     draw_odds float NOT NULL,
     away_odds float NOT NULL,
     country_id int NOT NULL,
-    sport_type_id int NOT NULL
+    sport_type_id int NOT NULL,
+    description text NOT NULL
 );
 
 DROP TABLE IF EXISTS public.cart_item;
