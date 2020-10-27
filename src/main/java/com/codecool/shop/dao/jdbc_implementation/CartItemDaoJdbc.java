@@ -2,7 +2,6 @@ package com.codecool.shop.dao.jdbc_implementation;
 
 import com.codecool.shop.dao.CartItemDao;
 import com.codecool.shop.dao.MatchDetailsDao;
-import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
 import com.codecool.shop.model.CartItem;
 
 
@@ -13,9 +12,11 @@ import java.util.List;
 
 public class CartItemDaoJdbc implements CartItemDao {
     private final DataSource dataSource;
+    private MatchDetailsDao matchDetailsDao;
 
-    public CartItemDaoJdbc(DataSource dataSource) {
-        this.dataSource = dataSource;  // TODO this required
+    public CartItemDaoJdbc(DataSource dataSource, MatchDetailsDao matchDetailsDao) {
+        this.dataSource = dataSource;
+        this.matchDetailsDao = matchDetailsDao;
     }
 
 
@@ -57,6 +58,19 @@ public class CartItemDaoJdbc implements CartItemDao {
     }
 
     @Override
+    public void removeAll(int cartId) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "DELETE FROM cart_item WHERE cart_id= ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, cartId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
     public List<CartItem> getAllByCart(int cartId) {
         try (Connection conn = dataSource.getConnection()){
             String sql = "SELECT chosen_team, match_id FROM cart_item WHERE cart_id=?";
@@ -65,8 +79,7 @@ public class CartItemDaoJdbc implements CartItemDao {
             while (rs.next()) {
                 String chosenTeam = rs.getString(1);
                 int matchId = rs.getInt(2);
-                MatchDetailsDao matchDetails = MatchDetailsDaoMem.getInstance(); //TODO::!!!!!
-                CartItem cartItem = new CartItem("DescriptionTODO", matchDetails.find(matchId), chosenTeam);
+                CartItem cartItem = new CartItem("DescriptionTODO", matchDetailsDao.find(matchId), chosenTeam);
                 result.add(cartItem);
             }
             return result;
