@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CountryDao {
 
-    void add(Country category);
+    void add(Country country);
     Country find(int id);
     void remove(int id);
 
