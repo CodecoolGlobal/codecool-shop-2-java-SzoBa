@@ -1,7 +1,9 @@
 package com.codecool.shop.dao.jdbc_implementation;
 
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.CartItemDao;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.CartItem;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -12,14 +14,13 @@ public class CartDaoJdbc implements CartDao {
     private final DataSource dataSource;
 
     public CartDaoJdbc(DataSource dataSource) {
-        this.dataSource = dataSource;  // TODO this required
+        this.dataSource = dataSource;  // TODO this is required
     }
 
 
     @Override
     public void add(Cart cart) {
     }
-
 
     @Override
     public void add(Cart cart, int clientSessionIdHashCode) {
@@ -53,6 +54,9 @@ public class CartDaoJdbc implements CartDao {
             int possibleWin = rs.getInt(3);
             float totalOdds = rs.getInt(4);
             Cart result = new Cart("DescriptionTODO?");
+            CartItemDao cardItemDao = new CartItemDaoJdbc(this.dataSource);
+            List<CartItem> items = cardItemDao.getAllByCart(result.getId());
+            items.forEach(result::addItemToCart);
             result.setActualTime(actualTime);
             result.setBet(bet);
             result.setPossibleWin(possibleWin);
@@ -75,7 +79,7 @@ public class CartDaoJdbc implements CartDao {
         }
     }
 
-    @Override
+    @Override //TODO it is not loading the items into the cart!!!
     public List<Cart> getAll() {
         try (Connection conn = dataSource.getConnection()){
             String sql = "SELECT id, actual_time, bet, possible_win, total_odds FROM cart";
@@ -87,7 +91,7 @@ public class CartDaoJdbc implements CartDao {
                 float bet = rs.getFloat(3);
                 int possibleWin = rs.getInt(4);
                 float totalOdds = rs.getInt(5);
-                Cart cart = new Cart("DescriptionTODO?");
+                Cart cart = new Cart("Description");
                 cart.setId(id);
                 cart.setActualTime(actualTime);
                 cart.setBet(bet);
