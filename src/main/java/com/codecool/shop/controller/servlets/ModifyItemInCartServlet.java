@@ -1,14 +1,10 @@
 package com.codecool.shop.controller.servlets;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.CountryDao;
 import com.codecool.shop.dao.MatchDetailsDao;
-import com.codecool.shop.dao.implementation.CartDaoMem;
-import com.codecool.shop.dao.implementation.CountryDaoMem;
-import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
+import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.CartItem;
-import com.codecool.shop.model.Country;
 import com.codecool.shop.model.MatchDetails;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -24,12 +20,14 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
+
         int matchId = Integer.parseInt(req.getParameter("matchID"));
         boolean isAdded = req.getParameter("isAdded").equals("true");
         String outcome = req.getParameter("outcome");
 
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
-        CartDao cartDao = CartDaoMem.getInstance();
+        CartDao cartDao = gameDatabaseManager.getCartDao();
 
         if (isAdded) {
             Cart cart = cartDao.find(clientSessionIdHashCode);
@@ -38,7 +36,7 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
                 cartDao.remove(clientSessionIdHashCode);
             }
         } else {
-            MatchDetailsDao matchDetailsDao = MatchDetailsDaoMem.getInstance();
+            MatchDetailsDao matchDetailsDao = gameDatabaseManager.getMatchDetailsDao();
             MatchDetails matchDetails = matchDetailsDao.find(matchId);
 
             CartItem cartItem = new CartItem("description", matchDetails, outcome);

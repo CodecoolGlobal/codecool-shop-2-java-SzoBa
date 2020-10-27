@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.CountryDaoMem;
 import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SportTypeDaoMem;
+import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,9 +23,11 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MatchDetailsDao productDataStore = MatchDetailsDaoMem.getInstance();
-        CountryDao countryDataStore = CountryDaoMem.getInstance();
-        SportTypeDao sportDataStore = SportTypeDaoMem.getInstance();
+        GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
+
+        MatchDetailsDao productDataStore = gameDatabaseManager.getMatchDetailsDao();
+        CountryDao countryDataStore = gameDatabaseManager.getCountryDao();
+        SportTypeDao sportDataStore = gameDatabaseManager.getSportTypeDao();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
