@@ -5,6 +5,7 @@ import com.codecool.shop.model.Country;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CountryDaoJdbc implements CountryDao {
@@ -33,13 +34,20 @@ public class CountryDaoJdbc implements CountryDao {
 
     @Override
     public Country find(int id) {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void remove(int id) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "DELETE FROM country ";
+            String sql = "DELETE FROM country WHERE id = ";
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,6 +55,23 @@ public class CountryDaoJdbc implements CountryDao {
 
     @Override
     public List<Country> getAll() {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT id, name, description FROM country";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+
+            List<Country> result = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String countryName = rs.getString("name");
+                String description = rs.getString("description");
+
+                Country country = new Country(countryName, description);
+                country.setId(id);
+                result.add(country);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
