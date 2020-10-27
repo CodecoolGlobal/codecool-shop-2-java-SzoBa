@@ -40,11 +40,11 @@ CREATE TABLE public.cart_item (
 
 DROP TABLE IF EXISTS public.cart;
 CREATE TABLE public.cart (
-    id serial NOT NULL PRIMARY KEY,
+    id int NOT NULL PRIMARY KEY,
     actual_time date NOT NULL,
-    bet float,
-    possible_win integer,
-    total_odds float
+    bet float DEFAULT 0,
+    possible_win integer DEFAULT 0,
+    total_odds float DEFAULT 0
 );
 
 DROP TABLE IF EXISTS public.order;
