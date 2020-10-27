@@ -109,23 +109,23 @@ public class CartDaoJdbc implements CartDao {
         }
     }
 
-//    @Override
-//    public void update(Cart cart) {
-//        try (Connection conn = dataSource.getConnection()) {
-//            String sql = "UPDATE cart " +
-//                    "SET actual_time = ?, bet = ?, possible_win = ?, total_odds = ?" +
-//                    "WHERE id = ?";
-//            PreparedStatement statement = conn.prepareStatement(sql);
-//            statement.setDate(1, (Date) cart.getActualTime());
-//            statement.setFloat(2, cart.getBet());
-//            statement.setInt(3, cart.getPossibleWin());
-//            statement.setFloat(4, cart.getTotalOdds());
-//            statement.setInt(5, cart.getId());
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    @Override
+    public void update(Cart cart) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "UPDATE cart " +
+                    "SET actual_time = ?, bet = ?, possible_win = ?, total_odds = ?" +
+                    "WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setDate(1, (Date) cart.getActualTime());
+            statement.setFloat(2, cart.getBet());
+            statement.setInt(3, cart.getPossibleWin());
+            statement.setFloat(4, cart.getTotalOdds());
+            statement.setInt(5, cart.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
 

@@ -10,6 +10,6 @@ public interface CartDao {
     void add(Cart cart, int clientSessionHashCode);
     Cart find(int id);
     void remove(int id);
-
+    void update(Cart cart);
     List<Cart> getAll();
 }
