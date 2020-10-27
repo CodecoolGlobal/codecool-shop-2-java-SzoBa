@@ -1,15 +1,8 @@
 package com.codecool.shop.controller.servlets;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.CountryDao;
-import com.codecool.shop.dao.MatchDetailsDao;
-import com.codecool.shop.dao.SportTypeDao;
-import com.codecool.shop.dao.implementation.CartDaoMem;
-import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
 import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.CartItem;
-import com.codecool.shop.model.MatchDetails;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

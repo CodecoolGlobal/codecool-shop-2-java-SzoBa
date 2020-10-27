@@ -1,10 +1,7 @@
 package com.codecool.shop.controller.servlets;
 
 import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.CartDaoMem;
-import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
-import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -3,9 +3,6 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.CountryDao;
 import com.codecool.shop.dao.MatchDetailsDao;
 import com.codecool.shop.dao.SportTypeDao;
-import com.codecool.shop.dao.implementation.CountryDaoMem;
-import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
-import com.codecool.shop.dao.implementation.SportTypeDaoMem;
 import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Country;
 import com.codecool.shop.model.MatchDetails;
@@ -23,7 +20,7 @@ public class Initializer implements ServletContextListener {
         GameDatabaseManager gameDatabaseManager = GameDatabaseManager.getInstance();
         MatchDetailsDao matchDetailsDataStore = gameDatabaseManager.getMatchDetailsDao();
         CountryDao countryDataStore = gameDatabaseManager.getCountryDao();
-        SportTypeDao sportTypeDataStore = GameDatabaseManager.getInstance().getSportTypeDao();
+        SportTypeDao sportTypeDataStore = gameDatabaseManager.getSportTypeDao();
 
         //setting up a new sport
         SportType football = new SportType("Football", "ico-sport ico-sport-soccer");

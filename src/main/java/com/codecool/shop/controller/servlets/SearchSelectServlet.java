@@ -3,16 +3,12 @@ package com.codecool.shop.controller.servlets;
 import com.codecool.shop.dao.CountryDao;
 import com.codecool.shop.dao.MatchDetailsDao;
 import com.codecool.shop.dao.SportTypeDao;
-import com.codecool.shop.dao.implementation.CountryDaoMem;
-import com.codecool.shop.dao.implementation.MatchDetailsDaoMem;
-import com.codecool.shop.dao.implementation.SportTypeDaoMem;
 import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Country;
 import com.codecool.shop.model.MatchDetails;
 import com.codecool.shop.model.SportType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

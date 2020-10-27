@@ -83,7 +83,7 @@ public class CartDaoJdbc implements CartDao {
         }
     }
 
-    @Override //TODO it is not loading the items into the cart!!!
+    @Override //TODO it is not loading the items into the cart currently!!!
     public List<Cart> getAll() {
         try (Connection conn = dataSource.getConnection()){
             String sql = "SELECT id, actual_time, bet, possible_win, total_odds FROM cart";
