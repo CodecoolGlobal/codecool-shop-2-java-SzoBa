@@ -12,9 +12,13 @@ import java.util.List;
 
 public class CartDaoJdbc implements CartDao {
     private final DataSource dataSource;
+    private CartItemDao cartItemDao;
 
-    public CartDaoJdbc(DataSource dataSource) {
-        this.dataSource = dataSource;  // TODO this is required
+
+    public CartDaoJdbc(DataSource dataSource, CartItemDao cartItemDao) {
+        this.dataSource = dataSource;
+        this.cartItemDao = cartItemDao;
+
     }
 
 
@@ -54,8 +58,7 @@ public class CartDaoJdbc implements CartDao {
             int possibleWin = rs.getInt(3);
             float totalOdds = rs.getInt(4);
             Cart result = new Cart("DescriptionTODO?");
-            CartItemDao cardItemDao = new CartItemDaoJdbc(this.dataSource);
-            List<CartItem> items = cardItemDao.getAllByCart(result.getId());
+            List<CartItem> items = cartItemDao.getAllByCart(result.getId());
             items.forEach(result::addItemToCart);
             result.setActualTime(actualTime);
             result.setBet(bet);
@@ -74,6 +77,7 @@ public class CartDaoJdbc implements CartDao {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             statement.executeUpdate();
+//            cartItemDao.removeAll(id); - TODO: check if CASCADE works!!!
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,7 +108,6 @@ public class CartDaoJdbc implements CartDao {
             throw new RuntimeException("Cart Database Error!");
         }
     }
-//TODO this will be required
 
 //    @Override
 //    public void update(Cart cart) {
