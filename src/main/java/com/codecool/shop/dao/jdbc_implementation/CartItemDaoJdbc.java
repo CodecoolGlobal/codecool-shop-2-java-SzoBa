@@ -32,8 +32,6 @@ public class CartItemDaoJdbc implements CartItemDao {
             statement.setInt(3, cartItem.getMatchId());
             statement.setInt(4, cartId);
             statement.executeUpdate();
-            ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
