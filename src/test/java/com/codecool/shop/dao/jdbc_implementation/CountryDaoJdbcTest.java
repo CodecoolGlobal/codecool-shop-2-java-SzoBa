@@ -54,7 +54,7 @@ class CountryDaoJdbcTest {
 
 
     @Test
-    void find() throws SQLException {
+    void find_searchForExistingId_returnsProperObject() throws SQLException {
         Country testCountry = new Country ("TheName", "description");
         testCountry.setId(1);
         Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
