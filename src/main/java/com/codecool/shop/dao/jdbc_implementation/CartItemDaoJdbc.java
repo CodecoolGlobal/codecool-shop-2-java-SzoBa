@@ -24,15 +24,14 @@ public class CartItemDaoJdbc implements CartItemDao {
     public void add(CartItem cartItem, int cartId) {
         try (Connection conn = dataSource.getConnection()) {
             String sql = "INSERT INTO cart_item" +
-                    "(chosen_team, odds, match_id)" +
-                    "VALUES (?, ?, ?)";
+                    "(chosen_team, odds, match_id, cart_id)" +
+                    "VALUES (?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.NO_GENERATED_KEYS);
             statement.setString(1, cartItem.getChosenOutcome());
             statement.setFloat(2, cartItem.getOdds());
-            statement.setInt(3, cartId);
+            statement.setInt(3, cartItem.getMatchId());
+            statement.setInt(4, cartId);
             statement.executeUpdate();
-            ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

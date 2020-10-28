@@ -1,6 +1,7 @@
 package com.codecool.shop.controller.servlets;
 
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.CartItemDao;
 import com.codecool.shop.dao.MatchDetailsDao;
 import com.codecool.shop.dao.jdbc_implementation.GameDatabaseManager;
 import com.codecool.shop.model.Cart;
@@ -28,10 +29,12 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
 
         int clientSessionIdHashCode = req.getSession().getId().hashCode();
         CartDao cartDao = gameDatabaseManager.getCartDao();
+        CartItemDao cartItemDao = gameDatabaseManager.getCartItemDao();
 
         if (isAdded) {
             Cart cart = cartDao.find(clientSessionIdHashCode);
             cart.removeItemFromCart(matchId);
+            cartItemDao.remove(cart.getId(), matchId);
             if (cart.getItems().size() == 0) {
                 cartDao.remove(clientSessionIdHashCode);
             }
@@ -46,6 +49,7 @@ public class ModifyItemInCartServlet extends javax.servlet.http.HttpServlet {
                 cartDao.add(cart, clientSessionIdHashCode);
             }
             cart.addItemToCart(cartItem);
+            cartItemDao.add(cartItem, cart.getId());
         }
 
         PrintWriter out = resp.getWriter();
