@@ -52,6 +52,8 @@ class SportTypeDaoMemTest {
     }
 
     @Test
-    void getAll() {
+    void getAll_getSizeOfList_returnsSize() {
+        int expectedSize = 3;
+        assertEquals(expectedSize, testSportTypeDaoMem.getAll().size());
     }
 }
