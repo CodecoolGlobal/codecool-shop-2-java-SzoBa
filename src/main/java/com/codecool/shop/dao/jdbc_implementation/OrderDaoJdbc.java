@@ -17,7 +17,7 @@ public class OrderDaoJdbc implements OrderDao {
     @Override
     public void add(Order order) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO order (id," +
+            String sql = "INSERT INTO confirmed_order (id," +
                     " first_name," +
                     " last_name," +
                     " phone_number," +
@@ -43,7 +43,7 @@ public class OrderDaoJdbc implements OrderDao {
     @Override
     public void remove(int id) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "DELETE FROM order " +
+            String sql = "DELETE FROM confirmed_order " +
                          "WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
@@ -59,7 +59,7 @@ public class OrderDaoJdbc implements OrderDao {
             PreparedStatement stmt;
             String query =
                     "SELECT * " +
-                    "FROM order " +
+                    "FROM confirmed_order " +
                     "WHERE id = ?";
 
             stmt = conn.prepareStatement(query);
