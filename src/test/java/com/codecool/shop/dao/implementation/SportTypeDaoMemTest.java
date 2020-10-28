@@ -23,8 +23,9 @@ class SportTypeDaoMemTest {
         testSportTypeDaoMem.add(new SportType("Darts", "Darts description"));
     }
 
+
     @Test
-    void add_multipleElementsAdded_boolean() {
+    void add_multipleElementsAdded_returnsNumberOfElements() {
         assertEquals(3, testSportTypeDaoMem.getAll().size());
     }
 
