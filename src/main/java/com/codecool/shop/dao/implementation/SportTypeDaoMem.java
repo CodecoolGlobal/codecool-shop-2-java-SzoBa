@@ -8,12 +8,18 @@ import java.util.List;
 
 public class SportTypeDaoMem implements SportTypeDao {
 
+
+
     private List<SportType> data = new ArrayList<>();
     private static SportTypeDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
     private SportTypeDaoMem() {
+    }
+
+    public void setData(List<SportType> data) {
+        this.data = data;
     }
 
     public static SportTypeDaoMem getInstance() {
