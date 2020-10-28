@@ -42,7 +42,7 @@ class CountryDaoJdbcTest {
 
 
     @Test
-    void add_addItem_ReturnsId() throws SQLException {
+    void add_addItem_ReturnsProperId() throws SQLException {
         Country testCountry = new Country ("TheName", "description");
         Mockito.when(testConnection.prepareStatement(Mockito.anyString(), Mockito.anyInt())).thenReturn(testStatement);
         Mockito.when(testStatement.getGeneratedKeys()).thenReturn(testResultSet);
