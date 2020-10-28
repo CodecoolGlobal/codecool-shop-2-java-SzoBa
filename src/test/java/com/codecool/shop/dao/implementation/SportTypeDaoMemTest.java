@@ -38,12 +38,17 @@ class SportTypeDaoMemTest {
     void find_searchForExistingIndex_returnsValue() {
         SportType sport4 = new SportType("Handball", "Handball description");
         testSportTypeDaoMem.add(sport4);
+
         assertEquals(sport4, testSportTypeDaoMem.find(4));
     }
 
     @Test
-    void remove() {
+    void remove_removeOneElement_returnsSizeMinusOne() {
+        int sizeBefore = testSportTypeDaoMem.getAll().size();
+        testSportTypeDaoMem.remove(1);
+        int sizeAfter = testSportTypeDaoMem.getAll().size();
 
+        assertEquals(sizeAfter + 1, sizeBefore);
     }
 
     @Test
