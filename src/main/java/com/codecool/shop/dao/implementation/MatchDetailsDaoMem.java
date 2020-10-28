@@ -65,4 +65,8 @@ public class MatchDetailsDaoMem implements MatchDetailsDao {
                 .filter(t -> t.getCountry().equals(country))
                 .collect(Collectors.toList());
     }
+
+    public void setData(List<MatchDetails> data) {
+        this.data = data;
+    }
 }
