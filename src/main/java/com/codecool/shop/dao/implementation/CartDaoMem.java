@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.SportType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,10 @@ public class CartDaoMem implements CartDao {
     /* A private Constructor prevents any other class from instantiating.
      */
     private CartDaoMem() {
+    }
+
+    public void setData(List<Cart> data) {
+        this.data = data;
     }
 
     public static CartDaoMem getInstance() {
