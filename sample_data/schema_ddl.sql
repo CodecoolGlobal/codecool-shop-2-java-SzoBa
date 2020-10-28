@@ -49,9 +49,9 @@ CREATE TABLE public.cart (
     total_odds float DEFAULT 0
 );
 
-DROP TABLE IF EXISTS public.order;
-CREATE TABLE public.order (
-    id serial NOT NULL PRIMARY KEY,
+DROP TABLE IF EXISTS public.confirmed_order;
+CREATE TABLE public.confirmed_order (
+    id int NOT NULL PRIMARY KEY,
     first_name text NOT NULL,
     last_name text NOT NULL,
     phone_number text NOT NULL,
