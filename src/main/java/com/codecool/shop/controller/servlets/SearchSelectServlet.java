@@ -26,12 +26,18 @@ public class SearchSelectServlet extends javax.servlet.http.HttpServlet {
 
         int typeId = Integer.parseInt(req.getParameter("typeId"));
         int countryId = Integer.parseInt(req.getParameter("countryId"));
+        SportType selectedType = null;
+        Country selectedCountry = null;
 
-        SportTypeDao sportTypeDataStore = gameDatabaseManager.getSportTypeDao();
-        SportType selectedType = sportTypeDataStore.find(typeId);
+        if (typeId != 0) {
+            SportTypeDao sportTypeDataStore = gameDatabaseManager.getSportTypeDao();
+            selectedType = sportTypeDataStore.find(typeId);
+        }
 
-        CountryDao countryDataStore = gameDatabaseManager.getCountryDao();
-        Country selectedCountry = countryDataStore.find(countryId);
+        if (countryId != 0) {
+            CountryDao countryDataStore = gameDatabaseManager.getCountryDao();
+            selectedCountry = countryDataStore.find(countryId);
+        }
 
         MatchDetailsDao matchDetailsDataStore = gameDatabaseManager.getMatchDetailsDao();
         List<MatchDetails> matchesSelected;
