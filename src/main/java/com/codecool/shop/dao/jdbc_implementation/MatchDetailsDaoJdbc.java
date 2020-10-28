@@ -27,7 +27,7 @@ public class MatchDetailsDaoJdbc implements MatchDetailsDao {
     @Override
     public void add(MatchDetails matchDetails) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO match_details (id," +
+            String sql = "INSERT INTO match_details (" +
                     " home_team," +
                     " away_team," +
                     " league_name," +
@@ -36,18 +36,18 @@ public class MatchDetailsDaoJdbc implements MatchDetailsDao {
                     " away_odds," +
                     " country_id," +
                     " sport_type_id," +
-                    " description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    " description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, matchDetails.getId());
-            statement.setString(2, matchDetails.getHomeTeam());
-            statement.setString(3, matchDetails.getAwayTeam());
-            statement.setString(4, matchDetails.getLeagueName());
-            statement.setFloat(5, matchDetails.getHomeOdds());
-            statement.setFloat(6, matchDetails.getDrawOdds());
-            statement.setFloat(7, matchDetails.getAwayOdds());
-            statement.setInt(8, matchDetails.getCountry().getId());
-            statement.setInt(9, matchDetails.getSportType().getId());
-            statement.setString(10, matchDetails.getDescription());
+//            statement.setInt(1, matchDetails.getId());
+            statement.setString(1, matchDetails.getHomeTeam());
+            statement.setString(2, matchDetails.getAwayTeam());
+            statement.setString(3, matchDetails.getLeagueName());
+            statement.setFloat(4, matchDetails.getHomeOdds());
+            statement.setFloat(5, matchDetails.getDrawOdds());
+            statement.setFloat(6, matchDetails.getAwayOdds());
+            statement.setInt(7, matchDetails.getCountry().getId());
+            statement.setInt(8, matchDetails.getSportType().getId());
+            statement.setString(9, matchDetails.getDescription());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();

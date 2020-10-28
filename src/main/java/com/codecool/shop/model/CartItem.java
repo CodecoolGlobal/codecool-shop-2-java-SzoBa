@@ -21,7 +21,7 @@ public class CartItem extends BaseModel {
         this.home = matchDetails.getHomeTeam();
         this.away = matchDetails.getAwayTeam();
         this.leagueName = matchDetails.getLeagueName();
-        switch (outcome) {
+        switch (outcome.toLowerCase()) {
             case ("home"):
                 this.chosenOutcome = "Home";
                 this.odds = matchDetails.getHomeOdds();

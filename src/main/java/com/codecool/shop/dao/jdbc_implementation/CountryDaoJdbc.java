@@ -19,10 +19,9 @@ public class CountryDaoJdbc implements CountryDao {
     @Override
     public void add(Country country) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT into country (name, description) VALUES (?, ?)";
+            String sql = "INSERT into country (name) VALUES (?)";
             PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, country.getName());
-            st.setString(2, country.getDescription());
             st.executeUpdate();
             ResultSet rs = st.getGeneratedKeys();
             rs.next();
@@ -35,7 +34,7 @@ public class CountryDaoJdbc implements CountryDao {
     @Override
     public Country find(int id) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT id, name, description FROM country WHERE id = ?";
+            String sql = "SELECT id, name FROM country WHERE id = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
@@ -51,7 +50,7 @@ public class CountryDaoJdbc implements CountryDao {
     private Country getCountry(ResultSet rs) throws SQLException {
 //        int id = rs.getInt("id");
         String name = rs.getString("name");
-        String description = rs.getString("description");
+        String description = "description";
 
         return new Country(name, description);
     }
@@ -71,16 +70,15 @@ public class CountryDaoJdbc implements CountryDao {
     @Override
     public List<Country> getAll() {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT id, name, description FROM country";
+            String sql = "SELECT id, name FROM country";
             ResultSet rs = conn.createStatement().executeQuery(sql);
 
             List<Country> result = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String countryName = rs.getString("name");
-                String description = rs.getString("description");
 
-                Country country = new Country(countryName, description);
+                Country country = new Country(countryName, "description");
                 country.setId(id);
                 result.add(country);
             }

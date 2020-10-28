@@ -28,9 +28,9 @@ public class GameDatabaseManager {
             DataSource dataSource = connect();
             countryDao = new CountryDaoJdbc(dataSource);
             sportTypeDao = new SportTypeDaoJdbc(dataSource);
+            matchDetailsDao = new MatchDetailsDaoJdbc(dataSource, countryDao, sportTypeDao);
             cartItemDao = new CartItemDaoJdbc(dataSource, matchDetailsDao);
             cartDao = new CartDaoJdbc(dataSource, cartItemDao);
-            matchDetailsDao = new MatchDetailsDaoJdbc(dataSource, countryDao, sportTypeDao);
             orderDao = new OrderDaoJdbc(dataSource);
         } catch (SQLException e) {
             System.out.println("Database connection error!");

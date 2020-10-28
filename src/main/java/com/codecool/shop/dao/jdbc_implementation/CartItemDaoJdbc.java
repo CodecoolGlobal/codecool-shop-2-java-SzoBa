@@ -73,7 +73,9 @@ public class CartItemDaoJdbc implements CartItemDao {
     public List<CartItem> getAllByCart(int cartId) {
         try (Connection conn = dataSource.getConnection()){
             String sql = "SELECT chosen_team, match_id FROM cart_item WHERE cart_id=?";
-            ResultSet rs = conn.createStatement().executeQuery(sql);
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, cartId);
+            ResultSet rs = statement.executeQuery();
             List<CartItem> result = new ArrayList<>();
             while (rs.next()) {
                 String chosenTeam = rs.getString(1);

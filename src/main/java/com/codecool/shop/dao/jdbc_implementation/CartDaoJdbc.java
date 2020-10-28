@@ -31,11 +31,10 @@ public class CartDaoJdbc implements CartDao {
         cart.setId(clientSessionIdHashCode);
         try (Connection conn = dataSource.getConnection()) {
             String sql = "INSERT INTO cart" +
-                    "(id, actual_time)" +
-                    "VALUES (?, ?)";
+                    "(id)" +
+                    "VALUES (?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.NO_GENERATED_KEYS);
             statement.setInt(1, cart.getId());
-            statement.setDate(2, (Date) cart.getActualTime());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -58,7 +57,8 @@ public class CartDaoJdbc implements CartDao {
             int possibleWin = rs.getInt(3);
             float totalOdds = rs.getInt(4);
             Cart result = new Cart("DescriptionTODO?");
-            List<CartItem> items = cartItemDao.getAllByCart(result.getId());
+            result.setId(id);
+            List<CartItem> items = cartItemDao.getAllByCart(id);
             items.forEach(result::addItemToCart);
             result.setActualTime(actualTime);
             result.setBet(bet);
@@ -113,14 +113,14 @@ public class CartDaoJdbc implements CartDao {
     public void update(Cart cart) {
         try (Connection conn = dataSource.getConnection()) {
             String sql = "UPDATE cart " +
-                    "SET actual_time = ?, bet = ?, possible_win = ?, total_odds = ?" +
+                    "SET bet = ?, possible_win = ?, total_odds = ?" +
                     "WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setDate(1, (Date) cart.getActualTime());
-            statement.setFloat(2, cart.getBet());
-            statement.setInt(3, cart.getPossibleWin());
-            statement.setFloat(4, cart.getTotalOdds());
-            statement.setInt(5, cart.getId());
+//            statement.setDate(1, (Date) cart.getActualTime());
+            statement.setFloat(1, cart.getBet());
+            statement.setInt(2, cart.getPossibleWin());
+            statement.setFloat(3, cart.getTotalOdds());
+            statement.setInt(4, cart.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
