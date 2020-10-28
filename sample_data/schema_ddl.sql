@@ -7,14 +7,14 @@ ALTER TABLE IF EXISTS ONLY public.cart_item DROP CONSTRAINT IF EXISTS fk_cart_id
 DROP TABLE IF EXISTS public.country;
 CREATE TABLE public.country (
     id serial NOT NULL PRIMARY KEY,
-    name text NOT NULL,
-    description text NOT NULL
+    name text NOT NULL
 );
 
 DROP TABLE IF EXISTS public.sport_type;
 CREATE TABLE public.sport_type (
     id serial NOT NULL PRIMARY KEY,
-    name text NOT NULL
+    name text NOT NULL,
+    description text NOT NULL
 );
 
 DROP TABLE IF EXISTS public.match_details;
@@ -43,7 +43,7 @@ CREATE TABLE public.cart_item (
 DROP TABLE IF EXISTS public.cart;
 CREATE TABLE public.cart (
     id int NOT NULL PRIMARY KEY,
-    actual_time date NOT NULL,
+    actual_time timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     bet float DEFAULT 0,
     possible_win integer DEFAULT 0,
     total_odds float DEFAULT 0
