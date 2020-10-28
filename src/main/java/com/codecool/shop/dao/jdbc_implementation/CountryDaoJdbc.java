@@ -35,19 +35,34 @@ public class CountryDaoJdbc implements CountryDao {
     @Override
     public Country find(int id) {
         try (Connection conn = dataSource.getConnection()) {
-
-            return null;
+            String sql = "SELECT id, name, description FROM country WHERE id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            Country requestedCountry = getCountry(rs);
+            requestedCountry.setId(id);
+            return requestedCountry;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private Country getCountry(ResultSet rs) throws SQLException {
+//        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        String description = rs.getString("description");
+
+        return new Country(name, description);
+    }
+
     @Override
     public void remove(int id) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "DELETE FROM country WHERE id = ";
-
-
+            String sql = "DELETE FROM country WHERE id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
