@@ -21,6 +21,7 @@ class OrderDaoJdbcTest {
     private Connection testConnection;
     private PreparedStatement testStatement;
     private ResultSet testResultSet;
+    private Order testOrder;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -30,21 +31,24 @@ class OrderDaoJdbcTest {
         testResultSet = Mockito.mock(ResultSet.class);
         testOrderDaoJdbc = new OrderDaoJdbc(dataSource);
         Mockito.when(dataSource.getConnection()).thenReturn(testConnection);
-    }
-
-    @Test
-    void add() throws SQLException {
-        Order testOrder = new Order ("description", "Kevin", "Johnson", "06705551223", "idunno@gamil.com", "Hungary",
+        testOrder = new Order ("description", "Kevin", "Johnson", "06705551223", "idunno@gamil.com", "Hungary",
                 "Budapest", 1011, "123. Sesame Street");
-        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
-        Mockito.when(testStatement.executeUpdate()).thenThrow(new SQLException());
-        testOrderDaoJdbc.add(testOrder);
-        assertThrows(RuntimeException.class, ()->testOrderDaoJdbc.add(testOrder));
+    }
 
+    @Test
+    void add_executeQuery_throwsSQLException() throws SQLException {
+
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
+        Mockito.when(testStatement.executeUpdate()).thenThrow(SQLException.class);
+        assertThrows(RuntimeException.class, ()->testOrderDaoJdbc.add(testOrder));
     }
 
 
     @Test
-    void find() {
+    void find_executeQuery_throwsSQLException() throws SQLException {
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
+        Mockito.when(testStatement.executeQuery()).thenReturn(testResultSet);
+        Mockito.when(testResultSet.next()).thenThrow(SQLException.class);
+        assertThrows(RuntimeException.class, ()-> testOrderDaoJdbc.find(1));
     }
 }
