@@ -84,6 +84,15 @@ class SportTypeDaoJdbcTest {
     }
 
     @Test
-    void getAll() {
+    void getAll() throws SQLException {
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
+        Mockito.when(testConnection.createStatement()).thenReturn(testStatement);
+        Mockito.when(testStatement.executeQuery(Mockito.anyString())).thenReturn(testResultSet);
+
+        Mockito.when(testResultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(testResultSet.getInt(Mockito.anyInt())).thenReturn(1).thenReturn(2);
+        Mockito.when(testResultSet.getString("name")).thenReturn("Name1").thenReturn("Name2");
+
+        assertEquals(2, sportTypeDaoJdbc.getAll().size());
     }
 }
