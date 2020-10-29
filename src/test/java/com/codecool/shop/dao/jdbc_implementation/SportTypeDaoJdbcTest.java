@@ -61,7 +61,7 @@ class SportTypeDaoJdbcTest {
         testSportType.setId(1);
         Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
         Mockito.when(testStatement.executeQuery()).thenReturn(testResultSet);
-        Mockito.when(testResultSet.getString("name")).thenReturn("TheName");
+        Mockito.when(testResultSet.getString("name")).thenReturn("Football");
         assertEquals(testSportType.getName(), sportTypeDaoJdbc.find(1).getName());
     }
 
