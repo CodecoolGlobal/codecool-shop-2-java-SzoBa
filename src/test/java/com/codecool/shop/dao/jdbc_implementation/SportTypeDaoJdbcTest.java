@@ -42,8 +42,27 @@ class SportTypeDaoJdbcTest {
         assertThrows(RuntimeException.class, () -> sportTypeDaoJdbc.add(new SportType("Handball", "Handball description")));
     }
 
+
     @Test
-    void find() {
+    void add_addItem_ReturnsProperId() throws SQLException {
+        SportType testSport = new SportType("Handball", "Handball description");
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString(), Mockito.anyInt())).thenReturn(testStatement);
+        Mockito.when(testStatement.getGeneratedKeys()).thenReturn(testResultSet);
+        Mockito.when(testResultSet.getInt(1)).thenReturn(1001);
+        testSport.setId(1001);
+        sportTypeDaoJdbc.add(testSport);
+        assertEquals(1001, testResultSet.getInt(1));
+    }
+
+
+    @Test
+    void find_searchForExistingId_returnsProperObject() throws SQLException {
+        SportType testSportType = new SportType ("Football", "description");
+        testSportType.setId(1);
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
+        Mockito.when(testStatement.executeQuery()).thenReturn(testResultSet);
+        Mockito.when(testResultSet.getString("name")).thenReturn("TheName");
+        assertEquals(testSportType.getName(), sportTypeDaoJdbc.find(1).getName());
     }
 
     @Test
