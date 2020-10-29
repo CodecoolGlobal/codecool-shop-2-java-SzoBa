@@ -54,7 +54,7 @@ class CountryDaoJdbcTest {
 
 
     @Test
-    void find_searchForExistingId_returnsProperObject() throws SQLException {
+    void find_existingId_returnsProperObject() throws SQLException {
         Country testCountry = new Country ("TheName", "description");
         testCountry.setId(1);
         Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
@@ -65,7 +65,7 @@ class CountryDaoJdbcTest {
 
 
     @Test
-    void getAll() throws SQLException {
+    void getAll_multipleElements_returnProperResultList() throws SQLException {
         Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
         Mockito.when(testConnection.createStatement()).thenReturn(testStatement);
         Mockito.when(testStatement.executeQuery(Mockito.anyString())).thenReturn(testResultSet);
