@@ -94,6 +94,64 @@ class MatchDetailsDaoJdbcTest {
     void find_existingMatchId_getMatch() throws SQLException {
         when(stmt.executeQuery()).thenReturn(rs);
         when(rs.next()).thenReturn(true);
+        getMockedMatchDetails(matchDetails);
+
+        MatchDetails returnedMatch = matchDetailsDao.find(1);
+        assertEquals(matchDetails, returnedMatch);
+    }
+
+    @Test
+    void getAll_collectAllMatches_returnMatches() throws SQLException {
+        when(stmt.executeQuery()).thenReturn(rs);
+        List<MatchDetails> matches = new ArrayList<>();
+        matches.add(matchDetails);
+        matches.add(englishFootball);
+        matches.add(russianHockey);
+        matches.add(internationalTennis);
+
+        when(rs.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
+        when(rs.getString("description")).thenReturn(matchDetails.getDescription())
+                .thenReturn(englishFootball.getDescription())
+                .thenReturn(russianHockey.getDescription())
+                .thenReturn(internationalTennis.getDescription());
+        when(rs.getString("home_team")).thenReturn(matchDetails.getHomeTeam())
+                .thenReturn(englishFootball.getHomeTeam())
+                .thenReturn(russianHockey.getHomeTeam())
+                .thenReturn(internationalTennis.getHomeTeam());
+        when(rs.getString("away_team")).thenReturn(matchDetails.getAwayTeam())
+                .thenReturn(englishFootball.getAwayTeam())
+                .thenReturn(russianHockey.getAwayTeam())
+                .thenReturn(internationalTennis.getAwayTeam());
+        when(rs.getString("league_name")).thenReturn(matchDetails.getLeagueName())
+                .thenReturn(englishFootball.getLeagueName())
+                .thenReturn(russianHockey.getLeagueName())
+                .thenReturn(internationalTennis.getLeagueName());
+        when(rs.getFloat("home_odds")).thenReturn(matchDetails.getHomeOdds())
+                .thenReturn(englishFootball.getHomeOdds())
+                .thenReturn(russianHockey.getHomeOdds())
+                .thenReturn(internationalTennis.getHomeOdds());
+        when(rs.getFloat("draw_odds")).thenReturn(matchDetails.getDrawOdds())
+                .thenReturn(englishFootball.getDrawOdds())
+                .thenReturn(russianHockey.getDrawOdds())
+                .thenReturn(internationalTennis.getDrawOdds());
+        when(rs.getFloat("away_odds")).thenReturn(matchDetails.getAwayOdds())
+                .thenReturn(englishFootball.getAwayOdds())
+                .thenReturn(russianHockey.getAwayOdds())
+                .thenReturn(internationalTennis.getAwayOdds());
+        when(countryDao.find(rs.getInt("country_id"))).thenReturn(matchDetails.getCountry())
+                .thenReturn(englishFootball.getCountry())
+                .thenReturn(russianHockey.getCountry())
+                .thenReturn(internationalTennis.getCountry());
+        when(sportTypeDao.find(rs.getInt("sport_type_id"))).thenReturn(matchDetails.getSportType())
+                .thenReturn(englishFootball.getSportType())
+                .thenReturn(russianHockey.getSportType())
+                .thenReturn(internationalTennis.getSportType());
+
+        List<MatchDetails> returnedMatches = matchDetailsDao.getAll();
+        assertEquals(matches, returnedMatches);
+    }
+
+    private void getMockedMatchDetails(MatchDetails matchDetails) throws SQLException {
         when(rs.getString("description")).thenReturn(matchDetails.getDescription());
         when(rs.getString("home_team")).thenReturn(matchDetails.getHomeTeam());
         when(rs.getString("away_team")).thenReturn(matchDetails.getAwayTeam());
@@ -103,9 +161,6 @@ class MatchDetailsDaoJdbcTest {
         when(rs.getFloat("away_odds")).thenReturn(matchDetails.getAwayOdds());
         when(countryDao.find(rs.getInt("country_id"))).thenReturn(matchDetails.getCountry());
         when(sportTypeDao.find(rs.getInt("sport_type_id"))).thenReturn(matchDetails.getSportType());
-
-        MatchDetails returnedMatch = matchDetailsDao.find(1);
-        assertEquals(matchDetails, returnedMatch);
     }
 
 }
