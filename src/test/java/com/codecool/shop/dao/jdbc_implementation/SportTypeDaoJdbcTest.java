@@ -2,9 +2,11 @@ package com.codecool.shop.dao.jdbc_implementation;
 
 import com.codecool.shop.model.SportType;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.sql.DataSource;
@@ -21,27 +23,26 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 class SportTypeDaoJdbcTest {
 
-    @Mock
-    private DataSource ds;
+    private DataSource dataSource;
+    private SportTypeDaoJdbc sportTypeDaoJdbc;
 
-    @Mock
-    private Connection c;
-
-    @Mock
-    private PreparedStatement stmt;
+    private Connection testConnection;
+    private PreparedStatement testStatement;
+    private ResultSet testResultSet;
 
     @Mock
     private ResultSet rs;
 
     private SportType sportType;
 
-    @BeforeAll
-    void setup() throws SQLException {
-        assertNotNull(ds);
-        when(c.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(ds.getConnection()).thenReturn(c);
-
-        sportType = new SportType("Football", "Football description");
+    @BeforeEach
+    void setUp() throws SQLException {
+        dataSource = Mockito.mock(DataSource.class);
+        testConnection = Mockito.mock(Connection.class);
+        testStatement = Mockito.mock(PreparedStatement.class);
+        testResultSet = Mockito.mock(ResultSet.class);
+        sportTypeDaoJdbc = new SportTypeDaoJdbc(dataSource);
+        Mockito.when(dataSource.getConnection()).thenReturn(testConnection);
     }
 
     @Test
