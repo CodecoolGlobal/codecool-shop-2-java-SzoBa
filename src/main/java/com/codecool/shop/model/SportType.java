@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SportType extends BaseModel {
 
@@ -39,5 +40,18 @@ public class SportType extends BaseModel {
                 this.name,
                 this.description
         );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SportType sportType = (SportType) o;
+        return name.equals(sportType.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
