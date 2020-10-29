@@ -66,7 +66,21 @@ class SportTypeDaoJdbcTest {
     }
 
     @Test
-    void remove() {
+    void remove() throws SQLException {
+        SportType testSport1 = new SportType("Handball", "Handball description");
+        SportType testSport2 = new SportType("Football", "Football description");
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString(), Mockito.anyInt())).thenReturn(testStatement);
+        Mockito.when(testConnection.prepareStatement(Mockito.anyString())).thenReturn(testStatement);
+//        Mockito.when(testStatement.getGeneratedKeys()).thenReturn(testResultSet);
+        Mockito.when(sportTypeDaoJdbc.getAll().size()).thenReturn(1);
+
+        sportTypeDaoJdbc.add(testSport1);
+        testSport1.setId(1);
+        sportTypeDaoJdbc.add(testSport2);
+        testSport2.setId(2);
+
+        sportTypeDaoJdbc.remove(2);
+        assertEquals(1, sportTypeDaoJdbc.getAll().size());
     }
 
     @Test
