@@ -37,8 +37,9 @@ class SportTypeDaoJdbcTest {
     }
 
     @Test
-    void add() {
-
+    void add_SQLException_ThrowsRuntimeException() throws SQLException {
+        Mockito.when(dataSource.getConnection()).thenThrow(SQLException.class);
+        assertThrows(RuntimeException.class, () -> sportTypeDaoJdbc.add(new SportType("Handball", "Handball description")));
     }
 
     @Test
