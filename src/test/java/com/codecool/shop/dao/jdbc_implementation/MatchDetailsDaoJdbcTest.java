@@ -13,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 import javax.sql.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -24,10 +26,28 @@ class MatchDetailsDaoJdbcTest {
     private MatchDetailsDaoJdbc matchDetailsDao;
 
     SportType football = new SportType("Football", "ico-sport ico-sport-soccer");
+    SportType tennis = new SportType("Tennis", "ico-sport ico-sport-tennis");
+    SportType iceHockey = new SportType("Hockey", "ico-sport ico-sport-ice-hockey");
+
     Country international = new Country("International", "Best country - Hungary.");
+    Country russia = new Country("Russia", "Voszem");
+    Country england = new Country("England", "Tea for two.");
+
     private MatchDetails matchDetails = new MatchDetails("1. Match",
             "Italy", "Netherlands", "UEFA Nations League A, Gr. 1",
             1.95f, 3.3f, 4.0f, international, football);
+
+    private MatchDetails englishFootball = new MatchDetails("10. Match",
+                               "Manchester City", "Arsenal", "Premier League",
+                               1.4f, 5.25f, 7.0f, england, football);
+
+    private MatchDetails internationalTennis = new MatchDetails("16. Match",
+                        "Zverev A.", "Verdasco F.", "ATP",
+                        1.2f, 1.0f, 4.33f, international, tennis);
+
+    private MatchDetails russianHockey = new MatchDetails("21. Match",
+                            "Kunlun Red Star", "Salavat Yulaev Ufa", "KHL",
+                            3.8f, 1.0f, 1.28f, russia, iceHockey);
 
     @Mock
     private DataSource dataSource;
