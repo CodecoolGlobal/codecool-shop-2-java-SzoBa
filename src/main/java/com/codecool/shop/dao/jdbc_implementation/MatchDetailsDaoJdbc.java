@@ -38,7 +38,6 @@ public class MatchDetailsDaoJdbc implements MatchDetailsDao {
                     " sport_type_id," +
                     " description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            statement.setInt(1, matchDetails.getId());
             statement.setString(1, matchDetails.getHomeTeam());
             statement.setString(2, matchDetails.getAwayTeam());
             statement.setString(3, matchDetails.getLeagueName());
