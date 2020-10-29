@@ -4,7 +4,6 @@ import com.codecool.shop.model.Country;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoRule;
 
 import javax.sql.DataSource;
 
@@ -64,9 +63,6 @@ class CountryDaoJdbcTest {
         assertEquals(testCountry.getName(), testCountryDaoJdbc.find(1).getName());
     }
 
-    @Test
-    void remove() {
-    }
 
     @Test
     void getAll() throws SQLException {
