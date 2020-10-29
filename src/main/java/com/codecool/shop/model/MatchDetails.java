@@ -2,6 +2,8 @@ package com.codecool.shop.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Objects;
+
 public class MatchDetails extends BaseModel {
 
     @Expose
@@ -105,5 +107,25 @@ public class MatchDetails extends BaseModel {
                 this.id,
                 this.country.getName(),
                 this.sportType);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchDetails that = (MatchDetails) o;
+        return Float.compare(that.homeOdds, homeOdds) == 0 &&
+                Float.compare(that.drawOdds, drawOdds) == 0 &&
+                Float.compare(that.awayOdds, awayOdds) == 0 &&
+                homeTeam.equals(that.homeTeam) &&
+                awayTeam.equals(that.awayTeam) &&
+                leagueName.equals(that.leagueName) &&
+                country.equals(that.country) &&
+                sportType.equals(that.sportType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(homeTeam, awayTeam, leagueName, homeOdds, drawOdds, awayOdds, country, sportType);
     }
 }
