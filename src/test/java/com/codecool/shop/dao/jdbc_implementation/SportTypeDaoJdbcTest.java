@@ -1,13 +1,9 @@
 package com.codecool.shop.dao.jdbc_implementation;
 
 import com.codecool.shop.model.SportType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.sql.DataSource;
 
@@ -17,10 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+
 class SportTypeDaoJdbcTest {
 
     private DataSource dataSource;
@@ -30,10 +24,7 @@ class SportTypeDaoJdbcTest {
     private PreparedStatement testStatement;
     private ResultSet testResultSet;
 
-    @Mock
-    private ResultSet rs;
 
-    private SportType sportType;
 
     @BeforeEach
     void setUp() throws SQLException {
