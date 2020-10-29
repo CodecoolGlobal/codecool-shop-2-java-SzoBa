@@ -1,12 +1,11 @@
 package com.codecool.shop.dao.jdbc_implementation;
 
-import com.codecool.shop.dao.implementation.SportTypeDaoMem;
 import com.codecool.shop.model.SportType;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.sql.DataSource;
 
@@ -19,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 class SportTypeDaoJdbcTest {
 
     @Mock
@@ -42,11 +42,11 @@ class SportTypeDaoJdbcTest {
         when(ds.getConnection()).thenReturn(c);
 
         sportType = new SportType("Football", "Football description");
-
     }
 
     @Test
     void add() {
+
     }
 
     @Test
