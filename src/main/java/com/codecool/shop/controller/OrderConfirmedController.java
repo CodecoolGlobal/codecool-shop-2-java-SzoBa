@@ -120,7 +120,7 @@ public class OrderConfirmedController extends HttpServlet {
             System.out.println("Problem occurred during writing to file");
         }
 
-            orderDao.remove(clientSessionIdHashCode);
+//            orderDao.remove(clientSessionIdHashCode);
             cartDao.remove(clientSessionIdHashCode);
 
             // TODO
